@@ -1,9 +1,9 @@
 /* ------- START OF ROOT CSS ------- */
 
-@import url('https://fonts.googleapis.com/css?family=Karla|Rubik:300,400,500');
+@import url('https://fonts.googleapis.com/css?family=Karla|Raleway:200,300,400');
 
 :root {
-  --primary-font: 'Rubik', sans-serif;
+  --primary-font: 'Raleway', sans-serif;
   --secondary-font: 'Karla', sans-serif;
   --primary-font-color: #eee;
 }
@@ -108,10 +108,19 @@ h1 {
   flex-direction: column;
   text-align: center;
   height: inherit;
+  min-height: inherit;
   width: 75px;
   background: #1F1F1F;
   position: relative;
   transition: 1s ease all;
+}
+
+.sidebar-wrapper > *:not(.hamburger) {
+  display: none;
+}
+
+.sidebar-wrapper.open > * {
+  display: block;
 }
 
 .sidebar-wrapper h2{
@@ -187,6 +196,33 @@ h1 {
 
 .hamburger.is-active .hamburger-inner, .hamburger.is-active .hamburger-inner::before, .hamburger.is-active .hamburger-inner::after {
   background-color: var(--primary-font-color);
+}
+
+.sidebar-wrapper.open .countries, .sidebar-wrapper.open .statistics {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+  margin: 0 20px;
+  font-family: var(--primary-font);
+  font-weight: 200;
+}
+
+.sidebar-wrapper.open .country, .sidebar-wrapper.open .stat {
+  margin: 20px 0;
+}
+
+.sidebar-wrapper.open .col-1, .sidebar-wrapper.open .col-2 {
+  text-align: left;
+}
+
+.sidebar-wrapper.open .col-1 {
+  margin-right: 10px;
+}
+
+.sidebar-wrapper.open .col-2 {
+  margin-left: 10px;
 }
 
 /* ------- END OF SIDEBAR DISPLAY PAGE CSS ------- */
