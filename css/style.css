@@ -13,6 +13,12 @@ body, html {
   padding: 0;
   box-sizing: border-box;
   color: var(--primary-font-color);
+  scroll-behavior: smooth;
+}
+
+h1 {
+  margin: 0;
+  font-family:var(--secondary-font);
 }
 
 /* ------- END OF ROOT CSS ------- */
@@ -35,7 +41,7 @@ body, html {
   font-weight: 500;
   font-size: 3em;
   letter-spacing: 2px;
-  margin-bottom: 10px;
+  margin: 50px 0;
 }
 
 .LandingPage h2 {
@@ -70,6 +76,7 @@ body, html {
   margin: 0;
   bottom: 5px;
   letter-spacing: 1px;
+  cursor: pointer;
 }
 
 .mouse p {
@@ -101,10 +108,10 @@ body, html {
   flex-direction: column;
   text-align: center;
   height: inherit;
-  min-height: inherit;
   width: 75px;
   background: #1F1F1F;
   position: relative;
+  transition: 1s ease all;
 }
 
 .sidebar-wrapper h2{
@@ -112,9 +119,8 @@ body, html {
 }
 
 .sidebar-wrapper.open {
-  min-width: 275px;
+  min-width: 300px;
   overflow: hidden;
-  /* min-width: 275px; */
 }
 
 .sidebar-wrapper.open h2 {
@@ -176,7 +182,7 @@ body, html {
 
 .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
   background: var(--primary-font-color);
-  width: 30px;
+  width: 20px;
 }
 
 .hamburger.is-active .hamburger-inner, .hamburger.is-active .hamburger-inner::before, .hamburger.is-active .hamburger-inner::after {
@@ -190,23 +196,43 @@ body, html {
 .dataPage {
   display: flex;
   height: 100vh;
-  min-height: 700px;;
+  min-height: 700px;
+  overflow: hidden;
 }
 
 .data-content {
   background: black;
   height: inherit;
   width: Calc(100vw - 75px);
+  overflow: scroll;
 }
 
-.data-section1, .data-section2 {
+.data-content::-webkit-scrollbar {
+  display: none;
+}
+
+.data-section1 {
+  width: 100%;
+  height: 100vh;
+  min-height: 700px;
+}
+
+.data-section2, .data-section3 {
   width: 100%;
   height: 50%;
-  background: #eee;
+  background: #303030;
+  min-height: Calc(700px - 50%);
 }
 
 .data-section2 {
   background: #444444;
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* ------- END OF DATA DISPLAY PAGE CSS ------- */
