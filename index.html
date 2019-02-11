@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Visualeyes - World Data Visualisation</title>
+  <link href="css/hamburgers.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+  <!-- Section A - Landing Page -->
+  <div class="LandingPage">
+    <div class="logo">
+      <img src="resources/images/logo.png" class="logo-img" alt="logo" />
+      <h1>Visualeyes</h1>
+      <h2>Interactive World Data</h2>
+    </div>
+    <div class="mouse">
+      <img src="resources/images/mouse.png" class="mouse-img" alt="mouse-icon" />
+    </div>
+    <p class="indicator">Scroll Down</p>
+  </div>
+
+  <!-- Section B - Data Display (Section 1) -->
+
+  <div class="dataPage">
+    <div id="sidebar" class="sidebar-wrapper">
+
+      <button id="hamburger" class="hamburger hamburger--squeeze" type="button">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+
+      <div class="country-selector">
+        <h2>Select Country</h2>
+      </div>
+      <div class="stat-selector">
+        <h2>Select Statistics</h2>
+      </div>
+    </div>
+
+    <div id="data-main" class="data-content">
+      <div id="ds1" class="data-section1">
+        <!-- INSERT SVG CONTENT HERE -->
+      </div>
+
+      <div id="ds2" class="data-section2">
+        <!-- INSERT SVG CONTENT HERE -->
+      </div>
+    </div>
+
+
+  </div>
+
+  <script src="js/d3.js" charset="utf-8"></script>
+  <script src="js/script.js" charset="utf-8"></script>
+</body>
+
+</html>
