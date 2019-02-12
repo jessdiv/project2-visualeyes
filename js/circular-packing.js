@@ -1,22 +1,22 @@
-const width = window.innerWidth;
-const height = window.innerHeight;
+let population_width = window.innerWidth;
+let population_height = window.innerHeight;
 
-const margin = {
+let population_margin = {
   left: 150,
   right: 150,
-  top: 150,
+  top: 200,
   bottom: 150
 }
 
-const svg = d3.select('#ds1')
+const population_svg = d3.select('#ds1')
   .append("svg")
   .attr('class', 'svg-graph1')
-  .attr('width', width)
-  .attr('height', height)
+  .attr('width', population_width)
+  .attr('height', population_height)
 
-svg.append("html")
-          .attr("x", (width / 2))
-          .attr("y", 0 - (margin.top / 2))
+population_svg.append("html")
+          .attr("x", (population_width / 2))
+          .attr("y", 0 - (population_margin.top / 2))
           .attr("text-anchor", "middle")
           .style("font-size", "16px")
           .style('color', 'black')
@@ -25,7 +25,6 @@ svg.append("html")
           .text("World Population 2017");
 
 d3.csv("../resources/alldata_flat.csv").then(function(data) {
-  // console.log(data);
   data.forEach(function(d) {
     d['Total Population'] = +d['Total Population']
   })
@@ -108,15 +107,15 @@ console.log(((year2017[0]["Total Population"]) / 10000000) * 2);
 
 // initializing the circle
 
-  const node = svg.append('g')
+  const node = population_svg.append('g')
     .selectAll('circle')
     .data(year2017)
     .enter()
     .append('circle')
     .attr('class', 'node')
     .attr("r", function(year2017){ return size(year2017['Total Population'])})
-    .attr('cx', width / 2)
-    .attr('cy', height / 2)
+    .attr('cx', population_width / 2)
+    .attr('cy', population_height / 2)
     .style('fill', function(d){ return color(d.Country)}) //come back to for colours
     .style('fill-opacity', 0.8)
     .attr('stroke', 'black')
@@ -134,7 +133,7 @@ console.log(((year2017[0]["Total Population"]) / 10000000) * 2);
   const simulation = d3.forceSimulation()
     // .force("x", d3.forceX().strength(0.5).x(width/2))
     // .force("y", d3.forceY().strength(0.1).y( height/2 ))
-    .force('center', d3.forceCenter().x(width / 2).y(height / 2)) //attracts to centre of svg
+    .force('center', d3.forceCenter().x(population_width / 2).y(height / 2)) //attracts to centre of svg
     .force('charge', d3.forceManyBody().strength(.1)) //Nodes are attracted to each other
     .force("collide", d3.forceCollide().strength(.2).radius(function(year2017){ return size(year2017['Total Population']+3) }).iterations(1)) //force avoids circle collision
 
