@@ -40,13 +40,13 @@
         <div class="countries">
           <div class="col-1">
             <div class="country">
-              <input type="checkbox" name="australia" value="">
-              <label for="australia">Australia</label>
+              <input type="checkbox" name="all" value="" checked>
+              <label for="all">All</label>
             </div>
 
             <div class="country">
-              <input type="checkbox" name="Belgium" value="">
-              <label for="Belgium">Belgium</label>
+              <input type="checkbox" name="australia" value="">
+              <label for="australia">Australia</label>
             </div>
 
             <div class="country">
@@ -55,13 +55,13 @@
             </div>
 
             <div class="country">
-              <input type="checkbox" name="China" value="">
-              <label for="China">China</label>
+              <input type="checkbox" name="Canada" value="">
+              <label for="Canada">Canada</label>
             </div>
 
             <div class="country">
-              <input type="checkbox" name="Vietnam" value="">
-              <label for="Vietnam">Vietnam</label>
+              <input type="checkbox" name="China" value="">
+              <label for="China">China</label>
             </div>
 
             <div class="country">
@@ -69,12 +69,6 @@
               <label for="France">France</label>
             </div>
 
-            <div class="country">
-              <input type="checkbox" name="Germany" value="">
-              <label for="Germany">Germany</label>
-            </div>
-          </div>
-          <div class="col-2">
             <div class="country">
               <input type="checkbox" name="India" value="">
               <label for="India">India</label>
@@ -84,10 +78,21 @@
               <input type="checkbox" name="Ireland" value="">
               <label for="Ireland">Ireland</label>
             </div>
-
+          </div>
+          <div class="col-2">
             <div class="country">
               <input type="checkbox" name="Italy" value="">
               <label for="Italy">Italy</label>
+            </div>
+
+            <div class="country">
+              <input type="checkbox" name="Mexico" value="">
+              <label for="Mexico">Mexico</label>
+            </div>
+
+            <div class="country">
+              <input type="checkbox" name="Nigeria" value="">
+              <label for="Nigeria">Nigeria</label>
             </div>
 
             <div class="country">
@@ -98,6 +103,11 @@
             <div class="country">
               <input type="checkbox" name="New Zealand" value="">
               <label for="New Zealand">New Zealand</label>
+            </div>
+
+            <div class="country">
+              <input type="checkbox" name="Thailand" value="">
+              <label for="Thailand">Thailand</label>
             </div>
 
             <div class="country">
@@ -127,7 +137,7 @@
             </div>
             <div class="stat">
               <input type="checkbox" name="area" value="">
-              <label for="area">Area (m<sup>2</sup>)</label>
+              <label for="area">Area (km<sup>2</sup>)</label>
             </div>
           </div>
 
@@ -161,15 +171,39 @@
       </div>
 
       <div id="ds3" class="data data-section3">
-        <h1>INSERT D3 CONTENT HERE</h1>
+        <h1>GDP/Capita per Country</h1>
+
+        <select id="country-select">
+          <option selected value="all">All</option>
+          <option value="Australia">Australia</option>
+          <option value="Brazil">Brazil</option>
+          <option value="Canada">Canada</option>
+          <option value="China">China</option>
+          <option value="France">France</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="India">India</option>
+          <option value="Ireland">Ireland</option>
+          <option value="Italy">Italy</option>
+          <option value="Mexico">Mexico</option>
+          <option value="Nigeria">Nigeria</option>
+          <option value="Netherlands">Netherlands</option>
+          <option value="New Zealand">New Zealand</option>
+          <option value="Thailand">Thailand</option>
+          <option value="United States">United States</option>
+        </select>
+
+        <div id='chart-area-3'></div>
       </div>
     </div>
-
 
   </div>
 
   <script src="js/d3.js" charset="utf-8"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js'></script>
   <script src="js/script.js" charset="utf-8"></script>
+  <script src="js/gdp-per-capita.js"></script>
 </body>
 
 </html>
