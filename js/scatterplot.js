@@ -97,7 +97,7 @@ d3.csv('../resources/flat_data.csv').then(function (data) {
     });
 
     let update = function (data) {
-      console.log('update', data);
+      // console.log('update', data);
       data.forEach(function (d) {
         // console.log('iterating', d);
         if (! d['Total Population']) return;
@@ -126,7 +126,7 @@ d3.csv('../resources/flat_data.csv').then(function (data) {
       });
 
       setTimeout(function () {
-        console.log('setting timeout');
+        // console.log('setting timeout');
         time = (time < 58) ? time + 1 : 0;
         update(dataByYear[time]);
       }, 500);

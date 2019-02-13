@@ -131,18 +131,20 @@ let line = d3.line()
       // country = $('#country-select').val();
       // console.log(country);
 
-      let updatedData = data.filter(function(d) {
+      let updatedData = nestedData.filter(function(d) {
         if (countries.indexOf('all') !== -1) {
           return true;
         } else {
           for (var i = 0; i < countries.length; i++) {
-            let currentCountry = countries[i]
-            return d.Country === currentCountry;
+            if (d.key === countries[i]) {
+              console.log(`${countries[i]} is in the selected array`);
+              // console.log(d.values);
+              return d.values;
+            }
           }
           // return d.Country === country;
         }
       });
-      console.log("nested data", updatedData);
 
       updatedData = updatedData.filter(function(d) {
         if (d.Year !== 2018) {
@@ -156,10 +158,10 @@ let line = d3.line()
 
       gdp_g.selectAll('.line')
         .data(function() {
-          if (allSelected === true || countries.length > 1) {
+          if (allSelected === true) {
             return nestedData;
           } else {
-            return [updatedData];
+            return updatedData;
           }
         })
         .enter()
@@ -167,19 +169,19 @@ let line = d3.line()
           .attr('class', 'line')
           .attr('fill', 'none')
           .attr('d', function(d) {
-            if (allSelected === true) {
+            if (countries.length === 1) {
               return line(d.values);
-            } else if (countries.length > 1) {
+            } else {
               return line(d.values);
-            } else if (countries.length === 1) {
-              return line(d);
             }
           });
     }
 
     function removeAll() {
       let index = countries.indexOf('all');
-      countries.splice(index, 1);
+      if (index !== -1) {
+        countries.splice(index, 1);
+      }
       $('#all').prop('checked', false);
     }
 
@@ -204,6 +206,7 @@ let line = d3.line()
         removeAll();
         countries.push(this.value);
         allSelected = false
+        console.log(countries);
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
@@ -216,6 +219,7 @@ let line = d3.line()
         removeAll();
         countries.push(this.value);
         allSelected = false
+        console.log(countries);
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
@@ -228,6 +232,7 @@ let line = d3.line()
         removeAll();
         countries.push(this.value);
         allSelected = false
+        console.log(countries);
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
