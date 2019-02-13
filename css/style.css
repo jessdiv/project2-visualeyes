@@ -237,7 +237,7 @@ h1 {
 }
 
 .data-content {
-  background: black;
+  background: #eee;
   height: inherit;
   width: Calc(100vw - 75px);
   overflow: scroll;
@@ -269,7 +269,8 @@ h1 {
 }
 
 .data-section2 {
-  background: #444444;
+  background: #eee;
+  height: 700px;
 }
 
 .data {
@@ -310,3 +311,21 @@ h1 {
 }
 
 /* ------- END OF DATA DISPLAY PAGE CSS ------- */
+
+/* ------- START OF DATA SCATTER PLOT CSS ------- */
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.dot {
+  stroke: #000;
+}
+
+text  {
+  color: black;
+}
+
+/* ------- END OF DATA SCATTER PLOT  CSS ------- */
