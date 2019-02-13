@@ -4,10 +4,7 @@ let width = 800 - margin.left - margin.right;
 let filteredData;
 let nestedData;
 let countries = ['all'];
-
-$('#Australia').on('select', function() {
-  countries.push(this.val());
-})
+let allSelected = true;
 
 let svg = d3.select('#chart-area-3')
   .append('svg')
@@ -26,6 +23,10 @@ let x = d3.scaleLinear()
 let y = d3.scaleLinear()
   .range([height, 0])
   .domain([60, 70000])
+
+// let colorScale = d3.scaleOrdinal()
+//   .domain(['Australia', 'Brazil', 'Canada', 'China', 'France', 'India', 'Ireland', 'Italy', 'Mexico', 'Nigeria', 'Netherlands', 'New Zealand', 'Thailand', 'United Kingdom', 'United States'])
+//   .range(['blanchedalmond', 'deeppink', 'lightblue', 'aquamarine', 'deepskyblue', 'coral', 'darkblue', 'thistle', 'darkseagreen', 'darkcyan', 'lightcoral', 'indigo', 'palevioletred', 'crimson', 'steelblue']);
 
 let xAxisCall = d3.axisBottom()
   .ticks(10)
@@ -53,14 +54,11 @@ let line = d3.line()
       // console.log(`The GDP per Capita in ${d['Year']} for ${d['Country']} was ${d['GDP/Capita']}.`);
     });
 
-    // console.log(data);
     filteredData = data.filter(function(d) {
       if (d.Year !== 2018) {
         return d;
       }
     });
-
-    // console.log(filteredData);
 
     // Nest data by country
     nestedData = d3.nest()
@@ -72,16 +70,16 @@ let line = d3.line()
     console.log(nestedData);
 
     //////////// Initialise Tooltip ////////////
-    const tip = d3.tip()
-      .attr('class', 'd3-tip')
-      .html(function(d) {
-        // console.log(d);
-        let text = "<strong>Country</strong>: " + d.key + "<br />";
-        text += "<strong>Year</strong>: " + this.Year + "<br />";
-        text += "<strong>GDP Per Capita</strong>: " + d['GDP/Capita'] + "<br />";
-        return text;
-      })
-    svg.call(tip);
+    // const tip = d3.tip()
+    //   .attr('class', 'd3-tip')
+    //   .html(function(d) {
+    //     // console.log(d);
+    //     let text = "<strong>Country</strong>: " + d.key + "<br />";
+    //     text += "<strong>Year</strong>: " + this.Year + "<br />";
+    //     text += "<strong>GDP Per Capita</strong>: " + d['GDP/Capita'] + "<br />";
+    //     return text;
+    //   })
+    // svg.call(tip);
 
     let xAxis = g.append('g')
       .attr('class', 'x axis')
@@ -119,25 +117,32 @@ let line = d3.line()
       .enter()
         .append('path')
           .attr('class', 'line')
-          .attr('fill', 'none')
-          .on('mouseover', tip.show)
-          .on('mouseout', tip.hide)
+          // .attr('stroke', function(d) {
+          //   return colorScale(d.key);
+          // })
+          // .on('mouseover', tip.show)
+          // .on('mouseout', tip.hide)
           .attr('d', function(d) {
             return line(d.values)
           });
 
 
     function update(data) {
-      country = $('#country-select').val();
-      console.log(country);
+      // country = $('#country-select').val();
+      // console.log(country);
 
       let updatedData = data.filter(function(d) {
-        if (country === 'all') {
+        if (countries.indexOf('all') !== -1) {
           return true;
         } else {
-          return d.Country === country;
+          for (var i = 0; i < countries.length; i++) {
+            let currentCountry = countries[i]
+            return d.Country === currentCountry;
+          }
+          // return d.Country === country;
         }
       });
+      console.log("nested data", updatedData);
 
       updatedData = updatedData.filter(function(d) {
         if (d.Year !== 2018) {
@@ -151,7 +156,7 @@ let line = d3.line()
 
       g.selectAll('.line')
         .data(function() {
-          if (country === 'all') {
+          if (allSelected === true) {
             return nestedData;
           } else {
             return [updatedData];
@@ -161,19 +166,193 @@ let line = d3.line()
           .append('path')
           .attr('class', 'line')
           .attr('fill', 'none')
-          // .on('mouseover', tip.show)
-          // .on('mouseout', tip.hide)
           .attr('d', function(d) {
-            if (country === 'all') {
+            if (allSelected === true) {
               return line(d.values);
             } else {
               return line(d);
             }
           });
-
     }
+
     $('#country-select').on('change', function() {
       update(data);
+    })
+
+    $('#all').on('change', function() {
+      if (this.checked) {
+        countries.push(this.value);
+        allSelected = true
+      } else {
+        let index = countries.indexOf(this.value);
+        countries.splice(index, 1);
+      }
+      update(data)
+    })
+
+    $('#Australia').on('change', function() {
+      if (this.checked) {
+        countries.push(this.value);
+        allSelected = false
+      } else {
+        let index = countries.indexOf(this.value);
+        countries.splice(index, 1);
+      }
+      update(data);
+    })
+
+    $('#Brazil').on('change', function() {
+      if (this.checked) {
+        countries.push(this.value);
+        allSelected = false
+      } else {
+        let index = countries.indexOf(this.value);
+        countries.splice(index, 1);
+      }
+      update(data)
+    })
+
+    $('#Canada').on('change', function() {
+      if (this.checked) {
+        countries.push(this.value);
+        allSelected = false
+      } else {
+        let index = countries.indexOf(this.value);
+        countries.splice(index, 1);
+      }
+      update(data)
+    })
+
+    $('#China').on('change', function() {
+      if (this.checked) {
+        countries.push(this.value);
+        allSelected = false
+      } else {
+        let index = countries.indexOf(this.value);
+        countries.splice(index, 1);
+      }
+      update(data)
+    })
+
+    $('#France').on('change', function() {
+      if (this.checked) {
+        countries.push(this.value);
+        allSelected = false
+      } else {
+        let index = countries.indexOf(this.value);
+        countries.splice(index, 1);
+      }
+      update(data)
+    })
+
+    $('#India').on('change', function() {
+      if (this.checked) {
+        countries.push(this.value);
+        allSelected = false
+      } else {
+        let index = countries.indexOf(this.value);
+        countries.splice(index, 1);
+      }
+      update(data)
+    })
+
+    $('#Ireland').on('change', function() {
+      if (this.checked) {
+        countries.push(this.value);
+        allSelected = false
+      } else {
+        let index = countries.indexOf(this.value);
+        countries.splice(index, 1);
+      }
+      update(data)
+    })
+
+    $('#Italy').on('change', function() {
+      if (this.checked) {
+        countries.push(this.value);
+        allSelected = false
+      } else {
+        let index = countries.indexOf(this.value);
+        countries.splice(index, 1);
+      }
+      update(data)
+    })
+
+    $('#Mexico').on('change', function() {
+      if (this.checked) {
+        countries.push(this.value);
+        allSelected = false
+      } else {
+        let index = countries.indexOf(this.value);
+        countries.splice(index, 1);
+      }
+      update(data)
+    })
+
+    $('#Nigeria').on('change', function() {
+      if (this.checked) {
+        countries.push(this.value);
+        allSelected = false
+      } else {
+        let index = countries.indexOf(this.value);
+        countries.splice(index, 1);
+      }
+      update(data)
+    })
+
+    $('#Netherlands').on('change', function() {
+      if (this.checked) {
+        countries.push(this.value);
+        allSelected = false
+      } else {
+        let index = countries.indexOf(this.value);
+        countries.splice(index, 1);
+      }
+      update(data)
+    })
+
+    $('#New Zealand').on('change', function() {
+      if (this.checked) {
+        countries.push(this.value);
+        allSelected = false
+      } else {
+        let index = countries.indexOf(this.value);
+        countries.splice(index, 1);
+      }
+      update(data)
+    })
+
+    $('#Thailand').on('change', function() {
+      if (this.checked) {
+        countries.push(this.value);
+        allSelected = false
+      } else {
+        let index = countries.indexOf(this.value);
+        countries.splice(index, 1);
+      }
+      update(data)
+    })
+
+    $('#United Kingdom').on('change', function() {
+      if (this.checked) {
+        countries.push(this.value);
+        allSelected = false
+      } else {
+        let index = countries.indexOf(this.value);
+        countries.splice(index, 1);
+      }
+      update(data)
+    })
+
+    $('#United States').on('change', function() {
+      if (this.checked) {
+        countries.push(this.value);
+        allSelected = false
+      } else {
+        let index = countries.indexOf(this.value);
+        countries.splice(index, 1);
+      }
+      update(data)
     })
 
 });
