@@ -71,19 +71,22 @@ d3.csv("../resources/alldata_flat.csv").then(function(data) {
     .style('position', 'absolute')
     .style('z-index', '10')
     .style('visibility', 'hidden')
-    .text(function(year2017) {
-      // console.log(year2017.Country);
-      // console.log(year2017['Total Population']);
-      return `Country: ${year2017.Country}, Population: ${year2017['Total Population']}`;
-    })
+    // .text(function(year2017) {
+    //   // console.log(year2017.Country);
+    //   // console.log(year2017['Total Population']);
+    //   return `Country: ${year2017.Country}, Population: ${year2017['Total Population']}`;
+    // })
 
 console.log(year2017);
 
 // http://bl.ocks.org/biovisualize/1016860
 
 // mouseover tooltips
-const tooltip_mouseover = function(year2017) {
+const tooltip_mouseover = function(e, year2017) {
   tooltip.style('visibility', 'visible')
+    .text(function() {
+      return `Country: ${ e.Country }, Population: ${e['Total Population']}`
+    })
 }
 
 const tooltip_mouseout = function(year2017) {

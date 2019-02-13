@@ -1,10 +1,11 @@
 $(document).ready(function(){
-  let marginPop = {top: 10, right: 150, bottom: 50, left: 100};
+  let marginPop = {top: 20, right: 50, bottom: 100, left: 100};
   let widthPop = 800 - marginPop.left - marginPop.right;
-  let heightPop = 800 - marginPop.top - marginPop.bottom;
-  let filteredDataPop;
-  let nestedDataPop;
-  let countryPop = ['all'];
+  let heightPop = 500 - marginPop.top - marginPop.bottom;
+  // let filteredDataPop;
+  // let nestedDataPop;
+  // let countryPop = ['all'];
+  // let allSelected = true;
 
   let svgPop = d3.select('#chart-area-4')
     .append('svg')
@@ -27,17 +28,17 @@ $(document).ready(function(){
 
   let xAxisCallPop = d3.axisBottom()
     .ticks(15)
-    // .tickFormat(function(d) {
-    //   return +d
-    // })
+    .tickFormat(function(d) {
+      return +d
+    })
 
     let yAxisCallPop = d3.axisLeft()
       .ticks(15)
 
 
   let linePop = d3.line()
-    .x(function(d) { return x(d.Year); })
-    .y(function(d) { return y(+d['Total Population']);})
+    .x(function(d) { return xPop(d.Year); })
+    .y(function(d) { return yPop(+d['Total Population']);})
 
   //////////// IMPORT CSV ////////////
   d3.csv("../resources/alldata_flat.csv").then(function(data) {
@@ -76,11 +77,11 @@ $(document).ready(function(){
   let xAxisPop = gPop.append('g')
         .attr('class', 'x axis')
         .attr('transform', 'translate(0,' + heightPop + ')')
-        .call(xAxisCall.scale(x))
+        .call(xAxisCallPop.scale(xPop))
 
       let yAxisPop = gPop.append('g')
         .attr('class', 'y axis')
-        .call(yAxisCallPop.scale(y))
+        .call(yAxisCallPop.scale(yPop))
 
       // Y Axis Label
       yAxisPop.append('text')
@@ -88,19 +89,21 @@ $(document).ready(function(){
         .attr('transform', 'rotate(-90)')
         .attr('y', 6)
         .attr('dy', '.71em')
-        .attr('fill', 'white')
+        .attr('fill', 'black')
         .attr('font-family', 'Raleway')
         .style('text-anchor', 'end')
+        .text('Population')
 
       // X Axis Label
       gPop.append('text')
         .attr('class', 'axis-label')
         .attr('x', widthPop / 2)
-        .attr('y', '400')
-        .attr('fill', 'white')
+        .attr('y', '440')
+        .attr('fill', 'black')
         .attr('font-family', 'Raleway')
         .attr('font-size', '18px')
         .attr('text-anchor', 'middle')
+        .text('Year')
 
       let pathPop = gPop.selectAll('.line2')
         .data(nestedDataPop)
@@ -116,48 +119,47 @@ $(document).ready(function(){
               return linePop(d.values)
             });
 
-      function update(data) {
-        country = $('#country-select').val();
-        console.log(country);
-
-        let updatedDataPop = data.filter(function(d) {
-          if (country === 'all') {
-            return true;
-          } else {
-            return d.Country === country;
-          }
-        });
-
-        updatedDataPop = updatedDataPop.filter(function(d) {
-          if (d.Year !== 2018) {
-            return d;
-          }
-        });
-        console.log(updatedDataPop);
-
-        gPop.selectAll('.line2')
-          .remove();
-
-        gPop.selectAll('.line2')
-          .data(function() {
-            if (country === 'all') {
-              return nestedDataPop;
-            } else {
-              return [updatedDataPop];
-            }
-          })
-          .enter()
-            .append('path')
-            .attr('class', 'line2')
-            .attr('fill', 'none')
-            .attr('d', function(d) {
-              if (country === 'all') {
-                return line(d.values);
-              } else {
-                return linePop(d);
-              }
-            });
-      }
+      // function update(data) {
+      //   //country = $('#country-select').val();
+      //   //console.log(country);
+      //
+      //   let updatedDataPop = data.filter(function(d) {
+      //     if (country === 'all') {
+      //       return true;
+      //     } else {
+      //       return d.Country === country;
+      //     }
+      //   });
+      //
+      //   updatedDataPop = updatedDataPop.filter(function(d) {
+      //     if (d.Year !== 2018) {
+      //       return d;
+      //     }
+      //   });
+      //   //console.log(updatedDataPop);
+      //
+      //   gPop.selectAll('.line2')
+      //     .remove();
+      //
+      //   gPop.selectAll('.line2')
+      //     .data(function() {
+      //       if (country === 'all') {
+      //         return nestedDataPop;
+      //       } else {
+      //         return updatedDataPop;
+      //       }
+      //     })
+      //     .enter()
+      //       .append('path')
+      //       .attr('class', 'line2')
+      //       .attr('fill', 'none')
+      //       .attr('d', function(d) {
+      //         if (country === 'all') {
+      //           return line2(d.values);
+      //         } else {
+      //           return line2(d);
+      //         }
+      //       });
+      // }
   });
-
 });
