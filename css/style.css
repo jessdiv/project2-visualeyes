@@ -251,6 +251,7 @@ h1 {
   width: 100%;
   height: 100vh;
   min-height: 700px;
+  background: #303030;
 }
 
 .data-section2, .data-section3 {
@@ -261,7 +262,8 @@ h1 {
 }
 
 .data-section2 {
-  background: #444444;
+  background: #eee;
+  height: auto;
 }
 
 .data {
