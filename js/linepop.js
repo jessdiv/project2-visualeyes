@@ -1,51 +1,52 @@
-// Define margins, dimensions, and some line colors
-let margin = {top: 10, right: 150, bottom: 50, left: 100};
-let width = 800 - margin.left - margin.right;
-let height = 800 - margin.top - margin.bottom;
-let filteredData;
-let nestedData;
-let country = 'all';
+let marginPop = {top: 10, right: 150, bottom: 50, left: 100};
+let widthPop = 800 - marginPop.left - marginPop.right;
+let heightPop = 800 - marginPop.top - marginPop.bottom;
+let filteredDataPop;
+let nestedDataPop;
+let countryPop = 'all';
 
-let svg = d3.select('#chart-area-3')
+let svgPop = d3.select('#chart-area-4')
   .append('svg')
-  .attr('width', width + margin.left + margin.right)
-  .attr('height', height + margin.top + margin.bottom)
-  .style('background-color', 'pink')
-let g = svg.append('g')
-  .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
+  .attr('width', widthPop + marginPop.left + marginPop.right)
+  .attr('height', heightPop + marginPop.top + marginPop.bottom)
+  //.style('background-color', 'pink')
+
+let gPop = svgPop.append('g')
+  .attr('transform', 'translate(' + marginPop.left + ', ' + marginPop.top + ')')
   .attr('class', 'g-parent')
 
 //////////// Scales ////////////
-let x = d3.scaleLinear()
-  .range([0, width])
+let xPop = d3.scaleLinear()
+  .range([0, widthPop])
   .domain([1960, 2017])
 
-let y = d3.scaleLinear()
-  .range([height, 0])
+let yPop = d3.scaleLinear()
+  .range([heightPop, 0])
   .domain([0, 1500000000])
 
-let xAxisCall = d3.axisBottom()
+let xAxisCallPop = d3.axisBottom()
   .ticks(15)
   // .tickFormat(function(d) {
   //   return +d
   // })
 
-  let yAxisCall = d3.axisLeft()
+  let yAxisCallPop = d3.axisLeft()
     .ticks(15)
 
 
-let line = d3.line()
+let linePop = d3.line()
   .x(function(d) { return x(d.Year); })
-  .y(function(d) { return y(+d['Total_Population']);})
+  .y(function(d) { return y(+d['Total Population']);})
 
 //////////// IMPORT CSV ////////////
 d3.csv("../resources/alldata_flat.csv").then(function(data) {
   data.forEach(function(d) {
     d.Year = +d.Year;
+    //d['Total Population'] = +d['Total Population'];
     d.Total_Population = +d.Total_Population.split(',').join('');
   });
 
-  filteredData = data.filter(function(d) {
+  filteredDataPop = data.filter(function(d) {
     if (d.Year !== 2018) {
       console.log(d);
       return d;
@@ -53,11 +54,11 @@ d3.csv("../resources/alldata_flat.csv").then(function(data) {
   });
 
   // Nesteed data by country
-  nestedData = d3.nest()
+  nestedDataPop = d3.nest()
     .key(function(d) {
       return d.Country;
     })
-     .entries(filteredData)
+     .entries(filteredDataPop)
 
 //////////// Initialise Tooltip ////////////
 const tip = d3.tip()
@@ -66,7 +67,7 @@ const tip = d3.tip()
         // console.log(d);
         let text = "<strong>Country</strong>: " + d.key + "<br />";
         text += "<strong>Year</strong>: " + this.Year + "<br />";
-        text += "<strong>Total Population</strong>: " + d['Total_Population'] + "<br />";
+        text += "<strong>Total Population</strong>: " + d['Total Population'] + "<br />";
         return text;
       })
     svg.call(tip);
@@ -91,7 +92,7 @@ let xAxis = g.append('g')
       .style('text-anchor', 'end')
 
     // X Axis Label
-    g.append('text')
+    gPop.append('text')
       .attr('class', 'axis-label')
       .attr('x', width / 2)
       .attr('y', '400')
@@ -100,8 +101,8 @@ let xAxis = g.append('g')
       .attr('font-size', '18px')
       .attr('text-anchor', 'middle')
 
-    let lines = g.selectAll('.line')
-      .data(nestedData)
+    let linesPop = g.selectAll('.line')
+      .data(nestedDataPop)
       .enter()
         .append('path')
         .attr('stroke', 'black')
@@ -118,7 +119,7 @@ let xAxis = g.append('g')
       country = $('#country-select').val();
       console.log(country);
 
-      let updatedData = data.filter(function(d) {
+      let updatedDataPop = data.filter(function(d) {
         if (country === 'all') {
           return true;
         } else {
@@ -126,22 +127,22 @@ let xAxis = g.append('g')
         }
       });
 
-      updatedData = updatedData.filter(function(d) {
+      updatedDataPop = updatedDataPop.filter(function(d) {
         if (d.Year !== 2018) {
           return d;
         }
       });
-      console.log(updatedData);
+      console.log(updatedDataPop);
 
-      g.selectAll('.line')
+      gPop.selectAll('.line')
         .remove();
 
-      g.selectAll('.line')
+      gPop.selectAll('.line')
         .data(function() {
           if (country === 'all') {
-            return nestedData;
+            return nestedDataPop;
           } else {
-            return [updatedData];
+            return [updatedDataPop];
           }
         })
         .enter()
