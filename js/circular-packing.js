@@ -24,25 +24,25 @@ population_svg.append("html")
           .style("text-decoration", "underline")
           .text("World Population 2017");
 
-d3.csv("../resources/alldata_flat.csv").then(function(data) {
+d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(data) {
   data.forEach(function(d) {
-    d['Total Population'] = +d['Total Population']
+    d.population = +d.population
   })
 
   // nesting to allow usage of year as key
 
   let years = d3.nest()
     .key(function(d) {
-      if (d.Year === '2017') {
-        return d.Year;
+      if (d.year === '2017') {
+        return d.year;
       }
     })
     .entries(data);
 
   console.log(years);
   console.log(years[1]);
-  console.log(years[1].values[0].Country);
-  console.log(years[1].values[0]["Total Population"]);
+  console.log(years[1].values[0].country_name);
+  console.log(years[1].values[0].population);
 
   const year2017 = years[1].values;
 
@@ -52,7 +52,7 @@ d3.csv("../resources/alldata_flat.csv").then(function(data) {
   // color-coding countries
   var color = d3.scaleOrdinal()
     .domain(year2017.map(function(d) {
-      return d.Country;
+      return d.country_name;
     }))
     .range(['blanchedalmond', 'deeppink', 'lightblue', 'aquamarine', 'deepskyblue', 'coral', 'darkblue', 'thistle', 'darkseagreen', 'darkcyan', 'lightcoral', 'indigo', 'palevioletred', 'crimson', 'steelblue']);
 
@@ -73,8 +73,8 @@ d3.csv("../resources/alldata_flat.csv").then(function(data) {
     .style('visibility', 'hidden')
     // .text(function(year2017) {
     //   // console.log(year2017.Country);
-    //   // console.log(year2017['Total Population']);
-    //   return `Country: ${year2017.Country}, Population: ${year2017['Total Population']}`;
+    //   // console.log(year2017.population);
+    //   return `Country: ${year2017.Country}, Population: ${year2017.population}`;
     // })
 
 console.log(year2017);
@@ -85,7 +85,7 @@ console.log(year2017);
 const tooltip_mouseover = function(e, year2017) {
   tooltip.style('visibility', 'visible')
     .text(function() {
-      return `${ e.Country }: ${e['Total Population']}`
+      return `${ e.country_name }: ${e.population}`
     })
 }
 
@@ -102,10 +102,10 @@ const tooltip_mousemove = function(year2017) {
 console.log('////////');
 console.log(years[1].values[0]['Country']);
 console.log(years[1].values[0]['Year']);
-console.log(years[1].values[0]['Total Population']);
+console.log(years[1].values[0].population);
 console.log('//////////');
 
-console.log(((year2017[0]["Total Population"]) / 10000000) * 2);
+console.log(((year2017[0].population) / 10000000) * 2);
 
 
 // initializing the circle
@@ -116,10 +116,10 @@ console.log(((year2017[0]["Total Population"]) / 10000000) * 2);
     .enter()
     .append('circle')
     .attr('class', 'node')
-    .attr("r", function(year2017){ return size(year2017['Total Population'])})
+    .attr("r", function(year2017){ return size(year2017.population)})
     .attr('cx', population_width / 2)
     .attr('cy', population_height / 2)
-    .style('fill', function(d){ return color(d.Country)}) //come back to for colours
+    .style('fill', function(d){ return color(d.country_name)}) //come back to for colours
     .style('fill-opacity', 0.8)
     .attr('stroke', 'black')
     .style("stroke-width", 1)
@@ -138,7 +138,7 @@ console.log(((year2017[0]["Total Population"]) / 10000000) * 2);
     // .force("y", d3.forceY().strength(0.1).y( height/2 ))
     .force('center', d3.forceCenter().x(population_width / 2).y(population_height / 2)) //attracts to centre of svg
     .force('charge', d3.forceManyBody().strength(.1)) //Nodes are attracted to each other
-    .force("collide", d3.forceCollide().strength(.2).radius(function(year2017){ return size(year2017['Total Population']+3) }).iterations(1)) //force avoids circle collision
+    .force("collide", d3.forceCollide().strength(.2).radius(function(year2017){ return size((year2017.population)+3) }).iterations(1)) //force avoids circle collision
 
   simulation
     .nodes(year2017)
