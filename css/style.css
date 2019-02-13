@@ -320,6 +320,11 @@ h1 {
   text-align: center;
 }
 
+.ds5 {
+  color: black;
+  display: flex;
+}
+
 /* ------- END OF DATA DISPLAY PAGE CSS ------- */
 
 /* ------- START OF DATA SCATTER PLOT CSS ------- */

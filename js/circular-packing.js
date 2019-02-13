@@ -85,7 +85,7 @@ console.log(year2017);
 const tooltip_mouseover = function(e, year2017) {
   tooltip.style('visibility', 'visible')
     .text(function() {
-      return `Country: ${ e.Country }, Population: ${e['Total Population']}`
+      return `${ e.Country }: ${e['Total Population']}`
     })
 }
 
