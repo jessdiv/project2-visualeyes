@@ -131,18 +131,20 @@ let line = d3.line()
       // country = $('#country-select').val();
       // console.log(country);
 
-      let updatedData = data.filter(function(d) {
+      let updatedData = nestedData.filter(function(d) {
         if (countries.indexOf('all') !== -1) {
           return true;
         } else {
           for (var i = 0; i < countries.length; i++) {
-            let currentCountry = countries[i]
-            return d.Country === currentCountry;
+            if (d.key === countries[i]) {
+              console.log(`${countries[i]} is in the selected array`);
+              // console.log(d.values);
+              return d.values;
+            }
           }
           // return d.Country === country;
         }
       });
-      console.log("nested data", updatedData);
 
       updatedData = updatedData.filter(function(d) {
         if (d.Year !== 2018) {
@@ -156,10 +158,10 @@ let line = d3.line()
 
       gdp_g.selectAll('.line')
         .data(function() {
-          if (allSelected === true || countries.length > 1) {
+          if (allSelected === true) {
             return nestedData;
           } else {
-            return [updatedData];
+            return updatedData;
           }
         })
         .enter()
@@ -167,14 +169,20 @@ let line = d3.line()
           .attr('class', 'line')
           .attr('fill', 'none')
           .attr('d', function(d) {
-            if (allSelected === true) {
+            if (countries.length === 1) {
               return line(d.values);
-            } else if (countries.length > 1) {
+            } else {
               return line(d.values);
-            } else if (countries.length === 1) {
-              return line(d);
             }
           });
+    }
+
+    function removeAll() {
+      let index = countries.indexOf('all');
+      if (index !== -1) {
+        countries.splice(index, 1);
+      }
+      $('#all').prop('checked', false);
     }
 
     $('#country-select').on('change', function() {
@@ -183,7 +191,7 @@ let line = d3.line()
 
     $('#all').on('change', function() {
       if (this.checked) {
-        countries.push(this.value);
+        countries = ['all']
         allSelected = true
       } else {
         let index = countries.indexOf(this.value);
@@ -195,8 +203,10 @@ let line = d3.line()
 
     $('#Australia').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
+        console.log(countries);
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
@@ -206,8 +216,10 @@ let line = d3.line()
 
     $('#Brazil').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
+        console.log(countries);
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
@@ -217,8 +229,10 @@ let line = d3.line()
 
     $('#Canada').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
+        console.log(countries);
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
@@ -228,6 +242,7 @@ let line = d3.line()
 
     $('#China').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -239,6 +254,7 @@ let line = d3.line()
 
     $('#France').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -250,6 +266,7 @@ let line = d3.line()
 
     $('#India').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -261,6 +278,7 @@ let line = d3.line()
 
     $('#Ireland').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -272,6 +290,7 @@ let line = d3.line()
 
     $('#Italy').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -283,6 +302,7 @@ let line = d3.line()
 
     $('#Mexico').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -294,6 +314,7 @@ let line = d3.line()
 
     $('#Nigeria').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -305,6 +326,7 @@ let line = d3.line()
 
     $('#Netherlands').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -314,9 +336,10 @@ let line = d3.line()
       update(data)
     })
 
-    $('#New Zealand').on('change', function() {
+    $('#New-Zealand').on('change', function() {
       if (this.checked) {
-        countries.push(this.value);
+        removeAll();
+        countries.push('New Zealand');
         allSelected = false
       } else {
         let index = countries.indexOf(this.value);
@@ -327,6 +350,7 @@ let line = d3.line()
 
     $('#Thailand').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -336,9 +360,10 @@ let line = d3.line()
       update(data)
     })
 
-    $('#United Kingdom').on('change', function() {
+    $('#United-Kingdom').on('change', function() {
       if (this.checked) {
-        countries.push(this.value);
+        removeAll();
+        countries.push('United Kingdom');
         allSelected = false
       } else {
         let index = countries.indexOf(this.value);
@@ -347,9 +372,10 @@ let line = d3.line()
       update(data)
     })
 
-    $('#United States').on('change', function() {
+    $('#United-States').on('change', function() {
       if (this.checked) {
-        countries.push(this.value);
+        removeAll();
+        countries.push('United States');
         allSelected = false
       } else {
         let index = countries.indexOf(this.value);
