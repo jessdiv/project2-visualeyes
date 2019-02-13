@@ -101,7 +101,7 @@ $(document).ready(function(){
         .attr('fill', 'black')
         .attr('font-family', 'Raleway')
         .style('text-anchor', 'end')
-        .text('GDP per Capita')
+        .text('GDP per Capita (USD)')
 
       // X Axis Label
       gdp_g.append('text')
