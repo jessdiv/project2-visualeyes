@@ -59,7 +59,7 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
   // scale for countries
   let size = d3.scaleLog()
     .domain([4793900, 1400000000])
-    .range([0, 120])
+    .range([15, 120])
     .base(2)
 
 // Tooltips
