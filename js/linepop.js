@@ -41,11 +41,7 @@ $(document).ready(function(){
     .y(function(d) { return yPop(+d.population);})
 
   //////////// IMPORT CSV ////////////
-<<<<<<< HEAD
   d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(data) {
-=======
-  d3.csv("resources/alldata_flat.csv").then(function(data) {
->>>>>>> 2a590af4dba1c63e76076ad398e82a10c86e7fd9
     data.forEach(function(d) {
       d.year = +d.year;
       d.population = +d.population;
