@@ -24,11 +24,7 @@ population_svg.append("html")
           .style("text-decoration", "underline")
           .text("World Population 2017");
 
-<<<<<<< HEAD
 d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(data) {
-=======
-d3.csv("resources/alldata_flat.csv").then(function(data) {
->>>>>>> dc1c34fab618c66070224060465ced55e69e1169
   data.forEach(function(d) {
     d.population = +d.population
   })
