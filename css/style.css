@@ -32,7 +32,7 @@ h1 {
   height: 100vh;
   min-height: 700px;
   position: relative;
-  background: linear-gradient(to left, rgba(152,132,255,0.25), rgba(152,132,255,0.25)), url(/resources/images/hero.jpg) center center no-repeat;
+  background: linear-gradient(to left, rgba(152,132,255,0.25), rgba(152,132,255,0.25)), url(../resources/images/hero.jpg) center center no-repeat;
   background-size: cover;
 }
 
@@ -351,6 +351,11 @@ h1 {
   border-radius: 4px;
   padding: 5px;
   text-align: center;
+}
+
+.ds5 {
+  color: black;
+  display: flex;
 }
 
 /* ------- END OF DATA DISPLAY PAGE CSS ------- */

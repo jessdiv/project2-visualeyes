@@ -80,7 +80,7 @@ var timeLabel = g.append('text')
     .text('1960');
 
 // Load CSV Data
-d3.csv('../resources/flat_data.csv').then(function (data) {
+d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (data) {
     const dataByYear = [];
     for (let i = 0; i < data.length; i += 15) {
       dataByYear.push(data.slice(i, i + 15));
@@ -91,10 +91,10 @@ d3.csv('../resources/flat_data.csv').then(function (data) {
     // Clean data
     dataByYear.forEach(function (year) {
       year.forEach(function (d) {
-        d['Life Expectancy'] = +d['Life Expectancy'];
-        d['Total Population'] = +d['Total Population'].replace(/,/g, '');
-        d['GPD/Capita'] = +d['GPD/Capita'].replace(/,/g, '');
-        d['GDP (Current USD)'] = +d['GDP (Current USD)'].replace(/,/g, '');
+        d.life_expectancy = +d.life_expectancy;
+        d.population = +d.population.replace(/,/g, '');
+        d.gdp_capita = +d.gdp_capita.replace(/,/g, '');
+        d.gdp_total = +d.gdp_total.replace(/,/g, '');
       });
     });
 
@@ -102,12 +102,12 @@ d3.csv('../resources/flat_data.csv').then(function (data) {
       // console.log('update', data);
       data.forEach(function (d) {
         // console.log('iterating', d);
-        if (! d['Total Population']) return;
+        if (! d.population) return;
         let t = d3.transition()
             .duration(100);
 
         let circles = g.selectAll('circle').data(data, function (d) {
-          return d.Country;
+          return d.country_name;
         });
 
         circles.exit()
@@ -117,29 +117,35 @@ d3.csv('../resources/flat_data.csv').then(function (data) {
         circles.enter()
             .append('circle')
             .attr('class', 'enter')
-            .attr('fill', function (d) { return continentColor(d['GPD/Capita']); })
+            .attr('fill', function (d) { return continentColor(d.gdp_capita); })
             .merge(circles)
             .transition(t)
-                .attr('cy', function (d){ return Y(d['Life Expectancy']); })
-                .attr('cx', function (d) { return X(d['GPD/Capita']); })
-                .attr('r', function (d){ return Math.sqrt(area(d['Total Population']) / Math.PI); });
+                .attr('cy', function (d){ return Y(d.life_expectancy); })
+                .attr('cx', function (d) { return X(d.gdp_capita); })
+                .attr('r', function (d){ return Math.sqrt(area(d.population) / Math.PI); });
 
         timeLabel.text(+(time + 1960));
       });
-
-      startTime.addEventListener('click', setTime);
-      // stopTime.addEventListener('click', killTimer);
-
-      function setTime() {
-        setInterval(function () {
-          time = (time < 58) ? time + 1 : 0;
-          update(dataByYear[time]);
-          if(time === 0) {
-            console.log('TIME');
-          }
-        }, 500);
-      } // End Timer function
     };
+
+    startTime.addEventListener('click', setTime);
+    stopTime.addEventListener('click', killTimer);
+
+    let timerId;
+
+    function setTime() {
+      timerId = setInterval(function () {
+        time = (time < 58) ? time + 1 : 0;
+        update(dataByYear[time]);
+        if(time === 0) {
+          console.log('TIME');
+        }
+      }, 500);
+    } // End Timer function
+
+    function killTimer() {
+      clearInterval(timerId);
+    }
 
     update(dataByYear[0]);
 
