@@ -1,5 +1,5 @@
-let population_width = window.innerWidth;
-let population_height = window.innerHeight;
+let population_width = $('#ds1').innerWidth();
+let population_height = $('#ds1').innerHeight();
 
 let population_margin = {
   left: 150,

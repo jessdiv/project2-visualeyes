@@ -72,16 +72,29 @@ $(document).ready(function(){
       console.log(nestedData);
 
       //////////// Initialise Tooltip ////////////
-      // const tip = d3.tip()
-      //   .attr('class', 'd3-tip')
-      //   .html(function(d) {
-      //     // console.log(d);
-      //     let text = "<strong>Country</strong>: " + d.key + "<br />";
-      //     text += "<strong>Year</strong>: " + this.Year + "<br />";
-      //     text += "<strong>GDP Per Capita</strong>: " + d['GDP/Capita'] + "<br />";
-      //     return text;
-      //   })
-      // svg.call(tip);
+      let tooltipGDP = d3.select('#chart-area-3')
+        .append('div')
+        .data(nestedData)
+        .attr('class', 'tooltip')
+        .style('position', 'absolute')
+        .style('z-index', '10')
+        .style('visibility', 'hidden')
+
+      let tooltip_mouseoverGDP = function(e) {
+        tooltipGDP.style('visibility', 'visible')
+          .text(function() {
+            return `Country: ${ e.key }`
+          })
+      }
+
+      let tooltip_mouseoutGDP = function() {
+        tooltipGDP.style('visibility', 'hidden')
+      }
+
+      let tooltip_mousemoveGDP = function() {
+        tooltipGDP.style('top', ( event.pageY - 10) + 'px')
+          .style('left', ( event.pageX + 10) + 'px')
+      }
 
       //////////// AXES ////////////
       let xAxis = gdp_g.append('g')
@@ -123,16 +136,15 @@ $(document).ready(function(){
             // .attr('stroke', function(d) {
             //   return colorScale(d.key);
             // })
-            // .on('mouseover', tip.show)
-            // .on('mouseout', tip.hide)
             .attr('d', function(d) {
               return line(d.values)
-            });
+            })
+            .on('mouseover', tooltip_mouseoverGDP)
+            .on('mouseout', tooltip_mouseoutGDP)
+            .on('mousemove', tooltip_mousemoveGDP)
 
 
       function update(data) {
-        // country = $('#country-select').val();
-        // console.log(country);
 
         let updatedData = nestedData.filter(function(d) {
           if (countries.indexOf('all') !== -1) {
@@ -171,6 +183,9 @@ $(document).ready(function(){
             .append('path')
             .attr('class', 'line')
             .attr('fill', 'none')
+            .on('mouseover', tooltip_mouseoverGDP)
+            .on('mouseout', tooltip_mouseoutGDP)
+            .on('mousemove', tooltip_mousemoveGDP)
             .attr('d', function(d) {
               if (countries.length === 1) {
                 return line(d.values);

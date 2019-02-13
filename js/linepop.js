@@ -37,19 +37,19 @@ $(document).ready(function(){
 
 
   let linePop = d3.line()
-    .x(function(d) { return xPop(d.Year); })
-    .y(function(d) { return yPop(+d['Total Population']);})
+    .x(function(d) { return xPop(d.year); })
+    .y(function(d) { return yPop(+d.population);})
 
   //////////// IMPORT CSV ////////////
-  d3.csv("resources/alldata_flat.csv").then(function(data) {
+  d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(data) {
     data.forEach(function(d) {
-      d.Year = +d.Year;
-      d['Total Population'] = +d['Total Population'];
+      d.year = +d.year;
+      d.population = +d.population;
       //d.Total_Population = +d.Total_Population.split(',').join('');
     });
 
     filteredDataPop = data.filter(function(d) {
-      if (d.Year !== 2018) {
+      if (d.year !== 2018) {
         // console.log(d);
         return d;
       }
@@ -58,7 +58,7 @@ $(document).ready(function(){
     // Nesteed data by country
     nestedDataPop = d3.nest()
       .key(function(d) {
-        return d.Country;
+        return d.country_name;
       })
        .entries(filteredDataPop)
 
