@@ -118,8 +118,8 @@ $(document).ready(function(){
             });
 
       function update(data) {
-        country = $('#country-select').val();
-        console.log(country);
+        //country = $('#country-select').val();
+        //console.log(country);
 
         let updatedDataPop = data.filter(function(d) {
           if (country === 'all') {
@@ -134,7 +134,7 @@ $(document).ready(function(){
             return d;
           }
         });
-        console.log(updatedDataPop);
+        //console.log(updatedDataPop);
 
         gPop.selectAll('.line2')
           .remove();
@@ -144,7 +144,7 @@ $(document).ready(function(){
             if (country === 'all') {
               return nestedDataPop;
             } else {
-              return [updatedDataPop];
+              return updatedDataPop;
             }
           })
           .enter()
@@ -153,9 +153,9 @@ $(document).ready(function(){
             .attr('fill', 'none')
             .attr('d', function(d) {
               if (country === 'all') {
-                return line(d.values);
+                return line2(d.values);
               } else {
-                return linePop(d);
+                return line2(d);
               }
             });
       }
