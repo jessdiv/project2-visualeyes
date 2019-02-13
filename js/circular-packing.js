@@ -133,7 +133,7 @@ console.log(((year2017[0]["Total Population"]) / 10000000) * 2);
   const simulation = d3.forceSimulation()
     // .force("x", d3.forceX().strength(0.5).x(width/2))
     // .force("y", d3.forceY().strength(0.1).y( height/2 ))
-    .force('center', d3.forceCenter().x(population_width / 2).y(height / 2)) //attracts to centre of svg
+    .force('center', d3.forceCenter().x(population_width / 2).y(population_height / 2)) //attracts to centre of svg
     .force('charge', d3.forceManyBody().strength(.1)) //Nodes are attracted to each other
     .force("collide", d3.forceCollide().strength(.2).radius(function(year2017){ return size(year2017['Total Population']+3) }).iterations(1)) //force avoids circle collision
 

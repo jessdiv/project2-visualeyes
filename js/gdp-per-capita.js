@@ -1,27 +1,27 @@
-let margin = { left:80, right:100, top:50, bottom:100 };
-let height = 500 - margin.top - margin.bottom;
-let width = 800 - margin.left - margin.right;
+let gdp_margin = { left:80, right:100, top:50, bottom:100 };
+let gdp_height = 500 - gdp_margin.top - gdp_margin.bottom;
+let gdp_width = 800 - gdp_margin.left - gdp_margin.right;
 let filteredData;
 let nestedData;
 let countries = ['all'];
 let allSelected = true;
 
-let svg = d3.select('#chart-area-3')
+let gdp_svg = d3.select('#chart-area-3')
   .append('svg')
-  .attr('width', width + margin.left + margin.right)
-  .attr('height', height + margin.top + margin.bottom)
+  .attr('width', gdp_width + gdp_margin.left + gdp_margin.right)
+  .attr('height', gdp_height + gdp_margin.top + gdp_margin.bottom)
 
-let g = svg.append('g')
-  .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
+let gdp_g = gdp_svg.append('g')
+  .attr('transform', 'translate(' + gdp_margin.left + ', ' + gdp_margin.top + ')')
   .attr('class', 'g-parent')
 
 //////////// Scales ////////////
 let x = d3.scaleLinear()
-  .range([0, width])
+  .range([0, gdp_width])
   .domain([1960, 2017])
 
 let y = d3.scaleLinear()
-  .range([height, 0])
+  .range([gdp_height, 0])
   .domain([60, 70000])
 
 // let colorScale = d3.scaleOrdinal()
@@ -81,12 +81,12 @@ let line = d3.line()
     //   })
     // svg.call(tip);
 
-    let xAxis = g.append('g')
+    let xAxis = gdp_g.append('g')
       .attr('class', 'x axis')
-      .attr('transform', 'translate(0,' + height + ')')
+      .attr('transform', 'translate(0,' + gdp_height + ')')
       .call(xAxisCall.scale(x))
 
-    let yAxis = g.append('g')
+    let yAxis = gdp_g.append('g')
       .attr('class', 'y axis')
       .call(yAxisCall.scale(y))
 
@@ -102,9 +102,9 @@ let line = d3.line()
       .text('GDP per Capita')
 
     // X Axis Label
-    g.append('text')
+    gdp_g.append('text')
       .attr('class', 'axis-label')
-      .attr('x', width / 2)
+      .attr('x', gdp_width / 2)
       .attr('y', '400')
       .attr('fill', 'white')
       .attr('font-family', 'Raleway')
@@ -112,7 +112,7 @@ let line = d3.line()
       .attr('text-anchor', 'middle')
       .text('Year')
 
-    let lines = g.selectAll('.line')
+    let lines = gdp_g.selectAll('.line')
       .data(nestedData)
       .enter()
         .append('path')
@@ -151,12 +151,12 @@ let line = d3.line()
       });
       console.log(updatedData);
 
-      g.selectAll('.line')
+      gdp_g.selectAll('.line')
         .remove();
 
-      g.selectAll('.line')
+      gdp_g.selectAll('.line')
         .data(function() {
-          if (allSelected === true) {
+          if (allSelected === true || countries.length > 1) {
             return nestedData;
           } else {
             return [updatedData];
@@ -169,10 +169,18 @@ let line = d3.line()
           .attr('d', function(d) {
             if (allSelected === true) {
               return line(d.values);
-            } else {
+            } else if (countries.length > 1) {
+              return line(d.values);
+            } else if (countries.length === 1) {
               return line(d);
             }
           });
+    }
+
+    function removeAll() {
+      let index = countries.indexOf('all');
+      countries.splice(index, 1);
+      $('#all').prop('checked', false);
     }
 
     $('#country-select').on('change', function() {
@@ -181,17 +189,19 @@ let line = d3.line()
 
     $('#all').on('change', function() {
       if (this.checked) {
-        countries.push(this.value);
+        countries = ['all']
         allSelected = true
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
+        allSelected = false;
       }
       update(data)
     })
 
     $('#Australia').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -203,6 +213,7 @@ let line = d3.line()
 
     $('#Brazil').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -214,6 +225,7 @@ let line = d3.line()
 
     $('#Canada').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -225,6 +237,7 @@ let line = d3.line()
 
     $('#China').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -236,6 +249,7 @@ let line = d3.line()
 
     $('#France').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -247,6 +261,7 @@ let line = d3.line()
 
     $('#India').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -258,6 +273,7 @@ let line = d3.line()
 
     $('#Ireland').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -269,6 +285,7 @@ let line = d3.line()
 
     $('#Italy').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -280,6 +297,7 @@ let line = d3.line()
 
     $('#Mexico').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -291,6 +309,7 @@ let line = d3.line()
 
     $('#Nigeria').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -302,6 +321,7 @@ let line = d3.line()
 
     $('#Netherlands').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -311,9 +331,10 @@ let line = d3.line()
       update(data)
     })
 
-    $('#New Zealand').on('change', function() {
+    $('#New-Zealand').on('change', function() {
       if (this.checked) {
-        countries.push(this.value);
+        removeAll();
+        countries.push('New Zealand');
         allSelected = false
       } else {
         let index = countries.indexOf(this.value);
@@ -324,6 +345,7 @@ let line = d3.line()
 
     $('#Thailand').on('change', function() {
       if (this.checked) {
+        removeAll();
         countries.push(this.value);
         allSelected = false
       } else {
@@ -333,9 +355,10 @@ let line = d3.line()
       update(data)
     })
 
-    $('#United Kingdom').on('change', function() {
+    $('#United-Kingdom').on('change', function() {
       if (this.checked) {
-        countries.push(this.value);
+        removeAll();
+        countries.push('United Kingdom');
         allSelected = false
       } else {
         let index = countries.indexOf(this.value);
@@ -344,9 +367,10 @@ let line = d3.line()
       update(data)
     })
 
-    $('#United States').on('change', function() {
+    $('#United-States').on('change', function() {
       if (this.checked) {
-        countries.push(this.value);
+        removeAll();
+        countries.push('United States');
         allSelected = false
       } else {
         let index = countries.indexOf(this.value);
