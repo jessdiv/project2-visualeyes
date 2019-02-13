@@ -24,7 +24,7 @@ var X = d3.scaleLinear()
 // Y Scale
 var Y = d3.scaleLinear()
     .range([Sheight, 0])
-    .domain([0, 100]);
+    .domain([31, 82]);
 
 // Area
 var area = d3.scaleLinear()
@@ -84,7 +84,7 @@ d3.csv('../resources/flat_data.csv').then(function (data) {
       dataByYear.push(data.slice(i, i + 15));
     }
 
-    console.log(dataByYear);
+    // console.log(dataByYear);
 
     // Clean data
     dataByYear.forEach(function (year) {
@@ -97,12 +97,12 @@ d3.csv('../resources/flat_data.csv').then(function (data) {
     });
 
     let update = function (data) {
-      console.log('update', data);
+      // console.log('update', data);
       data.forEach(function (d) {
         // console.log('iterating', d);
         if (! d['Total Population']) return;
         let t = d3.transition()
-            .duration(100);
+            .duration(1500);
 
         let circles = g.selectAll('circle').data(data, function (d) {
           return d.Country;
@@ -126,7 +126,7 @@ d3.csv('../resources/flat_data.csv').then(function (data) {
       });
 
       setTimeout(function () {
-        console.log('setting timeout');
+        // console.log('setting timeout');
         time = (time < 58) ? time + 1 : 0;
         update(dataByYear[time]);
       }, 500);
