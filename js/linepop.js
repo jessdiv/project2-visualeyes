@@ -5,6 +5,7 @@ $(document).ready(function(){
   let filteredDataPop;
   let nestedDataPop;
   let countryPop = ['all'];
+  let allSelected = true;
 
   let svgPop = d3.select('#chart-area-4')
     .append('svg')
@@ -36,8 +37,8 @@ $(document).ready(function(){
 
 
   let linePop = d3.line()
-    .x(function(d) { return x(d.Year); })
-    .y(function(d) { return y(+d['Total Population']);})
+    .x(function(d) { return xPop(d.Year); })
+    .y(function(d) { return yPop(+d['Total Population']);})
 
   //////////// IMPORT CSV ////////////
   d3.csv("../resources/alldata_flat.csv").then(function(data) {
@@ -76,11 +77,11 @@ $(document).ready(function(){
   let xAxisPop = gPop.append('g')
         .attr('class', 'x axis')
         .attr('transform', 'translate(0,' + heightPop + ')')
-        .call(xAxisCall.scale(x))
+        .call(xAxisCallPop.scale(xPop))
 
       let yAxisPop = gPop.append('g')
         .attr('class', 'y axis')
-        .call(yAxisCallPop.scale(y))
+        .call(yAxisCallPop.scale(yPop))
 
       // Y Axis Label
       yAxisPop.append('text')
