@@ -24,7 +24,7 @@ population_svg.append("html")
           .style("text-decoration", "underline")
           .text("World Population 2017");
 
-d3.csv("../resources/alldata_flat.csv").then(function(data) {
+d3.csv("resources/alldata_flat.csv").then(function(data) {
   data.forEach(function(d) {
     d['Total Population'] = +d['Total Population']
   })

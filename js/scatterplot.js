@@ -1,5 +1,7 @@
 
 // ----------------------- Start Scatter Plot  ----------------------- \\
+let stopTime = document.getElementById('scatter_pause');
+let startTime = document.getElementById('scatter_start');
 
 let Smargin = { left: 80, right: 20, top: 50, bottom: 100 };
 
@@ -70,15 +72,15 @@ g.append('text')
 
 // Time Label
 var timeLabel = g.append('text')
-    .attr('y', Sheight - 10)
-    .attr('x', Swidth - 40)
-    .attr('font-size', '40px')
-    .attr('opacity', '0.4')
+    .attr('y', Sheight - (Sheight / 2))
+    .attr('x', Swidth - (Swidth / 2))
+    .attr('font-size', '120px')
+    .attr('opacity', '0.2')
     .attr('text-anchor', 'middle')
     .text('1960');
 
 // Load CSV Data
-d3.csv('../resources/flat_data.csv').then(function (data) {
+d3.csv('resources/flat_data.csv').then(function (data) {
     const dataByYear = [];
     for (let i = 0; i < data.length; i += 15) {
       dataByYear.push(data.slice(i, i + 15));
@@ -102,7 +104,7 @@ d3.csv('../resources/flat_data.csv').then(function (data) {
         // console.log('iterating', d);
         if (! d['Total Population']) return;
         let t = d3.transition()
-            .duration(1500);
+            .duration(100);
 
         let circles = g.selectAll('circle').data(data, function (d) {
           return d.Country;
@@ -124,12 +126,27 @@ d3.csv('../resources/flat_data.csv').then(function (data) {
 
         timeLabel.text(+(time + 1960));
       });
+    };
 
-      setTimeout(function () {
-        // console.log('setting timeout');
+    startTime.addEventListener('click', setTime);
+    stopTime.addEventListener('click', killTimer);
+
+    let timerId;
+
+    function setTime() {
+      timerId = setInterval(function () {
         time = (time < 58) ? time + 1 : 0;
         update(dataByYear[time]);
+        if(time === 0) {
+          console.log('TIME');
+        }
       }, 500);
-    };
+    } // End Timer function
+
+    function killTimer() {
+      clearInterval(timerId);
+    }
+
     update(dataByYear[0]);
+
   });

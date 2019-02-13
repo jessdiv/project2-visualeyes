@@ -41,7 +41,7 @@ $(document).ready(function(){
     .y(function(d) { return yPop(+d['Total Population']);})
 
   //////////// IMPORT CSV ////////////
-  d3.csv("../resources/alldata_flat.csv").then(function(data) {
+  d3.csv("resources/alldata_flat.csv").then(function(data) {
     data.forEach(function(d) {
       d.Year = +d.Year;
       d['Total Population'] = +d['Total Population'];
@@ -50,7 +50,7 @@ $(document).ready(function(){
 
     filteredDataPop = data.filter(function(d) {
       if (d.Year !== 2018) {
-        //console.log(d);
+        // console.log(d);
         return d;
       }
     });

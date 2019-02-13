@@ -32,7 +32,7 @@ h1 {
   height: 100vh;
   min-height: 700px;
   position: relative;
-  background: linear-gradient(to left, rgba(152,132,255,0.25), rgba(152,132,255,0.25)), url(/resources/images/hero.jpg) center center no-repeat;
+  background: linear-gradient(to left, rgba(152,132,255,0.25), rgba(152,132,255,0.25)), url(../resources/images/hero.jpg) center center no-repeat;
   background-size: cover;
 }
 
@@ -41,7 +41,7 @@ h1 {
   font-weight: 500;
   font-size: 3em;
   letter-spacing: 2px;
-  margin: 50px 0;
+  margin: 20px 0;
 }
 
 .LandingPage h2 {
@@ -61,7 +61,7 @@ h1 {
 
 .mouse, .indicator {
   position: absolute;
-  bottom: 80px;
+  bottom: 60px;
   left: 0;
   right: 0;
   text-align: center;
@@ -88,7 +88,7 @@ h1 {
   margin: auto;
   left: 0;
   right: 0;
-  max-width: 50px;
+  max-width: 30px;
   animation: bounce 0.5s infinite linear;
 }
 
@@ -156,7 +156,7 @@ h1 {
 }
 
 .country-selector {
-  height: 50%;
+  height: 100%;
 }
 
 .population {
@@ -281,6 +281,39 @@ h1 {
 .data-section2 {
   background: #eee;
   height: 700px;
+  position: relative;
+}
+
+.data-section2 .button-cont {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.data-section2 button {
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  font-family: var(--secondary-font);
+}
+
+#scatter_start {
+  background: rgba(0, 176, 86, 0.5);
+  transition: 0.5s ease all;
+}
+
+#scatter_start:hover {
+  background: rgba(0, 176, 86, 1);
+  border: 2px solid rgb(0, 182, 24);
+}
+
+#scatter_pause {
+  background: rgba(255, 46, 0, 0.5);
+  transition: 0.5s ease all;
+}
+
+#scatter_pause:hover {
+  background: rgba(255, 46, 0, 0.8);
+  border: 2px solid rgba(255, 46, 0, 1);
 }
 
 .data {
