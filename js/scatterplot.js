@@ -80,7 +80,7 @@ var timeLabel = g.append('text')
     .text('1960');
 
 // Load CSV Data
-d3.csv('../resources/flat_data.csv').then(function (data) {
+d3.csv('resources/flat_data.csv').then(function (data) {
     const dataByYear = [];
     for (let i = 0; i < data.length; i += 15) {
       dataByYear.push(data.slice(i, i + 15));
@@ -126,20 +126,26 @@ d3.csv('../resources/flat_data.csv').then(function (data) {
 
         timeLabel.text(+(time + 1960));
       });
-
-      startTime.addEventListener('click', setTime);
-      // stopTime.addEventListener('click', killTimer);
-
-      function setTime() {
-        setInterval(function () {
-          time = (time < 58) ? time + 1 : 0;
-          update(dataByYear[time]);
-          if(time === 0) {
-            console.log('TIME');
-          }
-        }, 500);
-      } // End Timer function
     };
+
+    startTime.addEventListener('click', setTime);
+    stopTime.addEventListener('click', killTimer);
+
+    let timerId;
+
+    function setTime() {
+      timerId = setInterval(function () {
+        time = (time < 58) ? time + 1 : 0;
+        update(dataByYear[time]);
+        if(time === 0) {
+          console.log('TIME');
+        }
+      }, 500);
+    } // End Timer function
+
+    function killTimer() {
+      clearInterval(timerId);
+    }
 
     update(dataByYear[0]);
 

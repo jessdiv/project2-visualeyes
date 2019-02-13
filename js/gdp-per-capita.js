@@ -47,7 +47,7 @@ $(document).ready(function(){
       .y(function(d) { return y(+d['GDP/Capita']); })
 
   //////////// IMPORT CSV ////////////
-    d3.csv('../resources/alldata_flat.csv').then(function(data) {
+    d3.csv('resources/alldata_flat.csv').then(function(data) {
 
       // Format year and GDP as integers
       data.forEach(function(d) {
@@ -82,7 +82,7 @@ $(document).ready(function(){
       //     return text;
       //   })
       // svg.call(tip);
-      
+
       //////////// AXES ////////////
       let xAxis = gdp_g.append('g')
         .attr('class', 'x axis')
