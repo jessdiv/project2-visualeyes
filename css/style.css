@@ -155,7 +155,7 @@ h1 {
   right: 0;
 }
 
-.country-selector, .stat-selector {
+.country-selector {
   height: 50%;
 }
 
@@ -270,6 +270,7 @@ h1 {
 
 .darkheading {
   color: rgb(100,100,100);
+  padding-top: 1em;
 }
 
 .data-section2 {
