@@ -82,7 +82,8 @@ $(document).ready(function(){
       //     return text;
       //   })
       // svg.call(tip);
-
+      
+      //////////// AXES ////////////
       let xAxis = gdp_g.append('g')
         .attr('class', 'x axis')
         .attr('transform', 'translate(0,' + gdp_height + ')')

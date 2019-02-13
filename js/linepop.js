@@ -50,7 +50,7 @@ $(document).ready(function(){
 
     filteredDataPop = data.filter(function(d) {
       if (d.Year !== 2018) {
-        console.log(d);
+        // console.log(d);
         return d;
       }
     });
