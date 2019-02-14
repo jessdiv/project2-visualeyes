@@ -99,7 +99,7 @@ $(document).ready(function(){
       gPop.append('text')
         .attr('class', 'axis-label')
         .attr('x', widthPop / 2)
-        .attr('y', '440')
+        .attr('y', '500')
         .attr('fill', 'black')
         .attr('font-family', 'Raleway')
         .attr('font-size', '18px')
