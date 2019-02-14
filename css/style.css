@@ -126,6 +126,7 @@ position: sticky;
 }
 
 .sidebar-wrapper.open > * {
+  pointer-events: all;
   display: block;
   opacity: 1;
   transition: 3s ease opacity;
