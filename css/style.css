@@ -513,7 +513,7 @@ text  {
   color: #BC8F8F;
 }
 
-@media screen and (max-width: 600px){
+@media (max-width: 600px){
   .logo h2 {
     font-size: 2em;
   }
