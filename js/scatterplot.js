@@ -1,10 +1,8 @@
-
-// ----------------------- Start Scatter Plot  ----------------------- \\
 let stopTime = document.getElementById('scatter_pause');
 let startTime = document.getElementById('scatter_start');
 
 let Smargin = { left: 80, right: 20, top: 50, bottom: 100 };
-
+var time = 0;
 let Swidth = 800 - Smargin.left - Smargin.right;
 let Sheight = 600 - Smargin.top - Smargin.bottom;
 
@@ -15,8 +13,6 @@ var g = d3.select('#ds2')
         .attr('height', Sheight + Smargin.top + Smargin.bottom)
     .append('g')
         .attr('transform', 'translate(' + Smargin.left + ', ' + Smargin.top + ')');
-
-var time = 0;
 
 var tip = d3.tip().attr('class', 'd3-tip')
     .html(function (d) {
@@ -40,7 +36,10 @@ var area = d3.scaleLinear()
     .range([25 * Math.PI, 1500 * Math.PI])
     .domain([0, 1500000000]);
 
-var continentColor = d3.scaleOrdinal().range(['#ffba49', '#20a39e', '#ef5b5b', '#912f56', '#f2e3bc', '#ff8552', '#f76f8e', '#14cc60', '#931621', '#b33951', '#40434e', '#d1f5ff', '#7d53de', '#e5446d', '#000']);
+// Assign A Color to Continent
+var continentColor = d3.scaleOrdinal()
+  .domain(['Thailand', 'United States', 'Australia', 'Brazil', 'Canada', 'China', 'France', 'United Kingdom', 'India', 'Ireland', 'Italy', 'Mexico', 'Nigeria', 'Netherlands', 'New Zealand'])
+  .range(['#e5446d', '#BC8F8F', '#ffba49', '#20a39e', '#DC143C', '#663399', '#f2e3bc', '#ff8552', '#f76f8e', '#14cc60', '#931621', '#87CEEB', '#C0C0C0', '#d1f5ff', '#7d53de']);
 
 // X Axis
 var scatter_xAxisCall = d3.axisBottom(X)
@@ -95,15 +94,12 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
       dataByYear.push(data.slice(i, i + 15));
     }
 
-    // console.log(dataByYear);
-
     // Clean data
     dataByYear.forEach(function (year) {
       year.forEach(function (d) {
         d.life_expectancy = +d.life_expectancy;
         d.population = +d.population.replace(/,/g, '');
         d.gdp_capita = +d.gdp_capita.replace(/,/g, '');
-        d.gdp_total = +d.gdp_total.replace(/,/g, '');
       });
     });
 
@@ -113,27 +109,27 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
         // console.log('iterating', d);
         if (! d.population) return;
         let t = d3.transition()
-            .duration(100);
+            .duration(250);
 
-        let circles = g.selectAll('circle').data(data, function (d) {
+        var circles = g.selectAll('circle').data(data, function (d) {
           return d.country_name;
         });
-
-        circles.exit()
-            .attr('class', 'exit')
-            .remove();
 
         circles.enter()
             .append('circle')
             .attr('class', 'enter')
-            .attr('fill', function (d) { return continentColor(d.gdp_capita); })
+            .attr('fill', function (d) { return continentColor(d.country_name); })
             .on('mouseover', tip.show)
             .on('mouseout', tip.hide)
             .merge(circles)
             .transition(t)
                 .attr('cy', function (d){ return Y(d.life_expectancy); })
                 .attr('cx', function (d) { return X(d.gdp_capita); })
-                .attr('r', function (d){ return Math.sqrt(area(d.population) / Math.PI); });
+                .attr('r', function (d){ return Math.sqrt(area(d.population) / Math.PI); })
+                .style('opacity', '0.8')
+
+        circles.exit()
+            .remove();
 
         timeLabel.text(+(time + 1960));
       });
@@ -149,7 +145,6 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
         time = (time < 58) ? time + 1 : 0;
         update(dataByYear[time]);
         if(time === 0) {
-          console.log('TIME');
         }
       }, 500);
     } // End Timer function
@@ -159,5 +154,4 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
     }
 
     update(dataByYear[0]);
-
   });
