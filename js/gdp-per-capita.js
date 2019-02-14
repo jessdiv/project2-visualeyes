@@ -218,9 +218,12 @@ $(document).ready(function(){
         removeAll();
         countries.push(this.value);
         allSelected = false
+        console.log($('.aus'));
+        $('.aus').css('visibility', 'visible')
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
+        $('.aus').css('visibility', 'hidden');
       }
       update(data);
     })
@@ -230,9 +233,11 @@ $(document).ready(function(){
         removeAll();
         countries.push(this.value);
         allSelected = false
+        $('.bra').css('visibility', 'visible')
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
+        $('.bra').css('visibility', 'hidden')
       }
       update(data)
     })
@@ -242,9 +247,11 @@ $(document).ready(function(){
         removeAll();
         countries.push(this.value);
         allSelected = false
+        $('.can').css('visibility', 'visible')
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
+        $('.can').css('visibility', 'hidden')
       }
       update(data)
     })
@@ -254,9 +261,11 @@ $(document).ready(function(){
         removeAll();
         countries.push(this.value);
         allSelected = false
+        $('.chn').css('visibility', 'visible')
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
+        $('.chn').css('visibility', 'hidden')
       }
       update(data)
     })
@@ -266,9 +275,11 @@ $(document).ready(function(){
         removeAll();
         countries.push(this.value);
         allSelected = false
+        $('.fra').css('visibility', 'visible')
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
+        $('.fra').css('visibility', 'hidden')
       }
       update(data)
     })
@@ -278,9 +289,11 @@ $(document).ready(function(){
         removeAll();
         countries.push(this.value);
         allSelected = false
+        $('.ind').css('visibility', 'visible')
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
+        $('.ind').css('visibility', 'hidden')
       }
       update(data)
     })
@@ -290,9 +303,11 @@ $(document).ready(function(){
         removeAll();
         countries.push(this.value);
         allSelected = false
+        $('.irl').css('visibility', 'visible')
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
+        $('.irl').css('visibility', 'hidden')
       }
       update(data)
     })
@@ -302,9 +317,11 @@ $(document).ready(function(){
         removeAll();
         countries.push(this.value);
         allSelected = false
+        $('.ita').css('visibility', 'visible')
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
+        $('.ita').css('visibility', 'hidden')
       }
       update(data)
     })
@@ -314,9 +331,11 @@ $(document).ready(function(){
         removeAll();
         countries.push(this.value);
         allSelected = false
+        $('.mex').css('visibility', 'visible')
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
+        $('.mex').css('visibility', 'hidden')
       }
       update(data)
     })
@@ -326,9 +345,11 @@ $(document).ready(function(){
         removeAll();
         countries.push(this.value);
         allSelected = false
+        $('.nig').css('visibility', 'visible')
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
+        $('.nig').css('visibility', 'hidden')
       }
       update(data)
     })
@@ -338,9 +359,11 @@ $(document).ready(function(){
         removeAll();
         countries.push(this.value);
         allSelected = false
+        $('.net').css('visibility', 'visible')
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
+        $('.net').css('visibility', 'hidden')
       }
       update(data)
     })
@@ -350,9 +373,11 @@ $(document).ready(function(){
         removeAll();
         countries.push('New Zealand');
         allSelected = false
+        $('.nzl').css('visibility', 'visible')
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
+        $('.nzl').css('visibility', 'hidden')
       }
       update(data)
     })
@@ -362,9 +387,11 @@ $(document).ready(function(){
         removeAll();
         countries.push(this.value);
         allSelected = false
+        $('.tha').css('visibility', 'visible')
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
+        $('.tha').css('visibility', 'hidden')
       }
       update(data)
     })
@@ -374,9 +401,11 @@ $(document).ready(function(){
         removeAll();
         countries.push('United Kingdom');
         allSelected = false
+        $('.gbr').css('visibility', 'visible')
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
+        $('.gbr').css('visibility', 'hidden')
       }
       update(data)
     })
@@ -386,9 +415,11 @@ $(document).ready(function(){
         removeAll();
         countries.push('United States');
         allSelected = false
+        $('.usa').css('visibility', 'visible')
       } else {
         let index = countries.indexOf(this.value);
         countries.splice(index, 1);
+        $('.usa').css('visibility', 'hidden')
       }
       update(data)
     })
