@@ -23,8 +23,8 @@ $(document).ready(function(){
     .domain([1960, 2017])
 
   let yPop = d3.scaleLog()
-    .range([heightPop, 1])
-    .domain([1300000, 1400000000])
+    .range([heightPop, 2])
+    .domain([1500000, 1400000000])
     .base(5)
 
   let xAxisCallPop = d3.axisBottom()
@@ -34,7 +34,7 @@ $(document).ready(function(){
     })
 
     let yAxisCallPop = d3.axisLeft()
-      .ticks(15)
+      .ticks(8)
 
 
   let linePop = d3.line()
@@ -63,6 +63,7 @@ $(document).ready(function(){
       })
        .entries(filteredDataPop)
 
+//////////// Color ////////////
     let colorScalePop = d3.scaleOrdinal()
       .domain(nestedDataPop.map(function(d) {
           console.log(d.key);
