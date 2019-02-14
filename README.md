@@ -13,7 +13,8 @@ sees upon visiting our site:
 ![Landing Page](/images/2019/02/LandingPage.png)
 
 ## Objectives of Project 2
-- Have a backend for the project
+- Have a backend for the project which is in Ruby on Rails
+- Have a front end that can be in React, although does not have to be.
 - This app has: Countries and Statistics
 - Views: Use partials to DRY (Don’t Repeat Yourself) up your views.
 - Use Gems: 'rack-cors', and 'pry-rails'. Also, 'require-csv' (while not a gem) needed the csv library to communicate with the front-end for GET requests
@@ -38,6 +39,7 @@ change over time. This is a time-lapse series that runs from 1960-2017.
 ### GDP/Capita per Country
 The below graph is a demonstration of GDP/per capita has changed over by country
 from 1960-2017.
+
 ![GDP/Capita per Country](/images/2019/02/GDP_Capita_PerCountry.png)
 
 
@@ -46,6 +48,7 @@ The population bubbles are scaled to represent the population size of a given
 country. So the largest two bubbles represent China and India. The bubbles are
 interactive and the larger the bubble the more force they have to move their
 neighbouring bubbles around the site.
+
 ![Population Bubbles](/images/2019/02/PopulationBubbles.png)
 
 
@@ -53,6 +56,7 @@ neighbouring bubbles around the site.
 The below line graph shows how a given country's population has changed over time
 from 1960-2017. Like the other visualisations, a given country can be shown alone
 or by toggling off or on which countries you want to investigate further.
+
 ![Population Line Graph](/images/2019/02/PopulationLineGraph.png)
 
 
@@ -68,4 +72,4 @@ or by toggling off or on which countries you want to investigate further.
 
 
 ## Big Thanks
-A big thank you to our instructor, Joel Turnbull for his help and assistance in the project. As well as, to Linna Liu and Yianni Moustakas for your help and trouble shooting skills to help us with some of our pain points. This project was completed in February of 2019.
+A big thank you to our instructor, Joel Turnbull for his help and assistance in the project. As well as, to Linna Liu and Yianni Moustakas for your help and trouble shooting skills to guide us with some of our pain points. This project was completed in February of 2019.
