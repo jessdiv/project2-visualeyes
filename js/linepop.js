@@ -1,10 +1,11 @@
+let countries = ['all'];
 $(document).ready(function(){
-  let marginPop = {top: 20, right: 50, bottom: 100, left: 100};
+  let marginPop = {top: 50, right: 100, bottom: 100, left: 80};
   let widthPop = 800 - marginPop.left - marginPop.right;
   let heightPop = 500 - marginPop.top - marginPop.bottom;
   // let filteredDataPop;
   // let nestedDataPop;
-  let countries = ['all'];
+  //let countries = ['all'];
   // let allSelected = true;
 
   let svgPop = d3.select('#chart-area-4')
