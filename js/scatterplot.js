@@ -105,13 +105,25 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
 
     let update = function (data) {
       // console.log('update', data);
-      data.forEach(function (d) {
+      let updatedData = data.filter(function(d) {
+        if (allSelectedGlobal) {
+          return true;
+        } else {
+          for (var i = 0; i < countriesGlobal.length; i++) {
+            if (d.country_name === countriesGlobal[i]) {
+              return d;
+            }
+          }
+        }
+      })
+
+      updatedData.forEach(function (d) {
         // console.log('iterating', d);
         if (! d.population) return;
         let t = d3.transition()
             .duration(250);
 
-        var circles = g.selectAll('circle').data(data, function (d) {
+        var circles = g.selectAll('circle').data(updatedData, function (d) {
           return d.country_name;
         });
 
