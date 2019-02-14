@@ -1,7 +1,7 @@
 $(document).ready(function(){
-  let marginPop = {top: 50, right: 100, bottom: 100, left: 80};
+  let marginPop = {top: 50, right: 20, bottom: 100, left: 80};
   let widthPop = 800 - marginPop.left - marginPop.right;
-  let heightPop = 500 - marginPop.top - marginPop.bottom;
+  let heightPop = 600 - marginPop.top - marginPop.bottom;
   // let filteredDataPop;
   // let nestedDataPop;
   let countries = ['all'];
