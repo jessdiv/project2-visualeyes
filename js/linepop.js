@@ -22,10 +22,10 @@ $(document).ready(function(){
     .range([0, widthPop])
     .domain([1960, 2017])
 
-  let yPop = d3.scaleLog()
-    .range([heightPop, 2])
-    .domain([2000000, 1400000000])
-    .base(5)
+  let yPop = d3.scaleLinear()
+    .range([heightPop, 20])
+    .domain([0, 1400000000])
+    //.base(5)
 
   let xAxisCallPop = d3.axisBottom()
     .ticks(15)

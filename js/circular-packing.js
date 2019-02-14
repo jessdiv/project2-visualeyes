@@ -54,31 +54,38 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
 
 
       // Tooltips setup
-      const tooltip = d3.select('#ds1')
-        .append('div')
-        .data(year2017)
-        .attr('class', 'd3-tip')
-        .style('position', 'absolute')
-        .style('z-index', '10')
-        .style('visibility', 'hidden')
+      // const tooltip = d3.select('#ds1')
+      //   .append('div')
+      //   .data(year2017)
+      //   .attr('class', 'd3-tip')
+      //   .style('position', 'absolute')
+      //   .style('z-index', '10')
+      //   .style('visibility', 'hidden')
+
+      var tip = d3.tip().attr('class', 'd3-tip')
+          .html(function (d) {
+            return `${d.country_name}: ${d.population}`;
+          });
+
+      population_g.call(tip);
 
       // thanks to: http://bl.ocks.org/biovisualize/1016860
 
       // mouseover tooltip functions
-      const tooltip_mouseover = function(e, year2017) {
-        tooltip.style('visibility', 'visible')
-          .text(function() {
-            return `${ e.country_name }: ${e.population}`
-          })
-      }
+      // const tooltip_mouseover = function(e, year2017) {
+      //   tooltip.style('visibility', 'visible')
+      //     .text(function() {
+      //       return `${ e.country_name }: ${e.population}`
+      //     })
+      // }
 
-      const tooltip_mouseout = function(year2017) {
-        tooltip.style('visibility', 'hidden')
-      }
+      // const tooltip_mouseout = function(year2017) {
+      //   tooltip.style('visibility', 'hidden')
+      // }
 
-      const tooltip_mousemove = function(year2017) {
-        tooltip.style("top", (event.pageY - 10) + "px").style("left", (event.pageX + 10) + "px");
-      }
+      // const tooltip_mousemove = function(year2017) {
+      //   tooltip.style("top", (event.pageY - 10) + "px").style("left", (event.pageX + 10) + "px");
+      // }
 
       // initializing the circle
 
@@ -98,9 +105,11 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
         .style('fill-opacity', 0.8)
         .attr('stroke', 'black')
         .style("stroke-width", 1)
-        .on("mouseover", tooltip_mouseover)
-        .on('mousemove', tooltip_mousemove)
-        .on('mouseout', tooltip_mouseout)
+        .on('mouseover', tip.show)
+        .on('mouseout', tip.hide)
+        // .on("mouseover", tooltip_mouseover)
+        // .on('mousemove', tooltip_mousemove)
+        // .on('mouseout', tooltip_mouseout)
         .call(d3.drag()
           .on('start', dragstarted)
           .on('drag', dragged)

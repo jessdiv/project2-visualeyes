@@ -99,8 +99,6 @@ h1 {
     100% { top: 0; }
 }
 
-/* ------- END OF LANDING PAGE CSS ------- */
-
 /* ------- START OF SIDEBAR CSS ------- */
 
 .sidebar-wrapper {
@@ -238,8 +236,6 @@ position: sticky;
   font-weight: 200;
 }
 
-/* ------- END OF SIDEBAR DISPLAY PAGE CSS ------- */
-
 /* ------- START OF DATA DISPLAY PAGE CSS ------- */
 
 .dataPage {
@@ -276,21 +272,6 @@ position: sticky;
   font-family: var(--primary-font)
 }
 
-/* .chart-area-3 {
-  position: relative;
-} */
-
-.line {
-  fill: none;
-  /* stroke: black; */
-  stroke-width: 2px;
-}
-
-.line2 {
-  /*stroke: black;*/
-  stroke-width: 2px;
-}
-
 .darkheading {
   color: rgb(100,100,100);
   padding-top: 1em;
@@ -320,6 +301,15 @@ position: sticky;
   font-family: var(--secondary-font);
 }
 
+.data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ------- START OF BUTTON CSS ------- */
+
 #scatter_start {
   background: rgba(0, 176, 86, 0.5);
   transition: 0.5s ease all;
@@ -340,14 +330,7 @@ position: sticky;
   border: 2px solid rgba(255, 46, 0, 1);
 }
 
-.data {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-/* ////////////// */
+/* ------- START OF SVG CSS ------- */
 
 .graph1 {
   background-color: white;
@@ -398,8 +381,16 @@ position: sticky;
   height: 731px !important;
 }
 
+.line {
+  fill: none;
+  /* stroke: black; */
+  stroke-width: 2px;
+}
 
-/* ------- END OF DATA DISPLAY PAGE CSS ------- */
+.line2 {
+  /*stroke: black;*/
+  stroke-width: 2px;
+}
 
 /* ------- START OF DATA SCATTER PLOT CSS ------- */
 
@@ -417,9 +408,7 @@ text  {
   color: black;
 }
 
-/* ------- END OF DATA SCATTER PLOT  CSS ------- */
-
-/* ------- FOOTER ------- */
+/* ------- START OF LEGEND CSS ------- */
 
 .legend {
   display: flex;
