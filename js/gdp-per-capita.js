@@ -3,7 +3,6 @@ $(document).ready(function(){
   let gdp_margin = { left:80, right:100, top:50, bottom:100 };
   let gdp_height = 500 - gdp_margin.top - gdp_margin.bottom;
   let gdp_width = 800 - gdp_margin.left - gdp_margin.right;
-  let filteredData;
   let nestedData;
   let countries = ['all'];
   let allSelected = true;
@@ -26,10 +25,6 @@ $(document).ready(function(){
     .range([gdp_height, 0])
     .domain([60, 70000])
 
-  // let colorScale = d3.scaleOrdinal()
-  //   .domain(['Australia', 'Brazil', 'Canada', 'China', 'France', 'India', 'Ireland', 'Italy', 'Mexico', 'Nigeria', 'Netherlands', 'New Zealand', 'Thailand', 'United Kingdom', 'United States'])
-  //   .range(['blanchedalmond', 'deeppink', 'lightblue', 'aquamarine', 'deepskyblue', 'coral', 'darkblue', 'thistle', 'darkseagreen', 'darkcyan', 'lightcoral', 'indigo', 'palevioletred', 'crimson', 'steelblue']);
-
   let xAxisCall = d3.axisBottom()
     .ticks(10)
     .tickFormat(function(d) {
@@ -43,33 +38,34 @@ $(document).ready(function(){
     })
 
   let line = d3.line()
-      .x(function(d) { return x(d.Year); })
-      .y(function(d) { return y(+d['GDP/Capita']); })
+      .x(function(d) { return x(d.year); })
+      .y(function(d) { return y(+d.gdp_capita); })
 
   //////////// IMPORT CSV ////////////
-    d3.csv('resources/alldata_flat.csv').then(function(data) {
+    d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function(data) {
 
       // Format year and GDP as integers
       data.forEach(function(d) {
-        d.Year = +d.Year;
-        d['GDP/Capita'] = +d['GDP/Capita'];
-        // console.log(`The GDP per Capita in ${d['Year']} for ${d['Country']} was ${d['GDP/Capita']}.`);
-      });
-
-      filteredData = data.filter(function(d) {
-        if (d.Year !== 2018) {
-          return d;
-        }
+        d.year = +d.year;
+        d.gdp_capita = +d.gdp_capita;
       });
 
       // Nest data by country
       nestedData = d3.nest()
         .key(function(d) {
-          return d.Country;
+          return d.country_name;
         })
-        .entries(filteredData)
+        .entries(data)
 
       console.log(nestedData);
+
+      //////////// Colours ////////////
+      let colorScaleGDP = d3.scaleOrdinal()
+        .domain(nestedData.map(function(d) {
+          console.log(d.key);
+          return d.key;
+        }))
+        .range(['#ffba49', '#20a39e', '#ef5b5b', '#6A5ACD', '#f2e3bc', '#ff8552', '#f76f8e', '#14cc60', '#931621', '#87CEEB', '#40434e', '#d1f5ff', '#7d53de', '#e5446d', '#BC8F8F'])
 
       //////////// Initialise Tooltip ////////////
       let tooltipGDP = d3.select('#chart-area-3')
@@ -133,9 +129,9 @@ $(document).ready(function(){
         .enter()
           .append('path')
             .attr('class', 'line')
-            // .attr('stroke', function(d) {
-            //   return colorScale(d.key);
-            // })
+            .attr('stroke', function(d) {
+              return colorScaleGDP(d.key);
+            })
             .attr('d', function(d) {
               return line(d.values)
             })
@@ -152,21 +148,11 @@ $(document).ready(function(){
           } else {
             for (var i = 0; i < countries.length; i++) {
               if (d.key === countries[i]) {
-                console.log(`${countries[i]} is in the selected array`);
-                // console.log(d.values);
                 return d.values;
               }
             }
-            // return d.Country === country;
           }
         });
-
-        updatedData = updatedData.filter(function(d) {
-          if (d.Year !== 2018) {
-            return d;
-          }
-        });
-        console.log(updatedData);
 
         gdp_g.selectAll('.line')
           .remove();
@@ -186,6 +172,9 @@ $(document).ready(function(){
             .on('mouseover', tooltip_mouseoverGDP)
             .on('mouseout', tooltip_mouseoutGDP)
             .on('mousemove', tooltip_mousemoveGDP)
+            .attr('stroke', function(d) {
+              return colorScaleGDP(d.key);
+            })
             .attr('d', function(d) {
               if (countries.length === 1) {
                 return line(d.values);
