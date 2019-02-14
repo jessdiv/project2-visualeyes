@@ -2,13 +2,13 @@
 
 To get a closer look of the project visit: https://declanboller.github.io/Visualeyes-client-no-react/
 
-The Visualeyes site was produced by 4 students that are part of WDI-30 in sunny
-Sydney, Australia. It is a group project that is helping us prepare for our
-future web-development rolls. We came together in our shared interest of producing
-a site that helps us visualise data in different ways. We chose to focus on
-illustrating 15 countries around the world in terms of, population, GDP/per capita,
-and life-expectancy. Below is a screen shot of the landing page that the user
-sees upon visiting our site:
+The Visualeyes site was produced by 4 students (Bridget McMahon, Declan Boller,
+Jessica Diver, and Sean McCusker) that are part of WDI-30 in Sydney, Australia.
+It is a group project that is helping us prepare for our future web-development
+rolls. We came together in our shared interest of producing a site that helps us
+visualise data in different ways. We chose to focus on illustrating 15 countries
+around the world in terms of, population, GDP/per capita, and life-expectancy.
+Below is a screen shot of the landing page that the user sees upon visiting our site:
 
 ![Landing Page](/images/2019/02/LandingPage.png)
 
@@ -33,6 +33,7 @@ Below are screen shots of the different graphs that can be viewed on the site:
 ### Life Expectancy vs. GDP
 This is an animation that shows how life expectancy and GDP are correlated and
 change over time. This is a time-lapse series that runs from 1960-2017.
+
 ![Life Expectancy vs. GDP](/images/2019/02/LifeExpectancyGDP.png)
 
 
