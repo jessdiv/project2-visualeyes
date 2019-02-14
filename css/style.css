@@ -396,12 +396,94 @@ text  {
 
 .legend {
   color: #555;
+  text-align: left;
+  height: 50px;
+  line-height: 30px;
+  padding: 8px;
+  font-family: var(--primary-font);
+  font-size: 80%;
+  background-color: rgba(255, 255, 255, 0.5);
+  min-width: 120px;
+  max-width: 150px;
 }
 
 .legend span {
   min-width: 20px;
+  border-radius: 5px;
+  margin-right: 3px;
 }
 
 .australia {
   background-color: #ffba49;
+  color: #ffba49;
+}
+
+.brazil {
+  background-color: #20a39e;
+  color: #20a39e;
+}
+
+.canada {
+  background-color: #DC143C;
+  color: #DC143C;
+}
+
+.china {
+  background-color: #663399;
+  color: #663399;
+}
+
+.france {
+  background-color: #f2e3bc;
+  color: #f2e3bc;
+}
+
+.india {
+  background-color: #ff8552;
+  color: #ff8552;
+}
+
+.ireland {
+  background-color: #14cc60;
+  color: #14cc60;
+}
+
+.italy {
+  background-color: #931621;
+  color: #931621;
+}
+
+.mexico {
+  background-color: #87CEEB;
+  color: #87CEEB;
+}
+
+.nigeria {
+  background-color: #C0C0C0;
+  color: #C0C0C0;
+}
+
+.netherlands {
+  background-color: #d1f5ff;
+  color: #d1f5ff;
+}
+
+.new-zealand {
+  background-color: #7d53de;
+  color: #7d53de;
+}
+
+.thailand {
+  background-color: #e5446d;
+  color: #e5446d;
+}
+
+.united-kingdom {
+  background-color: #f76f8e;
+  color: #f76f8e;
+}
+
+.united-states {
+  background-color: #BC8F8F;
+  color: #BC8F8F;
 }
