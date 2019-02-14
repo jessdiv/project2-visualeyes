@@ -1,3 +1,5 @@
+// setting up svg
+
 let population_width = $('#ds1').innerWidth();
 let population_height = $('#ds1').innerHeight();
 
@@ -24,6 +26,8 @@ population_svg.append("html")
           .style("text-decoration", "underline")
           .text("World Population 2017");
 
+// pulling data from server
+
 d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(data) {
   data.forEach(function(d) {
     d.population = +d.population
@@ -39,15 +43,7 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
     })
     .entries(data);
 
-  console.log(years);
-  console.log(years[1]);
-  console.log(years[1].values[0].country_name);
-  console.log(years[1].values[0].population);
-
   const year2017 = years[1].values;
-
-  console.log(year2017);
-
 
   // color-coding countries
   var color = d3.scaleOrdinal()
@@ -62,8 +58,8 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
     .range([15, 120])
     .base(2)
 
-// Tooltips
 
+// Tooltips setup
   const tooltip = d3.select('#ds1')
     .append('div')
     .data(year2017)
@@ -71,17 +67,10 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
     .style('position', 'absolute')
     .style('z-index', '10')
     .style('visibility', 'hidden')
-    // .text(function(year2017) {
-    //   // console.log(year2017.Country);
-    //   // console.log(year2017.population);
-    //   return `Country: ${year2017.Country}, Population: ${year2017.population}`;
-    // })
 
-console.log(year2017);
+// thanks to: http://bl.ocks.org/biovisualize/1016860
 
-// http://bl.ocks.org/biovisualize/1016860
-
-// mouseover tooltips
+// mouseover tooltip functions
 const tooltip_mouseover = function(e, year2017) {
   tooltip.style('visibility', 'visible')
     .text(function() {
@@ -96,17 +85,6 @@ const tooltip_mouseout = function(year2017) {
 const tooltip_mousemove = function(year2017) {
   tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");
 }
-
-
-// checking data
-console.log('////////');
-console.log(years[1].values[0]['Country']);
-console.log(years[1].values[0]['Year']);
-console.log(years[1].values[0].population);
-console.log('//////////');
-
-console.log(((year2017[0].population) / 10000000) * 2);
-
 
 // initializing the circle
 
@@ -131,7 +109,7 @@ console.log(((year2017[0].population) / 10000000) * 2);
       .on('drag', dragged)
       .on('end', dragended));
 
-  // features of the force
+  // forces
 
   const simulation = d3.forceSimulation()
     // .force("x", d3.forceX().strength(0.5).x(width/2))
@@ -152,6 +130,8 @@ console.log(((year2017[0].population) / 10000000) * 2);
         })
     })
 
+  // drag functions
+
   function dragstarted(year2017) {
     if (!d3.event.active) simulation.alphaTarget(.03).restart();
     year2017.fx = year2017.x;
@@ -168,5 +148,221 @@ console.log(((year2017[0].population) / 10000000) * 2);
     year2017.fx = null;
     year2017.fy = null;
   }
+
+  // Event Listeners
+
+  let countries = ['all']
+  let selectedAll = false;
+
+  const clearAll = function() {
+    let i = countries.indexOf('all');
+    if (i !== -1) {
+      countries.splice(i, 1);
+    }
+    $('#all').prop('checked', false);
+  }
+
+  const update_data = function() {
+
+  }
+
+  $('#country-select').on('change', function() {
+    // update(data);
+  })
+
+  $('#all').on('change', function(){
+    if (this.checked) {
+      countries = ['all']
+      selectedAll = true;
+      console.log(countries);
+      $('#Australia').prop('checked', false);
+      $('#Brazil').prop('checked', false);
+      $('#Canada').prop('checked', false);
+      $('#China').prop('checked', false);
+      $('#France').prop('checked', false);
+      $('#India').prop('checked', false);
+      $('#Ireland').prop('checked', false);
+      $('#Italy').prop('checked', false);
+      $('#Mexico').prop('checked', false);
+      $('#Nigeria').prop('checked', false);
+      $('#Netherlands').prop('checked', false);
+      $('#New-Zealand').prop('checked', false);
+      $('#Thailand').prop('checked', false);
+      $('#United-Kingdom').prop('checked', false);
+      $('#United-States').prop('checked', false);
+    } else {
+      let index = countries.indexOf(this.value);
+      countries.splice(index, 1);
+      allSelected = false;
+    }
+    // update data function
+
+  });
+
+  $('#Australia').on('change', function() {
+    if ( this.checked ) {
+      clearAll();
+      countries.push(this.value)
+    } else {
+      let index = countries.indexOf(this.value);
+      countries.splice(index, 1);
+    }
+    //update data function
+  });
+
+  $('#Brazil').on('change', function() {
+    if ( this.checked ) {
+      clearAll();
+      countries.push(this.value)
+    } else {
+      let index = countries.indexOf(this.value);
+      countries.splice(index, 1);
+    }
+    //update data function
+  });
+
+  $('#Canada').on('change', function() {
+    if ( this.checked ) {
+      clearAll();
+      countries.push(this.value)
+    } else {
+      let index = countries.indexOf(this.value);
+      countries.splice(index, 1);
+    }
+    //update data function
+  });
+
+  $('#China').on('change', function() {
+    if ( this.checked ) {
+      clearAll();
+      countries.push(this.value)
+    } else {
+      let index = countries.indexOf(this.value);
+      countries.splice(index, 1);
+    }
+    //update data function
+  });
+
+  $('#France').on('change', function() {
+    if ( this.checked ) {
+      clearAll();
+      countries.push(this.value)
+    } else {
+      let index = countries.indexOf(this.value);
+      countries.splice(index, 1);
+    }
+    //update data function
+  });
+
+  $('#India').on('change', function() {
+    if ( this.checked ) {
+      clearAll();
+      countries.push(this.value)
+    } else {
+      let index = countries.indexOf(this.value);
+      countries.splice(index, 1);
+    }
+    //update data function
+  });
+
+  $('#Ireland').on('change', function() {
+    if ( this.checked ) {
+      clearAll();
+      countries.push(this.value)
+    } else {
+      let index = countries.indexOf(this.value);
+      countries.splice(index, 1);
+    }
+    //update data function
+  });
+
+  $('#Italy').on('change', function() {
+    if ( this.checked ) {
+      clearAll();
+      countries.push(this.value)
+    } else {
+      let index = countries.indexOf(this.value);
+      countries.splice(index, 1);
+    }
+    //update data function
+  });
+
+  $('#Mexico').on('change', function() {
+    if ( this.checked ) {
+      clearAll();
+      countries.push(this.value)
+    } else {
+      let index = countries.indexOf(this.value);
+      countries.splice(index, 1);
+    }
+    //update data function
+  });
+
+  $('#Nigeria').on('change', function() {
+    if ( this.checked ) {
+      clearAll();
+      countries.push(this.value)
+    } else {
+      let index = countries.indexOf(this.value);
+      countries.splice(index, 1);
+    }
+    //update data function
+  });
+
+  $('#Netherlands').on('change', function() {
+    if ( this.checked ) {
+      clearAll();
+      countries.push(this.value)
+    } else {
+      let index = countries.indexOf(this.value);
+      countries.splice(index, 1);
+    }
+    //update data function
+  });
+
+  $('#New-Zealand').on('change', function() {
+    if ( this.checked ) {
+      clearAll();
+      countries.push(this.value)
+    } else {
+      let index = countries.indexOf(this.value);
+      countries.splice(index, 1);
+    }
+    //update data function
+  });
+
+  $('#Thailand').on('change', function() {
+    if ( this.checked ) {
+      clearAll();
+      countries.push(this.value)
+    } else {
+      let index = countries.indexOf(this.value);
+      countries.splice(index, 1);
+    }
+    //update data function
+  });
+
+  $('#United-Kingdom').on('change', function() {
+    if ( this.checked ) {
+      clearAll();
+      countries.push(this.value)
+    } else {
+      let index = countries.indexOf(this.value);
+      countries.splice(index, 1);
+    }
+    //update data function
+  });
+
+  $('#United-States').on('change', function() {
+    if ( this.checked ) {
+      clearAll();
+      countries.push(this.value)
+    } else {
+      let index = countries.indexOf(this.value);
+      countries.splice(index, 1);
+    }
+    //update data function
+  });
+
 
 });
