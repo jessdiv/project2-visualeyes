@@ -2,16 +2,12 @@ $(document).ready(function(){
   let marginPop = {top: 50, right: 20, bottom: 100, left: 80};
   let widthPop = 800 - marginPop.left - marginPop.right;
   let heightPop = 600 - marginPop.top - marginPop.bottom;
-  // let filteredDataPop;
-  // let nestedDataPop;
   let countries = ['all'];
-  // let allSelected = true;
 
   let svgPop = d3.select('#chart-area-4')
     .append('svg')
     .attr('width', widthPop + marginPop.left + marginPop.right)
     .attr('height', heightPop + marginPop.top + marginPop.bottom)
-    //.style('background-color', 'pink')
 
   let gPop = svgPop.append('g')
     .attr('transform', 'translate(' + marginPop.left + ', ' + marginPop.top + ')')
@@ -46,7 +42,6 @@ $(document).ready(function(){
     data.forEach(function(d) {
       d.year = +d.year;
       d.population = +d.population;
-      //d.Total_Population = +d.Total_Population.split(',').join('');
     });
 
     filteredDataPop = data.filter(function(d) {
@@ -56,7 +51,6 @@ $(document).ready(function(){
       }
     });
 
-    // Nesteed data by country
     nestedDataPop = d3.nest()
       .key(function(d) {
         return d.country_name;
@@ -75,10 +69,8 @@ $(document).ready(function(){
   const tip = d3.tip()
         .attr('class', 'd3-tip')
         .html(function(d){
-          // console.log(d);
+
           let text = d.key + "<br />";
-          // text += "<strong>Year</strong>: " + d.values.year + "<br />";
-          // text += "<strong>Total Population</strong>: " + d.values.population + "<br />";
           return text;
         })
       svgPop.call(tip);
@@ -124,9 +116,7 @@ $(document).ready(function(){
           .attr('stroke', function(d) {
             return colorScalePop(d.key);
           })
-          // .attr('d', function(d) {
-          //   return line(d.values)
-          // })
+
           .attr('fill', 'none')
             .on('mouseover', tip.show)
             .on('mouseout', tip.hide)
@@ -161,9 +151,6 @@ $(document).ready(function(){
                   .append('path')
                   .attr('class', 'line2')
                   .attr('fill', 'none')
-                  // .on('mouseover', tooltip_mouseoverGDP)
-                  // .on('mouseout', tooltip_mouseoutGDP)
-                  // .on('mousemove', tooltip_mousemoveGDP)
                   .on('mouseover', tip.show)
                   .on('mouseout', tip.hide)
                   .attr('stroke', function(d) {
@@ -181,8 +168,8 @@ $(document).ready(function(){
               }
               $('#all').prop('checked', false);
             }
-            //////////// EVENT HANDLERS ////////////
 
+            //////////// EVENT HANDLERS ////////////
             $('#country-select').on('change', function() {
               update(data);
             })
@@ -223,7 +210,6 @@ $(document).ready(function(){
                 let index = countries.indexOf(this.value);
                 countries.splice(index, 1);
               }
-              // console.log(countries)
               update(data);
             })
 
@@ -394,47 +380,5 @@ $(document).ready(function(){
               }
               update(data)
             })
-      // function update(data) {
-      //   //country = $('#country-select').val();
-      //   //console.log(country);
-      //
-      //   let updatedDataPop = data.filter(function(d) {
-      //     if (country === 'all') {
-      //       return true;
-      //     } else {
-      //       return d.Country === country;
-      //     }
-      //   });
-      //
-      //   updatedDataPop = updatedDataPop.filter(function(d) {
-      //     if (d.Year !== 2018) {
-      //       return d;
-      //     }
-      //   });
-      //   //console.log(updatedDataPop);
-      //
-      //   gPop.selectAll('.line2')
-      //     .remove();
-      //
-      //   gPop.selectAll('.line2')
-      //     .data(function() {
-      //       if (country === 'all') {
-      //         return nestedDataPop;
-      //       } else {
-      //         return updatedDataPop;
-      //       }
-      //     })
-      //     .enter()
-      //       .append('path')
-      //       .attr('class', 'line2')
-      //       .attr('fill', 'none')
-      //       .attr('d', function(d) {
-      //         if (country === 'all') {
-      //           return line2(d.values);
-      //         } else {
-      //           return line2(d);
-      //         }
-      //       });
-      // }
   }); //d3.scv
 });
