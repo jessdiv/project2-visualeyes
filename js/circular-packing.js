@@ -203,13 +203,13 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
           .attr('cy', population_height / 2)
           .style('fill', function(d) {
             return color(d.country_name)
-          }) //come back to for colours
+          })
           .style('fill-opacity', 0.8)
           .attr('stroke', 'black')
           .style("stroke-width", 1)
-          .on("mouseover", tooltip_mouseover)
-          .on('mousemove', tooltip_mousemove)
-          .on('mouseout', tooltip_mouseout)
+          // .on("mouseover", tooltip_mouseover)
+          // .on('mousemove', tooltip_mousemove)
+          // .on('mouseout', tooltip_mouseout)
           .call(d3.drag()
             .on('start', dragstarted)
             .on('drag', dragged)
