@@ -2,8 +2,8 @@ $(document).ready(function(){
 
   // setting up svg
 
-  let area_width = $('#ds5').innerWidth();
-  let area_height = $('#ds5').innerHeight();
+  let area_width = $('.data-section5').innerWidth();
+  let area_height = $('.data-section5').innerHeight();
 
   let area_margin = {
     left: 150,
@@ -49,7 +49,7 @@ $(document).ready(function(){
         // scale for countries
         let size = d3.scaleLog()
           .domain([40000, 10000000])
-          .range([15, 120])
+          .range([15, 100])
           .base(2)
 
 

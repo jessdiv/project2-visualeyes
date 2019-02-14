@@ -2,8 +2,8 @@ $(document).ready(function(){
 
 // setting up svg
 
-let population_width = $('#ds1').innerWidth();
-let population_height = $('#ds1').innerHeight();
+let population_width = $('.data-section1').innerWidth();
+let population_height = $('.data-section1').innerHeight();
 
 let population_margin = {
   left: 150,

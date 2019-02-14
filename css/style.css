@@ -262,7 +262,7 @@ position: sticky;
 
 .data-section1 {
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   min-height: 700px;
   background-color: #eee;
   color: black;
@@ -297,6 +297,12 @@ position: sticky;
   height: 700px;
   position: relative;
 }
+
+.data-section5 {
+  height: 700px;
+  position: relative;
+}
+
 
 .data-section2 .button-cont {
   position: absolute;
@@ -377,11 +383,17 @@ position: sticky;
 .ds5 {
   color: black;
   display: block;
+  height: 700px !important;
 }
 
 .chart-area-1 {
   display: block;
 }
+
+.svg-graph-5 {
+  height: 731px !important;
+}
+
 
 /* ------- END OF DATA DISPLAY PAGE CSS ------- */
 
