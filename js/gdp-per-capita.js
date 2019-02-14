@@ -57,15 +57,12 @@ $(document).ready(function(){
         })
         .entries(data)
 
-      console.log(nestedData);
-
       //////////// Colours ////////////
       let colorScaleGDP = d3.scaleOrdinal()
         .domain(nestedData.map(function(d) {
-          console.log(d.key);
           return d.key;
         }))
-        .range(['#ffba49', '#20a39e', '#ef5b5b', '#6A5ACD', '#f2e3bc', '#ff8552', '#f76f8e', '#14cc60', '#931621', '#87CEEB', '#40434e', '#d1f5ff', '#7d53de', '#e5446d', '#BC8F8F'])
+        .range(['#e5446d', '#BC8F8F', '#ffba49', '#20a39e', '#DC143C', '#663399', '#f2e3bc', '#ff8552', '#f76f8e', '#14cc60', '#931621', '#87CEEB', '#C0C0C0', '#d1f5ff', '#7d53de'])
 
       //////////// Initialise Tooltip ////////////
       let tooltipGDP = d3.select('#chart-area-3')
@@ -143,7 +140,7 @@ $(document).ready(function(){
       function update(data) {
 
         let updatedData = nestedData.filter(function(d) {
-          if (countries.indexOf('all') !== -1) {
+          if (allSelected) {
             return true;
           } else {
             for (var i = 0; i < countries.length; i++) {
@@ -159,7 +156,7 @@ $(document).ready(function(){
 
         gdp_g.selectAll('.line')
           .data(function() {
-            if (allSelected === true) {
+            if (allSelected) {
               return nestedData;
             } else {
               return updatedData;
@@ -176,11 +173,7 @@ $(document).ready(function(){
               return colorScaleGDP(d.key);
             })
             .attr('d', function(d) {
-              if (countries.length === 1) {
-                return line(d.values);
-              } else {
-                return line(d.values);
-              }
+              return line(d.values);
             });
       }
 
