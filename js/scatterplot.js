@@ -2,7 +2,7 @@ let stopTime = document.getElementById('scatter_pause');
 let startTime = document.getElementById('scatter_start');
 
 let Smargin = { left: 80, right: 20, top: 50, bottom: 100 };
-var time = 0;
+let time = 0;
 let Swidth = 800 - Smargin.left - Smargin.right;
 let Sheight = 600 - Smargin.top - Smargin.bottom;
 
@@ -14,11 +14,13 @@ var g = d3.select('#ds2')
     .append('g')
         .attr('transform', 'translate(' + Smargin.left + ', ' + Smargin.top + ')');
 
+// Generate tooltip
 var tip = d3.tip().attr('class', 'd3-tip')
     .html(function (d) {
       return `${d.country_name}`;
     });
 
+// Call tooltip
 g.call(tip);
 
 // X Scale
@@ -106,6 +108,7 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
     let update = function (data) {
       // console.log('update', data);
       let updatedData = data.filter(function(d) {
+        // allSelectedGlobal Comes from gpd-per-capita file
         if (allSelectedGlobal) {
           return true;
         } else {
@@ -115,7 +118,7 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
             }
           }
         }
-      })
+      });
 
       updatedData.forEach(function (d) {
         // console.log('iterating', d);
@@ -138,12 +141,12 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
                 .attr('cy', function (d){ return Y(d.life_expectancy); })
                 .attr('cx', function (d) { return X(d.gdp_capita); })
                 .attr('r', function (d){ return Math.sqrt(area(d.population) / Math.PI); })
-                .style('opacity', '0.8')
+                .style('opacity', '0.8');
 
         circles.exit()
             .remove();
 
-        timeLabel.text(+(time + 1960));
+        timeLabel.text((time + 1960));
       });
     };
 
@@ -154,7 +157,8 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
 
     function setTime() {
       timerId = setInterval(function () {
-        time = (time < 58) ? time + 1 : 0;
+        // While time is less than dBY add one, else reset 0. Ternery Operator
+        time = (time < dataByYear.length) ? time + 1 : 0;
         update(dataByYear[time]);
         if(time === 0) {
         }
@@ -165,5 +169,6 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
       clearInterval(timerId);
     }
 
+    // Call update to initialise and run the code 
     update(dataByYear[0]);
   });
