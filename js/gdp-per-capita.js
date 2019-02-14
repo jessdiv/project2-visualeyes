@@ -15,7 +15,6 @@ $(document).ready(function(){
 
   let gGDP = svgGDP.append('g')
     .attr('transform', 'translate(' + marginGDP.left + ', ' + marginGDP.top + ')')
-    // .attr('class', 'g-parent')
 
   //////////// Scales ////////////
   let x = d3.scaleLinear()
@@ -70,7 +69,6 @@ $(document).ready(function(){
     //   .append('div')
     //   .data(nestedData)
     //   .attr('class', 'd3-tip')
-    //   .style('position', 'absolute')
     //   .style('z-index', '10')
     //   .style('visibility', 'hidden')
     //
@@ -86,8 +84,9 @@ $(document).ready(function(){
     // }
     //
     // let tooltip_mousemoveGDP = function() {
-    //   tooltipGDP.style('top', ( event.windowY - 10) + 'px')
-    //     .style('left', ( event.windowX + 10) + 'px')
+    //   console.log(event);
+    //   tooltipGDP.style('top', ( event.y - 10) + 'px')
+    //     .style('left', ( event.x + 10) + 'px')
     // }
 
     const tip = d3.tip()
@@ -197,51 +196,6 @@ $(document).ready(function(){
         countriesGlobal.splice(index, 1);
       }
       $('#all').prop('checked', false);
-      // if ($('#Australia').prop('checked', false)) {
-      //   $('.aus').css('display', 'none');
-      // }
-      // if ($('#Brazil').prop('checked', false)) {
-      //   $('.bra').css('display', 'none');
-      // }
-      // if ($('#Canada').prop('checked', false)) {
-      //   $('.can').css('display', 'none');
-      // }
-      // if ($('#China').prop('checked', false)) {
-      //   $('.chn').css('display', 'none');
-      // }
-      // if ($('#France').prop('checked', false)) {
-      //   $('.fra').css('display', 'none');
-      // }
-      // if ($('#India').prop('checked', false)) {
-      //   $('.ind').css('display', 'none');
-      // }
-      // if ($('#Ireland').prop('checked', false)) {
-      //   $('.irl').css('display', 'none');
-      // }
-      // if ($('#Italy').prop('checked', false)) {
-      //   $('.ita').css('display', 'none');
-      // }
-      // if ($('#Mexico').prop('checked', false)) {
-      //   $('.mex').css('display', 'none');
-      // }
-      // if ($('#Nigeria').prop('checked', false)) {
-      //   $('.nig').css('display', 'none');
-      // }
-      // if ($('#Netherlands').prop('checked', false)) {
-      //   $('.net').css('display', 'none');
-      // }
-      // if ($('#New-Zealand').prop('checked', false)) {
-      //   $('.nzl').css('display', 'none');
-      // }
-      // if ($('#Thailand').prop('checked', false)) {
-      //   $('.tha').css('display', 'none');
-      // }
-      // if ($('#United-Kingdom').prop('checked', false)) {
-      //   $('.gbr').css('display', 'none');
-      // }
-      // if ($('#United-States').prop('checked', false)) {
-      //   $('.usa').css('display', 'none');
-      // }
     }
 
     //////////// EVENT HANDLERS ////////////

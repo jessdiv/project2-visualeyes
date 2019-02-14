@@ -276,6 +276,10 @@ position: sticky;
   font-family: var(--primary-font)
 }
 
+/* .chart-area-3 {
+  position: relative;
+} */
+
 .line {
   fill: none;
   /* stroke: black; */
