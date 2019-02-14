@@ -55,7 +55,7 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
       const tooltip = d3.select('#ds1')
         .append('div')
         .data(year2017)
-        .attr('class', 'tooltip')
+        .attr('class', 'd3-tip')
         .style('position', 'absolute')
         .style('z-index', '10')
         .style('visibility', 'hidden')
