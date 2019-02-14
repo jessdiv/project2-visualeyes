@@ -389,3 +389,24 @@ text  {
 }
 
 /* ------- END OF DATA SCATTER PLOT  CSS ------- */
+
+/* ------- FOOTER ------- */
+
+.footer {
+  background-color: #555;
+  text-align: center;
+  font-family: var(--primary-font);
+  line-height: 30px;
+}
+
+.legend {
+  color: #555; 
+}
+
+.legend span {
+  min-width: 20px;
+}
+
+.australia {
+  background-color: #ffba49;
+}
