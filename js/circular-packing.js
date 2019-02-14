@@ -39,14 +39,14 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
     })
     .entries(data);
 
-  console.log(years);
-  console.log(years[1]);
-  console.log(years[1].values[0].country_name);
-  console.log(years[1].values[0].population);
+  // console.log(years);
+  // console.log(years[1]);
+  // console.log(years[1].values[0].country_name);
+  // console.log(years[1].values[0].population);
 
   const year2017 = years[1].values;
 
-  console.log(year2017);
+  // console.log(year2017);
 
 
   // color-coding countries
@@ -77,7 +77,7 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
     //   return `Country: ${year2017.Country}, Population: ${year2017.population}`;
     // })
 
-console.log(year2017);
+// console.log(year2017);
 
 // http://bl.ocks.org/biovisualize/1016860
 
@@ -99,13 +99,13 @@ const tooltip_mousemove = function(year2017) {
 
 
 // checking data
-console.log('////////');
-console.log(years[1].values[0]['Country']);
-console.log(years[1].values[0]['Year']);
-console.log(years[1].values[0].population);
-console.log('//////////');
-
-console.log(((year2017[0].population) / 10000000) * 2);
+// console.log('////////');
+// console.log(years[1].values[0]['Country']);
+// console.log(years[1].values[0]['Year']);
+// console.log(years[1].values[0].population);
+// console.log('//////////');
+//
+// console.log(((year2017[0].population) / 10000000) * 2);
 
 
 // initializing the circle

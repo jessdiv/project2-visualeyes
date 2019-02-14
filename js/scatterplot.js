@@ -40,7 +40,9 @@ var area = d3.scaleLinear()
     .range([25 * Math.PI, 1500 * Math.PI])
     .domain([0, 1500000000]);
 
-var continentColor = d3.scaleOrdinal().range(['#ffba49', '#20a39e', '#ef5b5b', '#912f56', '#f2e3bc', '#ff8552', '#f76f8e', '#14cc60', '#931621', '#b33951', '#40434e', '#d1f5ff', '#7d53de', '#e5446d', '#000']);
+var continentColor = d3.scaleOrdinal()
+  .domain(['Thailand', 'United States', 'Australia', 'Brazil', 'Canada', 'China', 'France', 'United Kingdom', 'India', 'Ireland', 'Italy', 'Mexico', 'Nigeria', 'Netherlands', 'New Zealand'])
+  .range(['#e5446d', '#BC8F8F', '#ffba49', '#20a39e', '#DC143C', '#663399', '#f2e3bc', '#ff8552', '#f76f8e', '#14cc60', '#931621', '#87CEEB', '#C0C0C0', '#d1f5ff', '#7d53de']);
 
 // X Axis
 var scatter_xAxisCall = d3.axisBottom(X)
@@ -111,20 +113,16 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
         // console.log('iterating', d);
         if (! d.population) return;
         let t = d3.transition()
-            .duration(100);
+            .duration(250);
 
         let circles = g.selectAll('circle').data(data, function (d) {
           return d.country_name;
         });
 
-        circles.exit()
-            .attr('class', 'exit')
-            .remove();
-
         circles.enter()
             .append('circle')
             .attr('class', 'enter')
-            .attr('fill', function (d) { return continentColor(d.gdp_capita); })
+            .attr('fill', function (d) { return continentColor(d.country_name); })
             .on('mouseover', tip.show)
             .on('mouseout', tip.hide)
             .merge(circles)
@@ -132,6 +130,9 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
                 .attr('cy', function (d){ return Y(d.life_expectancy); })
                 .attr('cx', function (d) { return X(d.gdp_capita); })
                 .attr('r', function (d){ return Math.sqrt(area(d.population) / Math.PI); });
+
+        circles.exit()
+            .remove();
 
         timeLabel.text(+(time + 1960));
       });
@@ -147,7 +148,6 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
         time = (time < 58) ? time + 1 : 0;
         update(dataByYear[time]);
         if(time === 0) {
-          console.log('TIME');
         }
       }, 500);
     } // End Timer function
@@ -159,3 +159,67 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
     update(dataByYear[0]);
 
   });
+
+// $('#all').on('change', function() {
+//   update(data)
+// });
+//
+// $('#Australia').on('change', function() {
+//   console.log('click');
+// });
+//
+// $('#Brazil').on('change', function() {
+//   console.log('click');
+// });
+//
+// $('#Canada').on('change', function() {
+//   console.log('click');
+// });
+//
+// $('#China').on('change', function() {
+//   console.log('click');
+// });
+//
+// $('#France').on('change', function() {
+//   console.log('click');
+// });
+//
+// $('#India').on('change', function() {
+//   console.log('click');
+// });
+//
+// $('#Ireland').on('change', function() {
+//   console.log('click');
+// });
+//
+// $('#Italy').on('change', function() {
+//   console.log('click');
+// });
+//
+// $('#Mexico').on('change', function() {
+//   console.log('click');
+// });
+//
+// $('#Nigeria').on('change', function() {
+//   console.log('click');
+// });
+//
+// $('#Netherlands').on('change', function() {
+//   console.log('click');
+// });
+//
+// $('#New-Zealand').on('change', function() {
+//   console.log('click');
+// });
+//
+// $('#Thailand').on('change', function() {
+//   console.log('click');
+// });
+//
+// $('#United-Kingdom').on('change', function() {
+//   console.log('click');
+// });
+//
+// $('#United-States').on('change', function() {
+//   console.log('click');
+// });
