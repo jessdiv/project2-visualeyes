@@ -376,7 +376,11 @@ position: sticky;
 
 .ds5 {
   color: black;
-  /* display: flex; */
+  display: block;
+}
+
+.chart-area-1 {
+  display: block;
 }
 
 /* ------- END OF DATA DISPLAY PAGE CSS ------- */

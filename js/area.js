@@ -12,7 +12,7 @@ $(document).ready(function(){
     bottom: 150
   }
 
-  const area_svg = d3.select('.#chart-area-5')
+  const area_svg = d3.select('#chart-area-5')
     .append("svg")
     .attr('class', 'svg-graph5')
     .attr('width', area_width)
