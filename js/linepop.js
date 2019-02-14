@@ -22,9 +22,10 @@ $(document).ready(function(){
     .range([0, widthPop])
     .domain([1960, 2017])
 
-  let yPop = d3.scaleLinear()
-    .range([heightPop, 0])
-    .domain([0, 1500000000])
+  let yPop = d3.scaleLog()
+    .range([heightPop, 5])
+    .domain([1300000, 1400000000])
+    .base(2)
 
   let xAxisCallPop = d3.axisBottom()
     .ticks(15)
@@ -72,7 +73,7 @@ $(document).ready(function(){
   //         text += "<strong>Total Population</strong>: " + d['Total Population'] + "<br />";
   //         return text;
   //       })
-  //     svg.call(tip);
+  //     svgPop.call(tip);
 
   let xAxisPop = gPop.append('g')
         .attr('class', 'x axis')
