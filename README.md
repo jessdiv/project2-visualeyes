@@ -63,6 +63,13 @@ or by toggling off or on which countries you want to investigate further.
 ![Population Line Graph](/images/2019/02/PopulationLineGraph.png)
 
 
+### Population Bubbles by Area
+The below bubbles are drawn to scale to visualise how large a country is by area
+compared to another country.
+
+![Population Area Bubbles](/images/2019/02/PopulationAreaBubbles.png)
+
+
 ## Scope of Project as of 14-2-2019
 - Can view data in different visualisations on the site
 - Can see all countries at once in each visualisation or toggle on or off which countries you want to see at any given time
@@ -73,6 +80,9 @@ or by toggling off or on which countries you want to investigate further.
 - Would like to possibly add more countries and further explore what the D3 library has to offer
 - Optimisation of the site could be improved
 - More time to solve scaleLog vs. scaleLinear presentation of data for population line graph
+- Would like to have more animations, i.e. show the SVGs animate the drawing
+- Make the site mobile friendly
+- Make the line graphs scale better when toggling on or off a country 
 
 
 ## Big Thanks
