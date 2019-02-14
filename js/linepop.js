@@ -76,7 +76,7 @@ $(document).ready(function(){
         .attr('class', 'd3-tip')
         .html(function(d) {
           // console.log(d);
-          let text = "<strong>Country</strong>: " + d.key + "<br />";
+          let text = d.key + "<br />";
           // text += "<strong>Year</strong>: " + this.year + "<br />";
           // text += "<strong>Total Population</strong>: " + d.population + "<br />";
           return text;
@@ -131,6 +131,218 @@ $(document).ready(function(){
               return linePop(d.values)
             });
 
+            //////////// EVENT HANDLERS ////////////
+
+            $('#country-select').on('change', function() {
+              update(data);
+            })
+
+            $('#all').on('change', function() {
+              if (this.checked) {
+                countries = ['all']
+                allSelected = true
+                $('#Australia').prop('checked', false);
+                $('#Brazil').prop('checked', false);
+                $('#Canada').prop('checked', false);
+                $('#China').prop('checked', false);
+                $('#France').prop('checked', false);
+                $('#India').prop('checked', false);
+                $('#Ireland').prop('checked', false);
+                $('#Italy').prop('checked', false);
+                $('#Mexico').prop('checked', false);
+                $('#Nigeria').prop('checked', false);
+                $('#Netherlands').prop('checked', false);
+                $('#New-Zealand').prop('checked', false);
+                $('#Thailand').prop('checked', false);
+                $('#United-Kingdom').prop('checked', false);
+                $('#United-States').prop('checked', false);
+              } else {
+                let index = countries.indexOf(this.value);
+                countries.splice(index, 1);
+                allSelected = false;
+              }
+              update(data)
+            })
+
+            $('#Australia').on('change', function() {
+              if (this.checked) {
+                removeAll();
+                countries.push(this.value);
+                allSelected = false
+              } else {
+                let index = countries.indexOf(this.value);
+                countries.splice(index, 1);
+              }
+              update(data);
+            })
+
+            $('#Brazil').on('change', function() {
+              if (this.checked) {
+                removeAll();
+                countries.push(this.value);
+                allSelected = false
+              } else {
+                let index = countries.indexOf(this.value);
+                countries.splice(index, 1);
+              }
+              update(data)
+            })
+
+            $('#Canada').on('change', function() {
+              if (this.checked) {
+                removeAll();
+                countries.push(this.value);
+                allSelected = false
+              } else {
+                let index = countries.indexOf(this.value);
+                countries.splice(index, 1);
+              }
+              update(data)
+            })
+
+            $('#China').on('change', function() {
+              if (this.checked) {
+                removeAll();
+                countries.push(this.value);
+                allSelected = false
+              } else {
+                let index = countries.indexOf(this.value);
+                countries.splice(index, 1);
+              }
+              update(data)
+            })
+
+            $('#France').on('change', function() {
+              if (this.checked) {
+                removeAll();
+                countries.push(this.value);
+                allSelected = false
+              } else {
+                let index = countries.indexOf(this.value);
+                countries.splice(index, 1);
+              }
+              update(data)
+            })
+
+            $('#India').on('change', function() {
+              if (this.checked) {
+                removeAll();
+                countries.push(this.value);
+                allSelected = false
+              } else {
+                let index = countries.indexOf(this.value);
+                countries.splice(index, 1);
+              }
+              update(data)
+            })
+
+            $('#Ireland').on('change', function() {
+              if (this.checked) {
+                removeAll();
+                countries.push(this.value);
+                allSelected = false
+              } else {
+                let index = countries.indexOf(this.value);
+                countries.splice(index, 1);
+              }
+              update(data)
+            })
+
+            $('#Italy').on('change', function() {
+              if (this.checked) {
+                removeAll();
+                countries.push(this.value);
+                allSelected = false
+              } else {
+                let index = countries.indexOf(this.value);
+                countries.splice(index, 1);
+              }
+              update(data)
+            })
+
+            $('#Mexico').on('change', function() {
+              if (this.checked) {
+                removeAll();
+                countries.push(this.value);
+                allSelected = false
+              } else {
+                let index = countries.indexOf(this.value);
+                countries.splice(index, 1);
+              }
+              update(data)
+            })
+
+            $('#Nigeria').on('change', function() {
+              if (this.checked) {
+                removeAll();
+                countries.push(this.value);
+                allSelected = false
+              } else {
+                let index = countries.indexOf(this.value);
+                countries.splice(index, 1);
+              }
+              update(data)
+            })
+
+            $('#Netherlands').on('change', function() {
+              if (this.checked) {
+                removeAll();
+                countries.push(this.value);
+                allSelected = false
+              } else {
+                let index = countries.indexOf(this.value);
+                countries.splice(index, 1);
+              }
+              update(data)
+            })
+
+            $('#New-Zealand').on('change', function() {
+              if (this.checked) {
+                removeAll();
+                countries.push('New Zealand');
+                allSelected = false
+              } else {
+                let index = countries.indexOf(this.value);
+                countries.splice(index, 1);
+              }
+              update(data)
+            })
+
+            $('#Thailand').on('change', function() {
+              if (this.checked) {
+                removeAll();
+                countries.push(this.value);
+                allSelected = false
+              } else {
+                let index = countries.indexOf(this.value);
+                countries.splice(index, 1);
+              }
+              update(data)
+            })
+
+            $('#United-Kingdom').on('change', function() {
+              if (this.checked) {
+                removeAll();
+                countries.push('United Kingdom');
+                allSelected = false
+              } else {
+                let index = countries.indexOf(this.value);
+                countries.splice(index, 1);
+              }
+              update(data)
+            })
+
+            $('#United-States').on('change', function() {
+              if (this.checked) {
+                removeAll();
+                countries.push('United States');
+                allSelected = false
+              } else {
+                let index = countries.indexOf(this.value);
+                countries.splice(index, 1);
+              }
+              update(data)
+            })
       // function update(data) {
       //   //country = $('#country-select').val();
       //   //console.log(country);
