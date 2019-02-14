@@ -7,4 +7,7 @@ Sydney, Australia. It is a group project that is helping us prepare for our
 future web-development rolls. We came together in our shared interest of producing
 a site that helps us visualise data in different ways. We chose to focus on
 illustrating 15 countries around the world in terms of, population, GDP/per capita,
-and life-expectancy.
+and life-expectancy. Belwo is a screen shot of the landing page that the user
+sees upon visiting our site:
+
+![Landing Page](/images/2019/02/LandingPage.png)
