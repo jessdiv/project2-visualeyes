@@ -15,9 +15,9 @@ Below is a screen shot of the landing page that the user sees upon visiting our 
 ## Objectives of Project 2
 - Have a backend for the project which is in Ruby on Rails
 - Have a front end that can be in React, although does not have to be.
-- This app has: Countries and Statistics
-- Views: Use partials to DRY (Don’t Repeat Yourself) up your views.
-- Use Gems: 'rack-cors', and 'pry-rails'. Also, 'require-csv' (while not a gem) needed the csv library to communicate with the front-end for GET requests
+- This app has two models in Rails: Countries and Statistics
+- We used the following Gems: 'rack-cors', and 'pry-rails'. Also, 'require-csv'
+(while not a gem) needed the csv library to communicate with the front-end for GET requests
 - Heroku: This app has been uploaded to Heroku on the backend and that is where we pull our statistics from the loaded CSV file.
 
 ## Built With
