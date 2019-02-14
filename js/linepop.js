@@ -24,7 +24,7 @@ $(document).ready(function(){
 
   let yPop = d3.scaleLog()
     .range([heightPop, 2])
-    .domain([1500000, 1400000000])
+    .domain([2000000, 1400000000])
     .base(5)
 
   let xAxisCallPop = d3.axisBottom()
@@ -66,7 +66,7 @@ $(document).ready(function(){
   //////////// Color ////////////
     let colorScalePop = d3.scaleOrdinal()
       .domain(nestedDataPop.map(function(d) {
-          console.log(d.key);
+          //console.log(d.key);
           return d.key;
         }))
         .range(['#e5446d', '#BC8F8F', '#ffba49', '#20a39e', '#DC143C', '#663399', '#f2e3bc', '#ff8552', '#f76f8e', '#14cc60', '#931621', '#87CEEB', '#C0C0C0', '#d1f5ff', '#7d53de'])
@@ -74,16 +74,16 @@ $(document).ready(function(){
   //////////// Initialise Tooltip ////////////
   const tip = d3.tip()
         .attr('class', 'd3-tip')
-        .html(function(d) {
+        .html(function(d){
           // console.log(d);
           let text = d.key + "<br />";
-          // text += "<strong>Year</strong>: " + this.year + "<br />";
-          // text += "<strong>Total Population</strong>: " + d.population + "<br />";
+          // text += "<strong>Year</strong>: " + d.values.year + "<br />";
+          // text += "<strong>Total Population</strong>: " + d.values.population + "<br />";
           return text;
         })
       svgPop.call(tip);
 
-  let xAxisPop = gPop.append('g')
+    let xAxisPop = gPop.append('g')
         .attr('class', 'x axis')
         .attr('transform', 'translate(0,' + heightPop + ')')
         .call(xAxisCallPop.scale(xPop))
@@ -131,27 +131,53 @@ $(document).ready(function(){
               return linePop(d.values)
             });
 
-            // function update(data) {
-            //
-            //   let updatedData = nestedData.filter(function(d) {
-            //     if (allSelected) {
-            //       return true;
-            //     } else {
-            //       for (var i = 0; i < countries.length; i++) {
-            //         if (d.key === countries[i]) {
-            //           return d.values;
-            //         }
-            //       }
-            //     }
-            //   });
+            function update(data) {
 
-            // function removeAll() {
-            //   let index = countries.indexOf('all');
-            //   if (index !== -1) {
-            //     countries.splice(index, 1);
-            //   }
-            //   $('#all').prop('checked', false);
-            // }
+
+              let updatedData = nestedDataPop.filter(function(d) {
+                if (allSelected) {
+                  return true;
+                } else {
+                  for (var i = 0; i < countries.length; i++) {
+                    if (d.key === countries[i]) {
+                      return d.values;
+                    }
+                  }
+                }
+              });
+
+              gPop.selectAll('.line2').remove();
+
+              gPop.selectAll('.line2')
+                .data(function() {
+                  if (allSelected) {
+                    return nestedDataPop;
+                  } else {
+                    return updatedData;
+                  }
+                })
+                .enter()
+                  .append('path')
+                  .attr('class', 'line2')
+                  .attr('fill', 'none')
+                  // .on('mouseover', tooltip_mouseoverGDP)
+                  // .on('mouseout', tooltip_mouseoutGDP)
+                  // .on('mousemove', tooltip_mousemoveGDP)
+                  .attr('stroke', function(d) {
+                    return colorScalePop(d.key);
+                  })
+                  .attr('d', function(d) {
+                    return linePop(d.values);
+                  });
+            }
+
+            function removeAll() {
+              let index = countries.indexOf('all');
+              if (index !== -1) {
+                countries.splice(index, 1);
+              }
+              $('#all').prop('checked', false);
+            }
             //////////// EVENT HANDLERS ////////////
 
             $('#country-select').on('change', function() {
@@ -194,6 +220,7 @@ $(document).ready(function(){
                 let index = countries.indexOf(this.value);
                 countries.splice(index, 1);
               }
+              // console.log(countries)
               update(data);
             })
 
@@ -406,5 +433,5 @@ $(document).ready(function(){
       //         }
       //       });
       // }
-  });
+  }); //d3.scv
 });
