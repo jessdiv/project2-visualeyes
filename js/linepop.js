@@ -124,6 +124,9 @@ $(document).ready(function(){
           .attr('stroke', function(d) {
             return colorScalePop(d.key);
           })
+          // .attr('d', function(d) {
+          //   return line(d.values)
+          // })
           .attr('fill', 'none')
             .on('mouseover', tip.show)
             .on('mouseout', tip.hide)
@@ -132,8 +135,6 @@ $(document).ready(function(){
             });
 
             function update(data) {
-
-
               let updatedData = nestedDataPop.filter(function(d) {
                 if (allSelected) {
                   return true;
