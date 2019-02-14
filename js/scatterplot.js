@@ -1,10 +1,8 @@
-
-// ----------------------- Start Scatter Plot  ----------------------- \\
 let stopTime = document.getElementById('scatter_pause');
 let startTime = document.getElementById('scatter_start');
 
 let Smargin = { left: 80, right: 20, top: 50, bottom: 100 };
-
+var time = 0;
 let Swidth = 800 - Smargin.left - Smargin.right;
 let Sheight = 600 - Smargin.top - Smargin.bottom;
 
@@ -15,8 +13,6 @@ var g = d3.select('#ds2')
         .attr('height', Sheight + Smargin.top + Smargin.bottom)
     .append('g')
         .attr('transform', 'translate(' + Smargin.left + ', ' + Smargin.top + ')');
-
-var time = 0;
 
 var tip = d3.tip().attr('class', 'd3-tip')
     .html(function (d) {
@@ -40,6 +36,7 @@ var area = d3.scaleLinear()
     .range([25 * Math.PI, 1500 * Math.PI])
     .domain([0, 1500000000]);
 
+// Assign A Color to Continent
 var continentColor = d3.scaleOrdinal()
   .domain(['Thailand', 'United States', 'Australia', 'Brazil', 'Canada', 'China', 'France', 'United Kingdom', 'India', 'Ireland', 'Italy', 'Mexico', 'Nigeria', 'Netherlands', 'New Zealand'])
   .range(['#e5446d', '#BC8F8F', '#ffba49', '#20a39e', '#DC143C', '#663399', '#f2e3bc', '#ff8552', '#f76f8e', '#14cc60', '#931621', '#87CEEB', '#C0C0C0', '#d1f5ff', '#7d53de']);
@@ -95,15 +92,12 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
       dataByYear.push(data.slice(i, i + 15));
     }
 
-    // console.log(dataByYear);
-
     // Clean data
     dataByYear.forEach(function (year) {
       year.forEach(function (d) {
         d.life_expectancy = +d.life_expectancy;
         d.population = +d.population.replace(/,/g, '');
         d.gdp_capita = +d.gdp_capita.replace(/,/g, '');
-        d.gdp_total = +d.gdp_total.replace(/,/g, '');
       });
     });
 
@@ -115,7 +109,7 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
         let t = d3.transition()
             .duration(250);
 
-        let circles = g.selectAll('circle').data(data, function (d) {
+        var circles = g.selectAll('circle').data(data, function (d) {
           return d.country_name;
         });
 
@@ -129,7 +123,8 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
             .transition(t)
                 .attr('cy', function (d){ return Y(d.life_expectancy); })
                 .attr('cx', function (d) { return X(d.gdp_capita); })
-                .attr('r', function (d){ return Math.sqrt(area(d.population) / Math.PI); });
+                .attr('r', function (d){ return Math.sqrt(area(d.population) / Math.PI); })
+                .style('opacity', '0.8')
 
         circles.exit()
             .remove();
@@ -157,69 +152,4 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
     }
 
     update(dataByYear[0]);
-
   });
-
-// $('#all').on('change', function() {
-//   update(data)
-// });
-//
-// $('#Australia').on('change', function() {
-//   console.log('click');
-// });
-//
-// $('#Brazil').on('change', function() {
-//   console.log('click');
-// });
-//
-// $('#Canada').on('change', function() {
-//   console.log('click');
-// });
-//
-// $('#China').on('change', function() {
-//   console.log('click');
-// });
-//
-// $('#France').on('change', function() {
-//   console.log('click');
-// });
-//
-// $('#India').on('change', function() {
-//   console.log('click');
-// });
-//
-// $('#Ireland').on('change', function() {
-//   console.log('click');
-// });
-//
-// $('#Italy').on('change', function() {
-//   console.log('click');
-// });
-//
-// $('#Mexico').on('change', function() {
-//   console.log('click');
-// });
-//
-// $('#Nigeria').on('change', function() {
-//   console.log('click');
-// });
-//
-// $('#Netherlands').on('change', function() {
-//   console.log('click');
-// });
-//
-// $('#New-Zealand').on('change', function() {
-//   console.log('click');
-// });
-//
-// $('#Thailand').on('change', function() {
-//   console.log('click');
-// });
-//
-// $('#United-Kingdom').on('change', function() {
-//   console.log('click');
-// });
-//
-// $('#United-States').on('change', function() {
-//   console.log('click');
-// });
