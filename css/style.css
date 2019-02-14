@@ -118,7 +118,7 @@ h1 {
 .navbar-fixed {
 top: 0;
 z-index: 1;
-position: fixed;
+position: sticky;
 }
 
 .sidebar-wrapper > *:not(.hamburger) {
@@ -128,6 +128,7 @@ position: fixed;
 .sidebar-wrapper.open > * {
   display: block;
   opacity: 1;
+  transition: 3s ease opacity;
 }
 
 .sidebar-wrapper h2{
@@ -245,7 +246,6 @@ position: fixed;
   display: flex;
   height: auto;
   min-height: 700px;
-  overflow: hidden;
   position: relative;
 }
 
@@ -402,16 +402,19 @@ text  {
 /* ------- FOOTER ------- */
 
 .legend {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   color: #555;
   text-align: left;
-  height: 50px;
-  line-height: 30px;
-  padding: 8px;
+  height: 100vh;
   font-family: var(--primary-font);
-  font-size: 80%;
+  font-size: 0.7em;
   background-color: rgba(255, 255, 255, 0.5);
   min-width: 120px;
   max-width: 150px;
+  padding: 10px 0 10px 5px;
+  border-left: 1px solid grey;
 }
 
 .legend span {

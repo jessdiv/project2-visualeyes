@@ -3,6 +3,18 @@ let sidebar = document.getElementById('sidebar');
 let dataBody = document.getElementById('data-main');
 let scrollHandler = document.getElementById('scrollHandler');
 
+
+$(window).scroll(function () {
+  if ($(window).scrollTop() > 700) {
+    $('#sidebar').addClass('navbar-fixed')
+    $('#legend').addClass('navbar-fixed')
+  }
+  if ($(window).scrollTop() < 700) {
+    $('#sidebar').removeClass('navbar-fixed');
+  }
+});
+
+
 let toggleClass = function () {
   menuButton.classList.toggle('is-active');
   sidebar.classList.toggle('open');
@@ -14,19 +26,8 @@ let toggleClass = function () {
 };
 
 let scrollDown = function () {
-  window.scrollTo(0, 800);
+  window.scrollTo(0, 700);
 };
 
 menuButton.addEventListener('click', toggleClass);
 scrollHandler.addEventListener('click', scrollDown);
-
-$(window).scroll(function () {
-    console.log($(window).scrollTop())
-  if ($(window).scrollTop() > 700) {
-    $('#sidebar').addClass('navbar-fixed')
-    $('#data-main').style('margin-left', '300px')
-  }
-  if ($(window).scrollTop() < 700) {
-    $('#sidebar').removeClass('navbar-fixed');
-  }
-});
