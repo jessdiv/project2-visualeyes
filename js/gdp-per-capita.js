@@ -1,11 +1,12 @@
-let countries = ['all'];
+let countriesGlobal = ['all'];
+let allSelectedGlobal = true;
+
 $(document).ready(function(){
 
   let marginGDP = { left:90, right:20, top:50, bottom:100 };
   let heightGDP = 600 - marginGDP.top - marginGDP.bottom;
   let widthGDP = 800 - marginGDP.left - marginGDP.right;
   let nestedData;
-  let allSelected = true;
 
   let svgGDP = d3.select('#chart-area-3')
     .append('svg')
@@ -140,11 +141,11 @@ $(document).ready(function(){
     //////////// UPDATE DATA FUNCTION ////////////
     function update(data) {
       let updatedData = nestedData.filter(function(d) {
-        if (allSelected) {
+        if (allSelectedGlobal) {
           return true;
         } else {
-          for (var i = 0; i < countries.length; i++) {
-            if (d.key === countries[i]) {
+          for (var i = 0; i < countriesGlobal.length; i++) {
+            if (d.key === countriesGlobal[i]) {
               return d.values;
             }
           }
@@ -156,7 +157,7 @@ $(document).ready(function(){
 
       gGDP.selectAll('.line')
         .data(function() {
-          if (allSelected) {
+          if (allSelectedGlobal) {
             return nestedData;
           } else {
             return updatedData;
@@ -178,18 +179,33 @@ $(document).ready(function(){
     }
 
     function removeAll() {
-      let index = countries.indexOf('all');
+      let index = countriesGlobal.indexOf('all');
       if (index !== -1) {
-        countries.splice(index, 1);
+        countriesGlobal.splice(index, 1);
       }
       $('#all').prop('checked', false);
+      $('.aus').css('display', 'none');
+      $('.bra').css('display', 'none');
+      $('.can').css('display', 'none');
+      $('.chn').css('display', 'none');
+      $('.fra').css('display', 'none');
+      $('.ind').css('display', 'none');
+      $('.irl').css('display', 'none');
+      $('.ita').css('display', 'none');
+      $('.mex').css('display', 'none');
+      $('.nig').css('display', 'none');
+      $('.net').css('display', 'none');
+      $('.nzl').css('display', 'none');
+      $('.tha').css('display', 'none');
+      $('.gbr').css('display', 'none');
+      $('.usa').css('display', 'none');
     }
 
     //////////// EVENT HANDLERS ////////////
     $('#all').on('change', function() {
       if (this.checked) {
-        countries = ['all'];
-        allSelected = true;
+        countriesGlobal = ['all'];
+        allSelectedGlobal = true;
         $('#Australia').prop('checked', false);
         $('#Brazil').prop('checked', false);
         $('#Canada').prop('checked', false);
@@ -205,10 +221,26 @@ $(document).ready(function(){
         $('#Thailand').prop('checked', false);
         $('#United-Kingdom').prop('checked', false);
         $('#United-States').prop('checked', false);
+        $('.aus').css('display', 'inline');
+        $('.bra').css('display', 'inline');
+        $('.can').css('display', 'inline');
+        $('.chn').css('display', 'inline');
+        $('.fra').css('display', 'inline');
+        $('.ind').css('display', 'inline');
+        $('.irl').css('display', 'inline');
+        $('.ita').css('display', 'inline');
+        $('.mex').css('display', 'inline');
+        $('.nig').css('display', 'inline');
+        $('.net').css('display', 'inline');
+        $('.nzl').css('display', 'inline');
+        $('.tha').css('display', 'inline');
+        $('.gbr').css('display', 'inline');
+        $('.usa').css('display', 'inline');
+
       } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-        allSelected = false;
+        let index = countriesGlobal.indexOf(this.value);
+        countriesGlobal.splice(index, 1);
+        allSelectedGlobal = false;
       }
       update(data)
     })
@@ -216,14 +248,14 @@ $(document).ready(function(){
     $('#Australia').on('change', function() {
       if (this.checked) {
         removeAll();
-        countries.push(this.value);
-        allSelected = false
+        countriesGlobal.push(this.value);
+        allSelectedGlobal = false
         console.log($('.aus'));
-        $('.aus').css('visibility', 'visible')
+        $('.aus').css('display', 'inline')
       } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-        $('.aus').css('visibility', 'hidden');
+        let index = countriesGlobal.indexOf(this.value);
+        countriesGlobal.splice(index, 1);
+        $('.aus').css('display', 'none');
       }
       update(data);
     })
@@ -231,13 +263,13 @@ $(document).ready(function(){
     $('#Brazil').on('change', function() {
       if (this.checked) {
         removeAll();
-        countries.push(this.value);
-        allSelected = false
-        $('.bra').css('visibility', 'visible')
+        countriesGlobal.push(this.value);
+        allSelectedGlobal = false
+        $('.bra').css('display', 'inline')
       } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-        $('.bra').css('visibility', 'hidden')
+        let index = countriesGlobal.indexOf(this.value);
+        countriesGlobal.splice(index, 1);
+        $('.bra').css('display', 'none')
       }
       update(data)
     })
@@ -245,13 +277,13 @@ $(document).ready(function(){
     $('#Canada').on('change', function() {
       if (this.checked) {
         removeAll();
-        countries.push(this.value);
-        allSelected = false
-        $('.can').css('visibility', 'visible')
+        countriesGlobal.push(this.value);
+        allSelectedGlobal = false
+        $('.can').css('display', 'inline')
       } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-        $('.can').css('visibility', 'hidden')
+        let index = countriesGlobal.indexOf(this.value);
+        countriesGlobal.splice(index, 1);
+        $('.can').css('display', 'none')
       }
       update(data)
     })
@@ -259,13 +291,13 @@ $(document).ready(function(){
     $('#China').on('change', function() {
       if (this.checked) {
         removeAll();
-        countries.push(this.value);
-        allSelected = false
-        $('.chn').css('visibility', 'visible')
+        countriesGlobal.push(this.value);
+        allSelectedGlobal = false
+        $('.chn').css('display', 'inline')
       } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-        $('.chn').css('visibility', 'hidden')
+        let index = countriesGlobal.indexOf(this.value);
+        countriesGlobal.splice(index, 1);
+        $('.chn').css('display', 'none')
       }
       update(data)
     })
@@ -273,13 +305,13 @@ $(document).ready(function(){
     $('#France').on('change', function() {
       if (this.checked) {
         removeAll();
-        countries.push(this.value);
-        allSelected = false
-        $('.fra').css('visibility', 'visible')
+        countriesGlobal.push(this.value);
+        allSelectedGlobal = false
+        $('.fra').css('display', 'inline')
       } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-        $('.fra').css('visibility', 'hidden')
+        let index = countriesGlobal.indexOf(this.value);
+        countriesGlobal.splice(index, 1);
+        $('.fra').css('display', 'none')
       }
       update(data)
     })
@@ -287,13 +319,13 @@ $(document).ready(function(){
     $('#India').on('change', function() {
       if (this.checked) {
         removeAll();
-        countries.push(this.value);
-        allSelected = false
-        $('.ind').css('visibility', 'visible')
+        countriesGlobal.push(this.value);
+        allSelectedGlobal = false
+        $('.ind').css('display', 'inline')
       } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-        $('.ind').css('visibility', 'hidden')
+        let index = countriesGlobal.indexOf(this.value);
+        countriesGlobal.splice(index, 1);
+        $('.ind').css('display', 'none')
       }
       update(data)
     })
@@ -301,13 +333,13 @@ $(document).ready(function(){
     $('#Ireland').on('change', function() {
       if (this.checked) {
         removeAll();
-        countries.push(this.value);
-        allSelected = false
-        $('.irl').css('visibility', 'visible')
+        countriesGlobal.push(this.value);
+        allSelectedGlobal = false
+        $('.irl').css('display', 'inline')
       } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-        $('.irl').css('visibility', 'hidden')
+        let index = countriesGlobal.indexOf(this.value);
+        countriesGlobal.splice(index, 1);
+        $('.irl').css('display', 'none')
       }
       update(data)
     })
@@ -315,13 +347,13 @@ $(document).ready(function(){
     $('#Italy').on('change', function() {
       if (this.checked) {
         removeAll();
-        countries.push(this.value);
-        allSelected = false
-        $('.ita').css('visibility', 'visible')
+        countriesGlobal.push(this.value);
+        allSelectedGlobal = false
+        $('.ita').css('display', 'inline')
       } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-        $('.ita').css('visibility', 'hidden')
+        let index = countriesGlobal.indexOf(this.value);
+        countriesGlobal.splice(index, 1);
+        $('.ita').css('display', 'none')
       }
       update(data)
     })
@@ -329,13 +361,13 @@ $(document).ready(function(){
     $('#Mexico').on('change', function() {
       if (this.checked) {
         removeAll();
-        countries.push(this.value);
-        allSelected = false
-        $('.mex').css('visibility', 'visible')
+        countriesGlobal.push(this.value);
+        allSelectedGlobal = false
+        $('.mex').css('display', 'inline')
       } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-        $('.mex').css('visibility', 'hidden')
+        let index = countriesGlobal.indexOf(this.value);
+        countriesGlobal.splice(index, 1);
+        $('.mex').css('display', 'none')
       }
       update(data)
     })
@@ -343,13 +375,13 @@ $(document).ready(function(){
     $('#Nigeria').on('change', function() {
       if (this.checked) {
         removeAll();
-        countries.push(this.value);
-        allSelected = false
-        $('.nig').css('visibility', 'visible')
+        countriesGlobal.push(this.value);
+        allSelectedGlobal = false
+        $('.nig').css('display', 'inline')
       } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-        $('.nig').css('visibility', 'hidden')
+        let index = countriesGlobal.indexOf(this.value);
+        countriesGlobal.splice(index, 1);
+        $('.nig').css('display', 'none')
       }
       update(data)
     })
@@ -357,13 +389,13 @@ $(document).ready(function(){
     $('#Netherlands').on('change', function() {
       if (this.checked) {
         removeAll();
-        countries.push(this.value);
-        allSelected = false
-        $('.net').css('visibility', 'visible')
+        countriesGlobal.push(this.value);
+        allSelectedGlobal = false
+        $('.net').css('display', 'inline')
       } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-        $('.net').css('visibility', 'hidden')
+        let index = countriesGlobal.indexOf(this.value);
+        countriesGlobal.splice(index, 1);
+        $('.net').css('display', 'none')
       }
       update(data)
     })
@@ -371,13 +403,13 @@ $(document).ready(function(){
     $('#New-Zealand').on('change', function() {
       if (this.checked) {
         removeAll();
-        countries.push('New Zealand');
-        allSelected = false
-        $('.nzl').css('visibility', 'visible')
+        countriesGlobal.push('New Zealand');
+        allSelectedGlobal = false
+        $('.nzl').css('display', 'inline')
       } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-        $('.nzl').css('visibility', 'hidden')
+        let index = countriesGlobal.indexOf(this.value);
+        countriesGlobal.splice(index, 1);
+        $('.nzl').css('display', 'none')
       }
       update(data)
     })
@@ -385,13 +417,13 @@ $(document).ready(function(){
     $('#Thailand').on('change', function() {
       if (this.checked) {
         removeAll();
-        countries.push(this.value);
-        allSelected = false
-        $('.tha').css('visibility', 'visible')
+        countriesGlobal.push(this.value);
+        allSelectedGlobal = false
+        $('.tha').css('display', 'inline')
       } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-        $('.tha').css('visibility', 'hidden')
+        let index = countriesGlobal.indexOf(this.value);
+        countriesGlobal.splice(index, 1);
+        $('.tha').css('display', 'none')
       }
       update(data)
     })
@@ -399,13 +431,13 @@ $(document).ready(function(){
     $('#United-Kingdom').on('change', function() {
       if (this.checked) {
         removeAll();
-        countries.push('United Kingdom');
-        allSelected = false
-        $('.gbr').css('visibility', 'visible')
+        countriesGlobal.push('United Kingdom');
+        allSelectedGlobal = false
+        $('.gbr').css('display', 'inline')
       } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-        $('.gbr').css('visibility', 'hidden')
+        let index = countriesGlobal.indexOf(this.value);
+        countriesGlobal.splice(index, 1);
+        $('.gbr').css('display', 'none')
       }
       update(data)
     })
@@ -413,13 +445,13 @@ $(document).ready(function(){
     $('#United-States').on('change', function() {
       if (this.checked) {
         removeAll();
-        countries.push('United States');
-        allSelected = false
-        $('.usa').css('visibility', 'visible')
+        countriesGlobal.push('United States');
+        allSelectedGlobal = false
+        $('.usa').css('display', 'inline')
       } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-        $('.usa').css('visibility', 'hidden')
+        let index = countriesGlobal.indexOf(this.value);
+        countriesGlobal.splice(index, 1);
+        $('.usa').css('display', 'none')
       }
       update(data)
     })
