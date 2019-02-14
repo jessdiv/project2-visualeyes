@@ -65,20 +65,27 @@ $(document).ready(function(){
         // thanks to: http://bl.ocks.org/biovisualize/1016860
 
         // mouseover tooltip functions
-        const tooltip_mouseover = function(e, year2017) {
-          tooltip.style('visibility', 'visible')
-            .text(function() {
-              return `${ e.country_name }: ${e.area}`
-            })
-        }
 
-        const tooltip_mouseout = function(year2017) {
-          tooltip.style('visibility', 'hidden')
-        }
+        var tip = d3.tip().attr('class', 'd3-tip')
+            .html(function (d) {
+              return `${d.country_name}: ${d.area}`;
+            });
 
-        const tooltip_mousemove = function(year2017) {
-          tooltip.style("top", (event.pageY - 10) + "px").style("left", (event.pageX + 10) + "px");
-        }
+        area_g.call(tip);
+        // const tooltip_mouseover = function(e, year2017) {
+        //   tooltip.style('visibility', 'visible')
+        //     .text(function() {
+        //       return `${ e.country_name }: ${e.area}`
+        //     })
+        // }
+        //
+        // const tooltip_mouseout = function(year2017) {
+        //   tooltip.style('visibility', 'hidden')
+        // }
+        //
+        // const tooltip_mousemove = function(year2017) {
+        //   tooltip.style("top", (event.pageY - 10) + "px").style("left", (event.pageX + 10) + "px");
+        // }
 
         // initializing the circle
 
@@ -90,6 +97,8 @@ $(document).ready(function(){
           .attr("r", function(year2017) {
             return size(year2017.area)
           })
+          // .attr('width', '200')
+          // .attr('height', '200')
           .attr('cx', area_width / 2)
           .attr('cy', area_height / 2)
           .style('fill', function(d) {
@@ -98,9 +107,11 @@ $(document).ready(function(){
           .style('fill-opacity', 0.8)
           .attr('stroke', 'black')
           .style("stroke-width", 1)
-          .on("mouseover", tooltip_mouseover)
-          .on('mousemove', tooltip_mousemove)
-          .on('mouseout', tooltip_mouseout)
+          .on('mouseover', tip.show)
+          .on('mouseout', tip.hide)
+          // .on("mouseover", tooltip_mouseover)
+          // .on('mousemove', tooltip_mousemove)
+          // .on('mouseout', tooltip_mouseout)
           .call(d3.drag()
             .on('start', dragstarted)
             .on('drag', dragged)
