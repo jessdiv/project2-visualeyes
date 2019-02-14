@@ -66,29 +66,36 @@ $(document).ready(function(){
       .range(['#e5446d', '#BC8F8F', '#ffba49', '#20a39e', '#DC143C', '#663399', '#f2e3bc', '#ff8552', '#f76f8e', '#14cc60', '#931621', '#87CEEB', '#C0C0C0', '#d1f5ff', '#7d53de'])
 
     //////////// TOOLTIP ////////////
-    let tooltipGDP = d3.select('#chart-area-3')
-      .append('div')
-      .data(nestedData)
+    // let tooltipGDP = d3.select('#ds3')
+    //   .append('div')
+    //   .data(nestedData)
+    //   .attr('class', 'd3-tip')
+    //   .style('position', 'absolute')
+    //   .style('z-index', '10')
+    //   .style('visibility', 'hidden')
+    //
+    // let tooltip_mouseoverGDP = function(e) {
+    //   tooltipGDP.style('visibility', 'visible')
+    //     .text(function() {
+    //       return `Country: ${ e.key }`
+    //     })
+    // }
+    //
+    // let tooltip_mouseoutGDP = function() {
+    //   tooltipGDP.style('visibility', 'hidden')
+    // }
+    //
+    // let tooltip_mousemoveGDP = function() {
+    //   tooltipGDP.style('top', ( event.windowY - 10) + 'px')
+    //     .style('left', ( event.windowX + 10) + 'px')
+    // }
+
+    const tip = d3.tip()
       .attr('class', 'd3-tip')
-      .style('position', 'absolute')
-      .style('z-index', '10')
-      .style('visibility', 'hidden')
-
-    let tooltip_mouseoverGDP = function(e) {
-      tooltipGDP.style('visibility', 'visible')
-        .text(function() {
-          return `Country: ${ e.key }`
-        })
-    }
-
-    let tooltip_mouseoutGDP = function() {
-      tooltipGDP.style('visibility', 'hidden')
-    }
-
-    let tooltip_mousemoveGDP = function() {
-      tooltipGDP.style('top', ( event.pageY - 10) + 'px')
-        .style('left', ( event.pageX + 10) + 'px')
-    }
+      .html(function(d) {
+        return d.key;
+      })
+    svgGDP.call(tip);
 
     //////////// AXES ////////////
     let xAxis = gGDP.append('g')
@@ -131,12 +138,14 @@ $(document).ready(function(){
           .attr('stroke', function(d) {
             return colorScaleGDP(d.key);
           })
+          .on('mouseover', tip.show)
+          .on('mouseout', tip.hide)
           .attr('d', function(d) {
             return line(d.values)
           })
-          .on('mouseover', tooltip_mouseoverGDP)
-          .on('mouseout', tooltip_mouseoutGDP)
-          .on('mousemove', tooltip_mousemoveGDP)
+          // .on('mouseover', tooltip_mouseoverGDP)
+          // .on('mouseout', tooltip_mouseoutGDP)
+          // .on('mousemove', tooltip_mousemoveGDP)
 
     //////////// UPDATE DATA FUNCTION ////////////
     function update(data) {
@@ -167,9 +176,11 @@ $(document).ready(function(){
           .append('path')
           .attr('class', 'line')
           .attr('fill', 'none')
-          .on('mouseover', tooltip_mouseoverGDP)
-          .on('mouseout', tooltip_mouseoutGDP)
-          .on('mousemove', tooltip_mousemoveGDP)
+          // .on('mouseover', tooltip_mouseoverGDP)
+          // .on('mouseout', tooltip_mouseoutGDP)
+          // .on('mousemove', tooltip_mousemoveGDP)
+          .on('mouseover', tip.show)
+          .on('mouseout', tip.hide)
           .attr('stroke', function(d) {
             return colorScaleGDP(d.key);
           })
