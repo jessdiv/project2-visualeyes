@@ -66,11 +66,7 @@ $(document).ready(function(){
   //////////// Color ////////////
     let colorScalePop = d3.scaleOrdinal()
       .domain(nestedDataPop.map(function(d) {
-<<<<<<< HEAD
-          // console.log(d.key);
-=======
-          //console.log(d.key);
->>>>>>> c5ec7af6e1f6e5fa7f40323239762652b597345a
+        //console.log(d.key);
           return d.key;
         }))
         .range(['#e5446d', '#BC8F8F', '#ffba49', '#20a39e', '#DC143C', '#663399', '#f2e3bc', '#ff8552', '#f76f8e', '#14cc60', '#931621', '#87CEEB', '#C0C0C0', '#d1f5ff', '#7d53de'])
