@@ -164,6 +164,8 @@ $(document).ready(function(){
                   // .on('mouseover', tooltip_mouseoverGDP)
                   // .on('mouseout', tooltip_mouseoutGDP)
                   // .on('mousemove', tooltip_mousemoveGDP)
+                  .on('mouseover', tip.show)
+                  .on('mouseout', tip.hide)
                   .attr('stroke', function(d) {
                     return colorScalePop(d.key);
                   })
