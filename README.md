@@ -60,7 +60,7 @@ The below line graph shows how a given country's population has changed over tim
 from 1960-2017. Like the other visualisations, a given country can be shown alone
 or by toggling off or on which countries you want to investigate further.
 
-![Population Line Graph](/images/2019/02/PopulationLineGraph.png)
+![Population Line Graph](/images/2019/02/PopulationLineGraph.)
 
 
 ## Scope of Project as of 14-2-2019
