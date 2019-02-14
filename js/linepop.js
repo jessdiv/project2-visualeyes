@@ -23,9 +23,9 @@ $(document).ready(function(){
     .domain([1960, 2017])
 
   let yPop = d3.scaleLog()
-    .range([heightPop, 5])
-    .domain([1300000, 1400000000])
-    .base(2)
+    .range([heightPop, 2])
+    .domain([1500000, 1400000000])
+    .base(5)
 
   let xAxisCallPop = d3.axisBottom()
     .ticks(15)
@@ -34,7 +34,7 @@ $(document).ready(function(){
     })
 
     let yAxisCallPop = d3.axisLeft()
-      .ticks(15)
+      .ticks(8)
 
 
   let linePop = d3.line()
@@ -63,14 +63,22 @@ $(document).ready(function(){
       })
        .entries(filteredDataPop)
 
+//////////// Color ////////////
+    let colorScalePop = d3.scaleOrdinal()
+      .domain(nestedDataPop.map(function(d) {
+          console.log(d.key);
+          return d.key;
+        }))
+        .range(['#ffba49', '#20a39e', '#ef5b5b', '#6A5ACD', '#f2e3bc', '#ff8552', '#f76f8e', '#14cc60', '#931621', '#87CEEB', '#40434e', '#d1f5ff', '#7d53de', '#e5446d', '#BC8F8F'])
+
   //////////// Initialise Tooltip ////////////
   const tip = d3.tip()
         .attr('class', 'd3-tip')
         .html(function(d) {
           // console.log(d);
           let text = "<strong>Country</strong>: " + d.key + "<br />";
-          // text += "<strong>Year</strong>: " + this.Year + "<br />";
-          // text += "<strong>Total Population</strong>: " + d['Total Population'] + "<br />";
+          // text += "<strong>Year</strong>: " + this.year + "<br />";
+          // text += "<strong>Total Population</strong>: " + d.population + "<br />";
           return text;
         })
       svgPop.call(tip);
@@ -113,6 +121,9 @@ $(document).ready(function(){
           .attr('stroke', 'black')
           .attr('stroke-width', '2px')
           .attr('class', 'line2')
+          .attr('stroke', function(d) {
+            return colorScalePop(d.key);
+          })
           .attr('fill', 'none')
             .on('mouseover', tip.show)
             .on('mouseout', tip.hide)
