@@ -28,9 +28,9 @@
   <!-- Section B - Data Display (Section 1) -->
 
   <div class="dataPage">
-    <div id="sidebar" class="sidebar-wrapper">
+    <div id="sidebar" class="sidebar-wrapper open">
 
-      <button id="hamburger" class="hamburger hamburger--squeeze" type="button">
+      <button id="hamburger" class="hamburger hamburger--squeeze is-active" type="button">
         <span class="hamburger-box">
           <span class="hamburger-inner"></span>
         </span>
@@ -147,9 +147,9 @@
       </div>
 
       <div id="ds1" class="data data-section1">
-        <h1 class="darkheading">Bubble Charts</h1>
-        <button type="button" name="population" id="population-button">Population</button>
-        <button type="button" name="button" id="area-button">Area</button>
+        <h1 class="darkheading">Population bubbles</h1>
+        <!-- <button type="button" name="population" id="population-button">Population</button>
+        <button type="button" name="button" id="area-button">Area</button> -->
         <div id='chart-area-1'></div>
       </div>
 
@@ -164,7 +164,7 @@
       </div>
     </div>
 
-    <div class="legend">
+    <div id="legend" class="legend">
       <span class="legend-line aus"><span class='australia'>---</span>Australia</span><br />
       <span class="legend-line bra"><span class="brazil">---</span>Brazil</span><br />
       <span class="legend-line can"><span class='canada'>---</span>Canada</span><br />
@@ -190,10 +190,11 @@
   <script src='https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js'></script>
   <script src="js/script.js" charset="utf-8"></script>
   <!-- <script src="js/all_statistics.js" charset="utf-8"></script> -->
-  <script src="js/circular-packing-testing.js" charset="utf-8"></script>
+  <script src="js/circular-packing.js" charset="utf-8"></script>
   <script src="js/gdp-per-capita.js" charset="utf-8"></script>
-    <script src="js/scatterplot.js" charset="utf-8"></script>
+  <script src="js/scatterplot.js" charset="utf-8"></script>
   <script src="js/linepop.js" charset="utf-8"></script>
+  <script src="js/area.js" charset="utf-8"></script>
 </body>
 
 </html>
