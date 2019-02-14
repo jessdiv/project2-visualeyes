@@ -363,7 +363,7 @@ h1 {
 
 .ds5 {
   color: black;
-  display: flex;
+  /* display: flex; */
 }
 
 /* ------- END OF DATA DISPLAY PAGE CSS ------- */

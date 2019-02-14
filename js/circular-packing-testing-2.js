@@ -12,7 +12,55 @@ let population_margin = {
   bottom: 150
 }
 
-const population_svg = d3.select('#chart-area-1')
+let area_control = false;
+let size;
+
+// Population or Area?
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const population_graph = {
+  area_control: false,
+
+  findDomain: function () {
+    let domain1;
+    let domain2;
+    let domain;
+
+    if (area_control === true) {
+      domain1 = 40000;
+      domain2 = 10000000;
+      domain = [domain1, domain2]
+      return domain;
+    } else {
+      domain1 = 4793900;
+      domain2 = 1400000000;
+      domain = [domain1, domain2]
+      return domain;
+    }
+
+  },
+
+  resetGraph: function(){
+    
+  }
+
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+$('#population-button').on('click', function() {
+  area_control = false;
+  console.log(area_control);
+})
+
+$('#area-button').on('click', function() {
+  area_control = true;
+  console.log(area_control);
+})
+
+const population_svg = d3.select('#ds1')
   .append("svg")
   .attr('class', 'svg-graph1')
   .attr('width', population_width)
@@ -24,6 +72,7 @@ const population_g = population_svg.append('g')
 
 d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(data) {
       data.forEach(function(d) {
+        d.area = +d.area
         d.population = +d.population
       })
 
@@ -47,10 +96,35 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
         .range(['#ffba49', '#20a39e', '#DC143C', '#663399', '#f2e3bc', '#ff8552', '#f76f8e', '#14cc60', '#931621', '#87CEEB', '#C0C0C0', '#d1f5ff', '#7d53de', '#e5446d', '#BC8F8F']);
 
       // scale for countries
+      //
+      // let domain1;
+      // let domain2;
+      // let domain;
+      //
+      // const findDomain = function () {
+      //   if (area_control === true) {
+      //     domain1 = 40000;
+      //     domain2 = 10000000;
+      //     domain = [domain1, domain2]
+      //     return domain;
+      //   } else {
+      //     domain1 = 4793900;
+      //     domain2 = 1400000000;
+      //     domain = [domain1, domain2]
+      //     return domain;
+      //   }
+      // }
+
+
       let size = d3.scaleLog()
-        .domain([4793900, 1400000000])
+        .domain(findDomain())
         .range([15, 120])
         .base(2)
+
+        console.log();
+
+        console.log(size);
+
 
 
       // Tooltips setup
@@ -68,7 +142,12 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
       const tooltip_mouseover = function(e, year2017) {
         tooltip.style('visibility', 'visible')
           .text(function() {
-            return `${ e.country_name }: ${e.population}`
+            if (area_control){
+              return `${ e.country_name }: ${e.area}km2`
+            } else {
+              return `${ e.country_name }: ${e.population}`
+            }
+
           })
       }
 
@@ -114,7 +193,13 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
         .force('center', d3.forceCenter().x(population_width / 2).y(population_height / 2)) //attracts to centre of svg
         .force('charge', d3.forceManyBody().strength(.1)) //Nodes are attracted to each other
         .force("collide", d3.forceCollide().strength(.2).radius(function(d) {
-          return size((d.population) + 3)
+          return size(function() {
+            if ( area_control ) {
+              return d.area;
+            } else {
+              return d.population;
+            }
+          } + 3)
         }).iterations(1)) //force avoids circle collision
 
       simulation
