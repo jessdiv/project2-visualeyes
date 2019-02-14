@@ -18,6 +18,13 @@ var g = d3.select('#ds2')
 
 var time = 0;
 
+var tip = d3.tip().attr('class', 'd3-tip')
+    .html(function (d) {
+      return `${d.country_name}`;
+    });
+
+g.call(tip);
+
 // X Scale
 var X = d3.scaleLinear()
     .range([0, Swidth])
@@ -26,7 +33,7 @@ var X = d3.scaleLinear()
 // Y Scale
 var Y = d3.scaleLinear()
     .range([Sheight, 0])
-    .domain([31, 82]);
+    .domain([20, 82]);
 
 // Area
 var area = d3.scaleLinear()
@@ -47,7 +54,7 @@ g.append('g')
 
 // Y Axis
 var scatter_yAxisCall = d3.axisLeft(Y)
-    .tickFormat(function (d) { return +d; });
+    .tickFormat(function (d) { return +d; })
 g.append('g')
     .attr('class', 'y axis')
     .call(scatter_yAxisCall);
@@ -118,6 +125,8 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
             .append('circle')
             .attr('class', 'enter')
             .attr('fill', function (d) { return continentColor(d.gdp_capita); })
+            .on('mouseover', tip.show)
+            .on('mouseout', tip.hide)
             .merge(circles)
             .transition(t)
                 .attr('cy', function (d){ return Y(d.life_expectancy); })
