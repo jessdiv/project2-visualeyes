@@ -54,11 +54,7 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
     .domain(year2017.map(function(d) {
       return d.country_name;
     }))
-<<<<<<< HEAD
-    // .range(['#ffba49', '#20a39e', '#ef5b5b', '#912f56', '#FFFFE0', '#ff8552', '#f76f8e', '#14cc60', '#4682B4', '#b33951', '#40434e', '#d1f5ff', '#7d53de', '#00FA9A', 'deepskyblue']);
-=======
     .range(['#ffba49', '#20a39e', '#DC143C', '#663399', '#f2e3bc', '#ff8552', '#f76f8e', '#14cc60', '#931621', '#87CEEB', '#C0C0C0', '#d1f5ff', '#7d53de', '#e5446d', '#BC8F8F']);
->>>>>>> c5ec7af6e1f6e5fa7f40323239762652b597345a
 
     .range(['#447c69', '#8e8c6d','#e4bf80','#e9d78e',    '#f19670','#e16552','#be5168','#a34974','#993767','#4e2472','#9163b6','#e279a3','#7c9fb0','#5698c4','#9abf88'])
   // scale for countries
