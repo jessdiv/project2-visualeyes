@@ -178,27 +178,59 @@ $(document).ready(function(){
           });
     }
 
+    let legendCountries = []
+
     function removeAll() {
       let index = countriesGlobal.indexOf('all');
       if (index !== -1) {
         countriesGlobal.splice(index, 1);
       }
       $('#all').prop('checked', false);
-      $('.aus').css('display', 'none');
-      $('.bra').css('display', 'none');
-      $('.can').css('display', 'none');
-      $('.chn').css('display', 'none');
-      $('.fra').css('display', 'none');
-      $('.ind').css('display', 'none');
-      $('.irl').css('display', 'none');
-      $('.ita').css('display', 'none');
-      $('.mex').css('display', 'none');
-      $('.nig').css('display', 'none');
-      $('.net').css('display', 'none');
-      $('.nzl').css('display', 'none');
-      $('.tha').css('display', 'none');
-      $('.gbr').css('display', 'none');
-      $('.usa').css('display', 'none');
+      // if ($('#Australia').prop('checked', false)) {
+      //   $('.aus').css('display', 'none');
+      // }
+      // if ($('#Brazil').prop('checked', false)) {
+      //   $('.bra').css('display', 'none');
+      // }
+      // if ($('#Canada').prop('checked', false)) {
+      //   $('.can').css('display', 'none');
+      // }
+      // if ($('#China').prop('checked', false)) {
+      //   $('.chn').css('display', 'none');
+      // }
+      // if ($('#France').prop('checked', false)) {
+      //   $('.fra').css('display', 'none');
+      // }
+      // if ($('#India').prop('checked', false)) {
+      //   $('.ind').css('display', 'none');
+      // }
+      // if ($('#Ireland').prop('checked', false)) {
+      //   $('.irl').css('display', 'none');
+      // }
+      // if ($('#Italy').prop('checked', false)) {
+      //   $('.ita').css('display', 'none');
+      // }
+      // if ($('#Mexico').prop('checked', false)) {
+      //   $('.mex').css('display', 'none');
+      // }
+      // if ($('#Nigeria').prop('checked', false)) {
+      //   $('.nig').css('display', 'none');
+      // }
+      // if ($('#Netherlands').prop('checked', false)) {
+      //   $('.net').css('display', 'none');
+      // }
+      // if ($('#New-Zealand').prop('checked', false)) {
+      //   $('.nzl').css('display', 'none');
+      // }
+      // if ($('#Thailand').prop('checked', false)) {
+      //   $('.tha').css('display', 'none');
+      // }
+      // if ($('#United-Kingdom').prop('checked', false)) {
+      //   $('.gbr').css('display', 'none');
+      // }
+      // if ($('#United-States').prop('checked', false)) {
+      //   $('.usa').css('display', 'none');
+      // }
     }
 
     //////////// EVENT HANDLERS ////////////
@@ -236,7 +268,6 @@ $(document).ready(function(){
         $('.tha').css('display', 'inline');
         $('.gbr').css('display', 'inline');
         $('.usa').css('display', 'inline');
-
       } else {
         let index = countriesGlobal.indexOf(this.value);
         countriesGlobal.splice(index, 1);
@@ -245,13 +276,35 @@ $(document).ready(function(){
       update(data)
     })
 
+    function setLegendDisplay() {
+      $('.aus').css('display', 'none');
+      $('.bra').css('display', 'none');
+      $('.can').css('display', 'none');
+      $('.chn').css('display', 'none');
+      $('.fra').css('display', 'none');
+      $('.ind').css('display', 'none');
+      $('.irl').css('display', 'none');
+      $('.ita').css('display', 'none');
+      $('.mex').css('display', 'none');
+      $('.nig').css('display', 'none');
+      $('.net').css('display', 'none');
+      $('.nzl').css('display', 'none');
+      $('.tha').css('display', 'none');
+      $('.gbr').css('display', 'none');
+      $('.usa').css('display', 'none');
+      for (var i = 0; i < legendCountries.length; i++) {
+        $('.' + legendCountries[i]).css('display', 'inline')
+      }
+    }
+
     $('#Australia').on('change', function() {
       if (this.checked) {
         removeAll();
         countriesGlobal.push(this.value);
+        legendCountries.push('aus');
         allSelectedGlobal = false
-        console.log($('.aus'));
         $('.aus').css('display', 'inline')
+        setLegendDisplay();
       } else {
         let index = countriesGlobal.indexOf(this.value);
         countriesGlobal.splice(index, 1);
@@ -264,8 +317,10 @@ $(document).ready(function(){
       if (this.checked) {
         removeAll();
         countriesGlobal.push(this.value);
+        legendCountries.push('bra');
         allSelectedGlobal = false
         $('.bra').css('display', 'inline')
+        setLegendDisplay();
       } else {
         let index = countriesGlobal.indexOf(this.value);
         countriesGlobal.splice(index, 1);
@@ -278,8 +333,10 @@ $(document).ready(function(){
       if (this.checked) {
         removeAll();
         countriesGlobal.push(this.value);
+        legendCountries.push('can');
         allSelectedGlobal = false
         $('.can').css('display', 'inline')
+        setLegendDisplay();
       } else {
         let index = countriesGlobal.indexOf(this.value);
         countriesGlobal.splice(index, 1);
@@ -292,8 +349,10 @@ $(document).ready(function(){
       if (this.checked) {
         removeAll();
         countriesGlobal.push(this.value);
+        legendCountries.push('chn');
         allSelectedGlobal = false
         $('.chn').css('display', 'inline')
+        setLegendDisplay();
       } else {
         let index = countriesGlobal.indexOf(this.value);
         countriesGlobal.splice(index, 1);
@@ -306,8 +365,10 @@ $(document).ready(function(){
       if (this.checked) {
         removeAll();
         countriesGlobal.push(this.value);
+        legendCountries.push('fra');
         allSelectedGlobal = false
         $('.fra').css('display', 'inline')
+        setLegendDisplay();
       } else {
         let index = countriesGlobal.indexOf(this.value);
         countriesGlobal.splice(index, 1);
@@ -320,8 +381,10 @@ $(document).ready(function(){
       if (this.checked) {
         removeAll();
         countriesGlobal.push(this.value);
+        legendCountries.push('ind');
         allSelectedGlobal = false
         $('.ind').css('display', 'inline')
+        setLegendDisplay();
       } else {
         let index = countriesGlobal.indexOf(this.value);
         countriesGlobal.splice(index, 1);
@@ -334,8 +397,10 @@ $(document).ready(function(){
       if (this.checked) {
         removeAll();
         countriesGlobal.push(this.value);
+        legendCountries.push('irl');
         allSelectedGlobal = false
         $('.irl').css('display', 'inline')
+        setLegendDisplay();
       } else {
         let index = countriesGlobal.indexOf(this.value);
         countriesGlobal.splice(index, 1);
@@ -348,8 +413,10 @@ $(document).ready(function(){
       if (this.checked) {
         removeAll();
         countriesGlobal.push(this.value);
+        legendCountries.push('ita');
         allSelectedGlobal = false
         $('.ita').css('display', 'inline')
+        setLegendDisplay();
       } else {
         let index = countriesGlobal.indexOf(this.value);
         countriesGlobal.splice(index, 1);
@@ -362,8 +429,10 @@ $(document).ready(function(){
       if (this.checked) {
         removeAll();
         countriesGlobal.push(this.value);
+        legendCountries.push('mex');
         allSelectedGlobal = false
         $('.mex').css('display', 'inline')
+        setLegendDisplay();
       } else {
         let index = countriesGlobal.indexOf(this.value);
         countriesGlobal.splice(index, 1);
@@ -376,8 +445,10 @@ $(document).ready(function(){
       if (this.checked) {
         removeAll();
         countriesGlobal.push(this.value);
+        legendCountries.push('nig');
         allSelectedGlobal = false
         $('.nig').css('display', 'inline')
+        setLegendDisplay();
       } else {
         let index = countriesGlobal.indexOf(this.value);
         countriesGlobal.splice(index, 1);
@@ -390,8 +461,10 @@ $(document).ready(function(){
       if (this.checked) {
         removeAll();
         countriesGlobal.push(this.value);
+        legendCountries.push('net');
         allSelectedGlobal = false
         $('.net').css('display', 'inline')
+        setLegendDisplay();
       } else {
         let index = countriesGlobal.indexOf(this.value);
         countriesGlobal.splice(index, 1);
@@ -404,8 +477,10 @@ $(document).ready(function(){
       if (this.checked) {
         removeAll();
         countriesGlobal.push('New Zealand');
+        legendCountries.push('nzl');
         allSelectedGlobal = false
         $('.nzl').css('display', 'inline')
+        setLegendDisplay();
       } else {
         let index = countriesGlobal.indexOf(this.value);
         countriesGlobal.splice(index, 1);
@@ -418,8 +493,10 @@ $(document).ready(function(){
       if (this.checked) {
         removeAll();
         countriesGlobal.push(this.value);
+        legendCountries.push('tha');
         allSelectedGlobal = false
         $('.tha').css('display', 'inline')
+        setLegendDisplay();
       } else {
         let index = countriesGlobal.indexOf(this.value);
         countriesGlobal.splice(index, 1);
@@ -432,8 +509,10 @@ $(document).ready(function(){
       if (this.checked) {
         removeAll();
         countriesGlobal.push('United Kingdom');
+        legendCountries.push('gbr');
         allSelectedGlobal = false
         $('.gbr').css('display', 'inline')
+        setLegendDisplay();
       } else {
         let index = countriesGlobal.indexOf(this.value);
         countriesGlobal.splice(index, 1);
@@ -446,8 +525,10 @@ $(document).ready(function(){
       if (this.checked) {
         removeAll();
         countriesGlobal.push('United States');
+        legendCountries.push('usa');
         allSelectedGlobal = false
         $('.usa').css('display', 'inline')
+        setLegendDisplay();
       } else {
         let index = countriesGlobal.indexOf(this.value);
         countriesGlobal.splice(index, 1);
