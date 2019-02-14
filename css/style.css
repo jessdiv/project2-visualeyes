@@ -107,7 +107,7 @@ h1 {
   display: flex;
   flex-direction: column;
   text-align: center;
-  height: inherit;
+  height: 100vh;
   min-height: inherit;
   width: 75px;
   background: #1F1F1F;
@@ -115,12 +115,19 @@ h1 {
   transition: 1s ease all;
 }
 
+.navbar-fixed {
+top: 0;
+z-index: 1;
+position: fixed;
+}
+
 .sidebar-wrapper > *:not(.hamburger) {
-  display: none;
+  opacity: 0;
 }
 
 .sidebar-wrapper.open > * {
   display: block;
+  opacity: 1;
 }
 
 .sidebar-wrapper h2{
@@ -128,8 +135,7 @@ h1 {
 }
 
 .sidebar-wrapper.open {
-  min-width: 300px;
-  overflow: hidden;
+  width: 300px;
 }
 
 .sidebar-wrapper.open h2 {
@@ -157,6 +163,7 @@ h1 {
 
 .country-selector {
   height: 100%;
+  width: inherit;
 }
 
 .population {
@@ -191,25 +198,25 @@ h1 {
 
 .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
   background: var(--primary-font-color);
-  width: 20px;
+  width: 30px;
 }
 
 .hamburger.is-active .hamburger-inner, .hamburger.is-active .hamburger-inner::before, .hamburger.is-active .hamburger-inner::after {
   background-color: var(--primary-font-color);
 }
 
-.sidebar-wrapper.open .countries, .sidebar-wrapper.open .statistics {
+.sidebar-wrapper.open .countries {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items:flex-start;
-  height: 80%;
+  height: 50%;
   margin: 0 20px;
   font-family: var(--primary-font);
   font-weight: 200;
 }
 
-.sidebar-wrapper.open .country, .sidebar-wrapper.open .stat {
+.sidebar-wrapper.open .country {
   margin: 20px 0;
 }
 
@@ -225,6 +232,11 @@ h1 {
   margin-left: 10px;
 }
 
+.about {
+  font-family: var(--primary-font);
+  font-weight: 200;
+}
+
 /* ------- END OF SIDEBAR DISPLAY PAGE CSS ------- */
 
 /* ------- START OF DATA DISPLAY PAGE CSS ------- */
@@ -234,6 +246,7 @@ h1 {
   height: auto;
   min-height: 700px;
   overflow: hidden;
+  position: relative;
 }
 
 .data-content {

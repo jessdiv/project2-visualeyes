@@ -19,3 +19,14 @@ let scrollDown = function () {
 
 menuButton.addEventListener('click', toggleClass);
 scrollHandler.addEventListener('click', scrollDown);
+
+$(window).scroll(function () {
+    console.log($(window).scrollTop())
+  if ($(window).scrollTop() > 700) {
+    $('#sidebar').addClass('navbar-fixed')
+    $('#data-main').style('margin-left', '300px')
+  }
+  if ($(window).scrollTop() < 700) {
+    $('#sidebar').removeClass('navbar-fixed');
+  }
+});
