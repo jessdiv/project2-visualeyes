@@ -26,7 +26,7 @@ let toggleClass = function () {
 };
 
 let scrollDown = function () {
-  window.scrollTo(0, 700);
+  window.scrollTo(0, 800);
 };
 
 menuButton.addEventListener('click', toggleClass);
