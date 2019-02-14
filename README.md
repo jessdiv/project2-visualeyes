@@ -60,7 +60,7 @@ The below line graph shows how a given country's population has changed over tim
 from 1960-2017. Like the other visualisations, a given country can be shown alone
 or by toggling off or on which countries you want to investigate further.
 
-![Population Line Graph](/images/2019/02/PopulationLineGraph.)
+![Population Line Graph](/images/2019/02/PopulationLineGraph.png)
 
 
 ## Scope of Project as of 14-2-2019
@@ -72,6 +72,7 @@ or by toggling off or on which countries you want to investigate further.
 - We only had a week and this was the first time we were introduced to, let alone had a chance to play with D3.
 - Would like to possibly add more countries and further explore what the D3 library has to offer
 - Optimisation of the site could be improved
+- More time to solve scaleLog vs. scaleLinear presentation of data for population line graph
 
 
 ## Big Thanks
