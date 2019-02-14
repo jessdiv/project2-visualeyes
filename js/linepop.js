@@ -24,7 +24,7 @@ $(document).ready(function(){
 
   let yPop = d3.scaleLinear()
     .range([heightPop, 20])
-    .domain([0, 1400000000])
+    .domain([0, 1300000000])
     //.base(5)
 
   let xAxisCallPop = d3.axisBottom()
@@ -34,7 +34,7 @@ $(document).ready(function(){
     })
 
     let yAxisCallPop = d3.axisLeft()
-      .ticks(8)
+      .ticks(10)
 
 
   let linePop = d3.line()
