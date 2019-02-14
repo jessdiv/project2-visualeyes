@@ -16,36 +16,33 @@ $(document).ready(function(){
     .attr('width', all_stats_width)
     .attr('height', all_stats_height)
 
-  d3.csv("../resources/alldata_flat.csv").then(function(data) {
+  d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(data) {
     data.forEach(function(d) {
-      d['Total Population'] = +d['Total Population']
+      d.population = +d.population
     })
 
     // nesting to allow usage of year as key
     let years = d3.nest()
       .key(function(d) {
-        if (d.Year === '2017') {
-          return d.Year;
+        if (d.year === '2017') {
+          return d.year;
         }
       })
       .entries(data);
 
-    console.log(years);
-    console.log(years[1]);
-    console.log(years[1].values[0].Country);
-    console.log(years[1].values[0]["Total Population"]);
-
     const year2017 = years[1].values;
+    console.log('----------');
     console.log(year2017);
+    console.log('----------');
 
     // color-coding countries
     var color = d3.scaleOrdinal()
       .domain(year2017.map(function(d) {
-        return d.Country;
+        return d.country_name;
       }))
       .range(['blanchedalmond', 'deeppink', 'lightblue', 'aquamarine', 'deepskyblue', 'coral', 'darkblue', 'thistle', 'darkseagreen', 'darkcyan', 'lightcoral', 'indigo', 'palevioletred', 'crimson', 'steelblue']);
     console.log('**');
-    console.log(year2017.map(function(d){ return d.Country}));
+    console.log(year2017.map(function(d){ return d.country_name}));
     console.log('**');
 
     // scale for countries
@@ -71,7 +68,7 @@ $(document).ready(function(){
   const pop_tooltip_mouseover = function(e, year2017) {
     tooltip.style('visibility', 'visible')
     .text(function() {
-      return `Country: ${e.Country}, Population: ${e['Total Population']}`;
+      return `Country: ${e.country_name}, Population: ${e.population}`;
     })
   }
 
@@ -84,12 +81,12 @@ $(document).ready(function(){
 
   // checking data
   console.log('////////');
-  console.log(years[1].values[0]['Country']);
-  console.log(years[1].values[0]['Year']);
-  console.log(years[1].values[0]['Total Population']);
+  console.log(years[1].values[0].country_name);
+  console.log(years[1].values[0].year);
+  console.log(years[1].values[0].population);
   console.log('//////////');
 
-  console.log(((year2017[0]["Total Population"]) / 10000000) * 2);
+  console.log(((year2017[0].population) / 10000000) * 2);
 
 
   // initializing the circle
@@ -101,10 +98,10 @@ $(document).ready(function(){
       .append('circle')
       .attr('class', 'node')
       .attr("r", function(year2017){
-        return size(year2017['Total Population'])})
+        return size(year2017.population)})
       .attr('cx', 250)
       .attr('cy', 150)
-      .style('fill', function(d){ return color(d.Country)}) //come back to for colours
+      .style('fill', function(d){ return color(d.country_name)}) //come back to for colours
       .style('fill-opacity', 0.8)
       .attr('stroke', 'black')
       .style("stroke-width", 1)
@@ -122,7 +119,7 @@ $(document).ready(function(){
       .force("y", d3.forceY().strength(0.1).y( all_stats_height/2 ))
       .force('center', d3.forceCenter().x(population_width / 2).y(population_height / 2)) //attracts to centre of svg
       .force('charge', d3.forceManyBody().strength(.1)) //Nodes are attracted to each other
-      .force("collide", d3.forceCollide().strength(.2).radius(function(year2017){ return size(year2017['Total Population']+3) }).iterations(1)) //force avoids circle collision
+      .force("collide", d3.forceCollide().strength(.2).radius(function(year2017){ return size((year2017.population)+3) }).iterations(1)) //force avoids circle collision
 
     simulation
       .nodes(year2017)
@@ -173,7 +170,7 @@ $(document).ready(function(){
     const area_tooltip_mouseover = function(e, year2017) {
         tooltip.style('visibility', 'visible')
         .text(function() {
-          return `Country: ${e.Country}, Area: ${e['Area (km2)']}km2`;
+          return `Country: ${e.country_name}, Area: ${e.area}km2`;
         })
       }
 
@@ -185,11 +182,11 @@ $(document).ready(function(){
       .append('circle')
       // .attr('class', 'node')
       .attr('r', function(year2017){
-        return areaSize(year2017['Area (km2)'])
+        return areaSize(year2017.area)
       })
       .attr('cx', 250)
       .attr('cy', 150)
-      .style('fill', function(d){ return color(d.Country)}) //come back to for colours
+      .style('fill', function(d){ return color(d.country_name)}) //come back to for colours
       .style('fill-opacity', 0.8)
       .attr('stroke', 'black')
       .style("stroke-width", 1)
@@ -205,7 +202,7 @@ $(document).ready(function(){
         .force("y", d3.forceY().strength(0.1).y( all_stats_height/2 ))
         .force('center', d3.forceCenter().x(all_stats_width/2).y(all_stats_width / 2))
         .force('charge', d3.forceManyBody().strength(.1))
-        .force('collide', d3.forceCollide().strength(.2).radius(function(year2017) { return areaSize(year2017['Area (km2)']+3)}).iterations(1))
+        .force('collide', d3.forceCollide().strength(.2).radius(function(year2017) { return areaSize((year2017.area)+3)}).iterations(1))
 
     areaSimulation
       .nodes(year2017)
@@ -257,7 +254,7 @@ $(document).ready(function(){
     const density_tooltip_mouseover = function(e, year2017) {
         tooltip.style('visibility', 'visible')
         .text(function() {
-          return `Country: ${e.Country}, Density: ${e['Population Density (/km2)']}km2`;
+          return `Country: ${e.country_name}, Density: ${e.density}`;
         })
       }
 
@@ -269,11 +266,11 @@ $(document).ready(function(){
       .append('circle')
       // .attr('class', 'node')
       .attr('r', function(year2017){
-        return densitySize(year2017['Population Density (/km2)'])
+        return densitySize(year2017.density)
       })
       .attr('cx', 250)
       .attr('cy', 150)
-      .style('fill', function(d){ return color(d.Country)}) //come back to for colours
+      .style('fill', function(d){ return color(d.country_name)}) //come back to for colours
       .style('fill-opacity', 0.8)
       .attr('stroke', 'black')
       .style("stroke-width", 1)
@@ -341,7 +338,7 @@ $(document).ready(function(){
     const gdp_tooltip_mouseover = function(e, year2017) {
         tooltip.style('visibility', 'visible')
         .text(function() {
-          return `Country: ${e.Country}, TOTAL GDP: ${e['GDP (Current USD)']}`;
+          return `Country: ${e.country_name}, TOTAL GDP: ${e.gdp_total}`;
         })
       }
 
@@ -357,7 +354,7 @@ $(document).ready(function(){
       })
       .attr('cx', 250)
       .attr('cy', 150)
-      .style('fill', function(d){ return color(d.Country)}) //come back to for colours
+      .style('fill', function(d){ return color(d.country_name)}) //come back to for colours
       .style('fill-opacity', 0.8)
       .attr('stroke', 'black')
       .style("stroke-width", 1)
@@ -373,7 +370,7 @@ $(document).ready(function(){
         .force("y", d3.forceY().strength(0.1).y( all_stats_height/2 ))
         .force('center', d3.forceCenter().x(all_stats_width/2).y(all_stats_width / 2))
         .force('charge', d3.forceManyBody().strength(.1))
-        .force('collide', d3.forceCollide().strength(.2).radius(function(year2017) { return areaSize(year2017['Area (km2)']+3)}).iterations(1))
+        .force('collide', d3.forceCollide().strength(.2).radius(function(year2017) { return areaSize(year2017.area+3)}).iterations(1))
 
     gdpSimulation
       .nodes(year2017)

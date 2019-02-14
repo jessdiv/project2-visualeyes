@@ -22,9 +22,10 @@ $(document).ready(function(){
     .range([0, widthPop])
     .domain([1960, 2017])
 
-  let yPop = d3.scaleLinear()
-    .range([heightPop, 0])
-    .domain([0, 1500000000])
+  let yPop = d3.scaleLog()
+    .range([heightPop, 5])
+    .domain([1300000, 1400000000])
+    .base(2)
 
   let xAxisCallPop = d3.axisBottom()
     .ticks(15)
@@ -63,16 +64,16 @@ $(document).ready(function(){
        .entries(filteredDataPop)
 
   //////////// Initialise Tooltip ////////////
-  // const tip = d3.tip()
-  //       .attr('class', 'd3-tip')
-  //       .html(function(d) {
-  //         // console.log(d);
-  //         let text = "<strong>Country</strong>: " + d.key + "<br />";
-  //         text += "<strong>Year</strong>: " + this.Year + "<br />";
-  //         text += "<strong>Total Population</strong>: " + d['Total Population'] + "<br />";
-  //         return text;
-  //       })
-  //     svg.call(tip);
+  const tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .html(function(d) {
+          // console.log(d);
+          let text = "<strong>Country</strong>: " + d.key + "<br />";
+          // text += "<strong>Year</strong>: " + this.Year + "<br />";
+          // text += "<strong>Total Population</strong>: " + d['Total Population'] + "<br />";
+          return text;
+        })
+      svgPop.call(tip);
 
   let xAxisPop = gPop.append('g')
         .attr('class', 'x axis')
@@ -113,8 +114,8 @@ $(document).ready(function(){
           .attr('stroke-width', '2px')
           .attr('class', 'line2')
           .attr('fill', 'none')
-            // .on('mouseover', tip.show)
-            // .on('mouseout', tip.hide)
+            .on('mouseover', tip.show)
+            .on('mouseout', tip.hide)
             .attr('d', function(d) {
               return linePop(d.values)
             });
