@@ -69,6 +69,53 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
             return `${ e.country_name }: ${e.population}`
           })
       }
+    })
+    .entries(data);
+
+  console.log(years);
+  console.log(years[1]);
+  console.log(years[1].values[0].country_name);
+  console.log(years[1].values[0].population);
+
+  const year2017 = years[1].values;
+
+  console.log(year2017);
+
+
+  // color-coding countries
+  var color = d3.scaleOrdinal()
+    .domain(year2017.map(function(d) {
+      return d.country_name;
+    }))
+    .range(['#ffba49', '#20a39e', '#DC143C', '#663399', '#f2e3bc', '#ff8552', '#f76f8e', '#14cc60', '#931621', '#87CEEB', '#C0C0C0', '#d1f5ff', '#7d53de', '#e5446d', '#BC8F8F']);
+
+    .range(['#447c69', '#8e8c6d','#e4bf80','#e9d78e',    '#f19670','#e16552','#be5168','#a34974','#993767','#4e2472','#9163b6','#e279a3','#7c9fb0','#5698c4','#9abf88'])
+  // scale for countries
+  let size = d3.scaleLog()
+    .domain([4793900, 1400000000])
+    .range([15, 120])
+    .base(2)
+
+// Tooltips
+
+  const tooltip = d3.select('#ds1')
+    .append('div')
+    .data(year2017)
+    .attr('class', 'tooltip')
+    .style('position', 'absolute')
+    .style('z-index', '10')
+    .style('visibility', 'hidden')
+console.log(year2017);
+
+// http://bl.ocks.org/biovisualize/1016860
+
+// mouseover tooltips
+const tooltip_mouseover = function(e, year2017) {
+  tooltip.style('visibility', 'visible')
+    .text(function() {
+      return `${ e.country_name }: ${e.population}`
+    })
+}
 
       const tooltip_mouseout = function(year2017) {
         tooltip.style('visibility', 'hidden')
