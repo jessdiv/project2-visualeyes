@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-  let all_stats_width = 800;
-  let all_stats_height = 500;
+  let pop_stats_width = $('#population-bubble').innerWidth();
+  let pop_stats_height = $('#population-bubble').innerHeight();
 
   let all_stats_margin = {
     left: 150,
@@ -13,8 +13,8 @@ $(document).ready(function(){
   const population_stats_svg = d3.select('#population-chart-area')
     .append("svg")
     .attr('class', 'svg-1')
-    .attr('width', all_stats_width)
-    .attr('height', all_stats_height)
+    .attr('width', pop_stats_width)
+    .attr('height', pop_stats_height)
 
   d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(data) {
     data.forEach(function(d) {

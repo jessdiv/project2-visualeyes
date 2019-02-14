@@ -54,8 +54,9 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
     .domain(year2017.map(function(d) {
       return d.country_name;
     }))
-    .range(['blanchedalmond', 'deeppink', 'lightblue', 'aquamarine', 'deepskyblue', 'coral', 'darkblue', 'thistle', 'darkseagreen', 'darkcyan', 'lightcoral', 'indigo', 'palevioletred', 'crimson', 'steelblue']);
+    // .range(['#ffba49', '#20a39e', '#ef5b5b', '#912f56', '#FFFFE0', '#ff8552', '#f76f8e', '#14cc60', '#4682B4', '#b33951', '#40434e', '#d1f5ff', '#7d53de', '#00FA9A', 'deepskyblue']);
 
+    .range(['#447c69', '#8e8c6d','#e4bf80','#e9d78e',    '#f19670','#e16552','#be5168','#a34974','#993767','#4e2472','#9163b6','#e279a3','#7c9fb0','#5698c4','#9abf88'])
   // scale for countries
   let size = d3.scaleLog()
     .domain([4793900, 1400000000])
@@ -71,12 +72,6 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
     .style('position', 'absolute')
     .style('z-index', '10')
     .style('visibility', 'hidden')
-    // .text(function(year2017) {
-    //   // console.log(year2017.Country);
-    //   // console.log(year2017.population);
-    //   return `Country: ${year2017.Country}, Population: ${year2017.population}`;
-    // })
-
 console.log(year2017);
 
 // http://bl.ocks.org/biovisualize/1016860
