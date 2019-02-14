@@ -54,24 +54,25 @@ $(document).ready(function(){
 
 
         // Tooltips setup
-        const tooltip = d3.select('#chat-area-5')
-          .append('div')
-          .data(year2017)
-          .attr('class', 'd3-tip')
-          .style('position', 'absolute')
-          .style('z-index', '10')
-          .style('visibility', 'hidden')
+        // const tooltip = d3.select('#chat-area-5')
+        //   .append('div')
+        //   .data(year2017)
+        //   .attr('class', 'd3-tip')
+        //   .style('position', 'absolute')
+        //   .style('z-index', '10')
+        //   .style('visibility', 'hidden')
 
         // thanks to: http://bl.ocks.org/biovisualize/1016860
 
         // mouseover tooltip functions
 
-        var tip = d3.tip().attr('class', 'd3-tip')
+        let tip = d3.tip().attr('class', 'd3-tip')
             .html(function (d) {
               return `${d.country_name}: ${d.area}`;
             });
 
         area_g.call(tip);
+
         // const tooltip_mouseover = function(e, year2017) {
         //   tooltip.style('visibility', 'visible')
         //     .text(function() {
@@ -97,8 +98,6 @@ $(document).ready(function(){
           .attr("r", function(year2017) {
             return size(year2017.area)
           })
-          // .attr('width', '200')
-          // .attr('height', '200')
           .attr('cx', area_width / 2)
           .attr('cy', area_height / 2)
           .style('fill', function(d) {
@@ -193,13 +192,13 @@ $(document).ready(function(){
           area_g.selectAll('circle')
             .remove();
 
-          let nodes3 = population_g.selectAll('circle')
+          let nodes3 = area_g.selectAll('circle')
             .data(updatedData)
             .enter()
             .append('circle')
             .attr('class', 'node')
             .attr("r", function(d) {
-              return size(d.population)
+              return size(d.area)
             })
             .attr('cx', area_width / 2)
             .attr('cy', area_height / 2)
@@ -209,9 +208,11 @@ $(document).ready(function(){
             .style('fill-opacity', 0.8)
             .attr('stroke', 'black')
             .style("stroke-width", 1)
-            .on("mouseover", tooltip_mouseover)
-            .on('mousemove', tooltip_mousemove)
-            .on('mouseout', tooltip_mouseout)
+            .on('mouseover', tip.show)
+            .on('mouseout', tip.hide)
+            // .on("mouseover", tooltip_mouseover)
+            // .on('mousemove', tooltip_mousemove)
+            // .on('mouseout', tooltip_mouseout)
             .call(d3.drag()
               .on('start', dragstarted)
               .on('drag', dragged)
@@ -222,13 +223,13 @@ $(document).ready(function(){
 
               const simulation3 = d3.forceSimulation()
                 .force('center', d3.forceCenter()
-                  .x(population_width / 2).y(population_height / 2))
+                  .x(area_width / 2).y(area_height / 2))
                 .force('charge', d3.forceManyBody()
                   .strength(.1))
                 .force("collide", d3.forceCollide()
                   .strength(.2)
                   .radius(function(d) {
-                  return size((d.population) + 3)
+                  return size((d.area) + 3)
                 }).iterations(1))
 
               simulation3

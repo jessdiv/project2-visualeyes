@@ -62,7 +62,7 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
       //   .style('z-index', '10')
       //   .style('visibility', 'hidden')
 
-      var tip = d3.tip().attr('class', 'd3-tip')
+      let tip = d3.tip().attr('class', 'd3-tip')
           .html(function (d) {
             return `${d.country_name}: ${d.population}`;
           });
@@ -207,6 +207,8 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
           .style('fill-opacity', 0.8)
           .attr('stroke', 'black')
           .style("stroke-width", 1)
+          .on('mouseover', tip.show)
+          .on('mouseout', tip.hide)
           // .on("mouseover", tooltip_mouseover)
           // .on('mousemove', tooltip_mousemove)
           // .on('mouseout', tooltip_mouseout)
