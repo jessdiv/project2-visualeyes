@@ -74,15 +74,20 @@ compared to another country.
 - Can view data in different visualisations on the site
 - Can see all countries at once in each visualisation or toggle on or off which countries you want to see at any given time
 
+## Pain Points
+- We only had a week and this was the first time we were introduced to, let alone had a chance to play with D3
+- Trying to configure the backend properly so that we could pull the data to use on the frontend
+- Finding the correct data to use
+- Configuring tooltips, especially for the line graphs
 
 ## TODO
-- We only had a week and this was the first time we were introduced to, let alone had a chance to play with D3.
 - Would like to possibly add more countries and further explore what the D3 library has to offer
 - Optimisation of the site could be improved
 - More time to solve scaleLog vs. scaleLinear presentation of data for population line graph
 - Would like to have more animations, i.e. show the SVGs animate the drawing
 - Make the site mobile friendly
-- Make the line graphs scale better when toggling on or off a country 
+- Make the line graphs scale better when toggling on or off a country
+- A lot of DRY code that could be fixed, this was the sacrifice for trying to wrap our heads around 'learning' D3 in one week
 
 
 ## Big Thanks
