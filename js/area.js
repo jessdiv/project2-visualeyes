@@ -93,6 +93,8 @@ $(document).ready(function(){
         // forces
 
         const simulation = d3.forceSimulation()
+          .force("x", d3.forceX().strength(0.01))
+          .force("y", d3.forceY().strength(0.01))
           .force('center', d3.forceCenter().x(area_width / 2).y(area_height / 2)) //attracts to centre of svg
           .force('charge', d3.forceManyBody().strength(.1)) //Nodes are attracted to each other
           .force("collide", d3.forceCollide().strength(.2).radius(function(d) {

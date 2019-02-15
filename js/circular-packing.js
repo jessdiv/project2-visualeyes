@@ -89,8 +89,8 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
       // forces
 
       const simulation = d3.forceSimulation()
-        // .force("x", d3.forceX().strength(0.5).x( function(d){ return x(d.population) } ))
-        // .force("y", d3.forceY().strength(0.1).y( height/2 ))
+        .force("x", d3.forceX().strength(0.01))
+        // .force("y", d3.forceY().strength(0.01))
         .force('center', d3.forceCenter().x(population_width / 2).y(population_height / 2)) //attracts to centre of svg
         .force('charge', d3.forceManyBody().strength(.9)) //Nodes are attracted to each other
         .force("collide", d3.forceCollide().strength(.2).radius(function(d) {
