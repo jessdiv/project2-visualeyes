@@ -52,16 +52,6 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
         .range([15, 120])
         .base(2)
 
-
-      // Tooltips setup
-      // const tooltip = d3.select('#ds1')
-      //   .append('div')
-      //   .data(year2017)
-      //   .attr('class', 'd3-tip')
-      //   .style('position', 'absolute')
-      //   .style('z-index', '10')
-      //   .style('visibility', 'hidden')
-
       let tip = d3.tip().attr('class', 'd3-tip')
           .html(function (d) {
             return `${d.country_name}: ${d.population}`;
@@ -71,25 +61,9 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
 
       // thanks to: http://bl.ocks.org/biovisualize/1016860
 
-      // mouseover tooltip functions
-      // const tooltip_mouseover = function(e, year2017) {
-      //   tooltip.style('visibility', 'visible')
-      //     .text(function() {
-      //       return `${ e.country_name }: ${e.population}`
-      //     })
-      // }
-
-      // const tooltip_mouseout = function(year2017) {
-      //   tooltip.style('visibility', 'hidden')
-      // }
-
-      // const tooltip_mousemove = function(year2017) {
-      //   tooltip.style("top", (event.pageY - 10) + "px").style("left", (event.pageX + 10) + "px");
-      // }
-
       // initializing the circle
 
-      const node = population_g.selectAll('circle')
+      let node = population_g.selectAll('circle')
         .data(year2017)
         .enter()
         .append('circle')
@@ -107,9 +81,6 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
         .style("stroke-width", 1)
         .on('mouseover', tip.show)
         .on('mouseout', tip.hide)
-        // .on("mouseover", tooltip_mouseover)
-        // .on('mousemove', tooltip_mousemove)
-        // .on('mouseout', tooltip_mouseout)
         .call(d3.drag()
           .on('start', dragstarted)
           .on('drag', dragged)
@@ -118,10 +89,10 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
       // forces
 
       const simulation = d3.forceSimulation()
-        // .force("x", d3.forceX().strength(0.5).x(width/2))
+        // .force("x", d3.forceX().strength(0.5).x( function(d){ return x(d.population) } ))
         // .force("y", d3.forceY().strength(0.1).y( height/2 ))
         .force('center', d3.forceCenter().x(population_width / 2).y(population_height / 2)) //attracts to centre of svg
-        .force('charge', d3.forceManyBody().strength(.1)) //Nodes are attracted to each other
+        .force('charge', d3.forceManyBody().strength(.9)) //Nodes are attracted to each other
         .force("collide", d3.forceCollide().strength(.2).radius(function(d) {
           return size((d.population) + 3)
         }).iterations(1)) //force avoids circle collision
@@ -191,7 +162,10 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
         population_g.selectAll('circle')
           .remove();
 
-        let nodes2 = population_g.selectAll('circle')
+        node.select('circle')
+          .remove()
+
+        node = population_g.selectAll('circle')
           .data(updatedData)
           .enter()
           .append('circle')
@@ -209,9 +183,6 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
           .style("stroke-width", 1)
           .on('mouseover', tip.show)
           .on('mouseout', tip.hide)
-          // .on("mouseover", tooltip_mouseover)
-          // .on('mousemove', tooltip_mousemove)
-          // .on('mouseout', tooltip_mouseout)
           .call(d3.drag()
             .on('start', dragstarted)
             .on('drag', dragged)
@@ -220,28 +191,6 @@ d3.csv("https://visualeyes-server.herokuapp.com/statistics.csv").then(function(d
             console.log(year2017);
             console.log(updatedData);
 
-            const simulation2 = d3.forceSimulation()
-              .force('center', d3.forceCenter()
-                .x(population_width / 2).y(population_height / 2))
-              .force('charge', d3.forceManyBody()
-                .strength(.1))
-              .force("collide", d3.forceCollide()
-                .strength(.2)
-                .radius(function(d) {
-                return size((d.population) + 3)
-              }).iterations(1))
-
-            simulation2
-              .nodes(updatedData)
-              .on('tick', function(updatedData) {
-                nodes2
-                  .attr('cx', function(year2017) {
-                    return year2017.x;
-                  })
-                  .attr('cy', function(year2017) {
-                    return year2017.y;
-                  })
-              })
 
       }
 
