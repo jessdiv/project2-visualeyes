@@ -276,7 +276,8 @@ position: sticky;
 
 .darkheading {
   color: rgb(100,100,100);
-  padding-top: 1em;
+  margin-top: 1em;
+  position: relative;
 }
 
 .data-section2 {
@@ -288,6 +289,7 @@ position: sticky;
 .data-section5 {
   height: 700px;
   position: relative;
+  margin-top: 2em;
 }
 
 
