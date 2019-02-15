@@ -89,6 +89,5 @@ compared to another country.
 - Make the line graphs scale better when toggling on or off a country
 - A lot of DRY code that could be fixed, this was the sacrifice for trying to wrap our heads around 'learning' D3 in one week
 
-
 ## Big Thanks
 A big thank you to our instructor, Joel Turnbull for his help and assistance in the project. As well as, to Linna Liu and Yianni Moustakas for your help and trouble shooting skills to guide us with some of our pain points. This project was completed in February of 2019.
