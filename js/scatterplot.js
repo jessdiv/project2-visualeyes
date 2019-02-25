@@ -1,3 +1,5 @@
+const loadScatterplot = (data) => {
+
 let stopTime = document.getElementById('scatter_pause');
 let startTime = document.getElementById('scatter_start');
 
@@ -89,21 +91,10 @@ var timeLabel = g.append('text')
     .attr('text-anchor', 'middle')
     .text('1960');
 
-// Load CSV Data
-d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (data) {
     const dataByYear = [];
     for (let i = 0; i < data.length; i += 15) {
       dataByYear.push(data.slice(i, i + 15));
     }
-
-    // Clean data
-    dataByYear.forEach(function (year) {
-      year.forEach(function (d) {
-        d.life_expectancy = +d.life_expectancy;
-        d.population = +d.population.replace(/,/g, '');
-        d.gdp_capita = +d.gdp_capita.replace(/,/g, '');
-      });
-    });
 
     let update = function (data) {
       // console.log('update', data);
@@ -169,6 +160,7 @@ d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function (
       clearInterval(timerId);
     }
 
-    // Call update to initialise and run the code 
+    // Call update to initialise and run the code
     update(dataByYear[0]);
-  });
+
+};

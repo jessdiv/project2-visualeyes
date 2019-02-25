@@ -31,3 +31,24 @@ let scrollDown = function () {
 
 menuButton.addEventListener('click', toggleClass);
 scrollHandler.addEventListener('click', scrollDown);
+
+let countriesGlobal = ['all'];
+let allSelectedGlobal = true;
+
+d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function(data) {
+
+  // Format year and GDP as integers
+  data.forEach(function(d) {
+    d.year = +d.year;
+    d.gdp_capita = +d.gdp_capita;
+    d.population = +d.population;
+    d.life_expectancy = +d.life_expectancy;
+    d.area = +d.area;
+  });
+
+  loadGraphGDP(data);
+  loadScatterplot(data);
+  loadPopulationBubbles(data);
+  loadGraphPopulation(data);
+  loadAreaBubbles(data);
+});

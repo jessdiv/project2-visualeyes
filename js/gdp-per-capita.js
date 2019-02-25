@@ -1,7 +1,4 @@
-let countriesGlobal = ['all'];
-let allSelectedGlobal = true;
-
-$(document).ready(function(){
+const loadGraphGDP = (data) => {
 
   let marginGDP = { left:90, right:20, top:50, bottom:100 };
   let heightGDP = 600 - marginGDP.top - marginGDP.bottom;
@@ -42,13 +39,13 @@ $(document).ready(function(){
       .y(function(d) { return y(+d.gdp_capita); })
 
   //////////// IMPORT CSV ////////////
-  d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function(data) {
-
-    // Format year and GDP as integers
-    data.forEach(function(d) {
-      d.year = +d.year;
-      d.gdp_capita = +d.gdp_capita;
-    });
+  // d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function(data) {
+  //
+  //   // Format year and GDP as integers
+  //   data.forEach(function(d) {
+  //     d.year = +d.year;
+  //     d.gdp_capita = +d.gdp_capita;
+  //   });
 
     // Nest data by country
     nestedData = d3.nest()
@@ -500,7 +497,5 @@ $(document).ready(function(){
         $('.usa').css('display', 'none')
       }
       update(data)
-    })
-
-  });
-});
+    });
+};
