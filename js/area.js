@@ -47,7 +47,7 @@ const loadAreaBubbles = (data) => {
   // tooltips
 
   let tip = d3.tip().attr('class', 'd3-tip')
-    .html(function (d) {
+    .html(function(d) {
       return `${d.country_name}: ${d.area}`;
     });
 
@@ -138,7 +138,6 @@ const loadAreaBubbles = (data) => {
 
 
   function update_data(data) {
-    console.log(year2017);
     let updatedData = year2017.filter(function(d) {
       if (selectedAll) {
         return true;
@@ -211,187 +210,18 @@ const loadAreaBubbles = (data) => {
     update_data(data)
   });
 
-  $('#Australia').on('change', function() {
-      if (this.checked) {
-          clearAll();
-          countries.push(this.value)
-          selectedAll = false;
-          selectedAll = false;
-        }
-        else {
-          let index = countries.indexOf(this.value);
-          countries.splice(index, 1);
-        }
-        update_data(data)
-      });
-
-    $('#Brazil').on('change', function() {
-      if (this.checked) {
-        clearAll();
-        countries.push(this.value);
-        selectedAll = false;
-      } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-      }
-      update_data(data)
-    });
-
-    $('#Canada').on('change', function() {
-      if (this.checked) {
-        clearAll();
-        countries.push(this.value)
-        selectedAll = false;
-      } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-      }
-      update_data(data)
-    });
-
-    $('#China').on('change', function() {
-      if (this.checked) {
-        clearAll();
-        countries.push(this.value)
-        selectedAll = false;
-      } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-      }
-      update_data(data)
-    });
-
-    $('#France').on('change', function() {
-      if (this.checked) {
-        clearAll();
-        countries.push(this.value)
-        selectedAll = false;
-      } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-      }
-      update_data(data)
-    });
-
-    $('#India').on('change', function() {
-      if (this.checked) {
-        clearAll();
-        countries.push(this.value)
-        selectedAll = false;
-      } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-      }
-      update_data(data)
-    });
-
-    $('#Ireland').on('change', function() {
-      if (this.checked) {
-        clearAll();
-        countries.push(this.value)
-        selectedAll = false;
-      } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-      }
-      update_data(data)
-    });
-
-    $('#Italy').on('change', function() {
-      if (this.checked) {
-        clearAll();
-        countries.push(this.value)
-        selectedAll = false;
-      } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-      }
-      update_data(data)
-    });
-
-    $('#Mexico').on('change', function() {
-      if (this.checked) {
-        clearAll();
-        countries.push(this.value)
-        selectedAll = false;
-      } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-      }
-      update_data(data)
-    });
-
-    $('#Nigeria').on('change', function() {
-      if (this.checked) {
-        clearAll();
-        countries.push(this.value)
-        selectedAll = false;
-      } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-      }
-      update_data(data)
-    });
-
-    $('#Netherlands').on('change', function() {
-      if (this.checked) {
-        clearAll();
-        countries.push(this.value)
-        selectedAll = false;
-      } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-      }
-      update_data(data)
-    });
-
-    $('#New-Zealand').on('change', function() {
-      if (this.checked) {
-        clearAll();
-        countries.push(this.value)
-        selectedAll = false;
-      } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-      }
-      update_data(data)
-    });
-
-    $('#Thailand').on('change', function() {
-      if (this.checked) {
-        clearAll();
-        countries.push(this.value)
-        selectedAll = false;
-      } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-      }
-      update_data(data)
-    });
-
-    $('#United-Kingdom').on('change', function() {
-      if (this.checked) {
-        clearAll();
-        countries.push(this.value)
-        selectedAll = false;
-      } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-      }
-      update_data(data)
-    });
-
-    $('#United-States').on('change', function() {
-      if (this.checked) {
-        clearAll();
-        console.log(this.value);
-        countries.push(this.value)
-        selectedAll = false;
-      } else {
-        let index = countries.indexOf(this.value);
-        countries.splice(index, 1);
-      }
-      update_data(data)
-    });
+  $('#country-boxes').on('change', 'input', function(e) {
+    e.preventDefault;
+    if (this.checked) {
+      clearAll();
+      countries.push(this.value)
+      selectedAll = false;
+      selectedAll = false;
+    } else {
+      let index = countries.indexOf(this.value);
+      countries.splice(index, 1);
+    }
+    update_data(data)
+  });
 
 };
