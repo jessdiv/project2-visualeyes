@@ -203,7 +203,7 @@ const loadGraphPopulation = (data) => {
     update(data)
   })
 
-  $('#country-boxes').on('change', 'input', function(e) {
+  $('.country-boxes').on('change', 'input', function(e) {
     e.preventDefault;
     if (this.checked) {
       removeAll();

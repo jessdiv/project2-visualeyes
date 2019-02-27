@@ -167,7 +167,29 @@ const loadGraphGDP = (data) => {
     $('#all').prop('checked', false);
   }
 
-  //////////// EVENT HANDLERS ////////////
+  //////////// EVENT HANDLERS ///////////
+
+  function setLegendDisplay() {
+    $('.Australia').css('display', 'none');
+    $('.Brazil').css('display', 'none');
+    $('.Canada').css('display', 'none');
+    $('.China').css('display', 'none');
+    $('.France').css('display', 'none');
+    $('.India').css('display', 'none');
+    $('.Ireland').css('display', 'none');
+    $('.Italy').css('display', 'none');
+    $('.Mexico').css('display', 'none');
+    $('.Nigeria').css('display', 'none');
+    $('.Netherlands').css('display', 'none');
+    $('.New-Zealand').css('display', 'none');
+    $('.Thailand').css('display', 'none');
+    $('.United-Kingdom').css('display', 'none');
+    $('.United-States').css('display', 'none');
+    for (var i = 0; i < legendCountries.length; i++) {
+      $('.' + legendCountries[i]).css('display', 'inline')
+    }
+  }
+
   $('#all').on('change', function() {
     if (this.checked) {
       countriesGlobal = ['all'];
@@ -210,28 +232,7 @@ const loadGraphGDP = (data) => {
     update(data)
   })
 
-  function setLegendDisplay() {
-    $('.Australia').css('display', 'none');
-    $('.Brazil').css('display', 'none');
-    $('.Canada').css('display', 'none');
-    $('.China').css('display', 'none');
-    $('.France').css('display', 'none');
-    $('.India').css('display', 'none');
-    $('.Ireland').css('display', 'none');
-    $('.Italy').css('display', 'none');
-    $('.Mexico').css('display', 'none');
-    $('.Nigeria').css('display', 'none');
-    $('.Netherlands').css('display', 'none');
-    $('.New-Zealand').css('display', 'none');
-    $('.Thailand').css('display', 'none');
-    $('.United-Kingdom').css('display', 'none');
-    $('.United-States').css('display', 'none');
-    for (var i = 0; i < legendCountries.length; i++) {
-      $('.' + legendCountries[i]).css('display', 'inline')
-    }
-  }
-
-  $('#country-boxes').on('change', 'input', function(e) {
+  $('.country-boxes').on('change', 'input', function(e) {
     e.preventDefault;
     if (this.checked) {
       removeAll();
