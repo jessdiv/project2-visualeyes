@@ -37,7 +37,7 @@ let allSelectedGlobal = true;
 
 d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function(data) {
 
-  // Format year and GDP as integers
+  // Format data as integers
   data.forEach(function(d) {
     d.year = +d.year;
     d.gdp_capita = +d.gdp_capita;

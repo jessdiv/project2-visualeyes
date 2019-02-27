@@ -391,14 +391,9 @@ position: sticky;
 
 .line {
   fill: none;
-  /* stroke: black; */
   stroke-width: 2px;
 }
 
-.line2 {
-  /*stroke: black;*/
-  stroke-width: 2px;
-}
 
 /* ------- START OF DATA SCATTER PLOT CSS ------- */
 
@@ -524,10 +519,15 @@ text  {
     display: none;
   }
 
+  #sidebar {
+    display: none;
+  }
+
   .data-content {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100vw;
   }
 
   .page-size {
