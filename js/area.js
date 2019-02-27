@@ -210,7 +210,7 @@ const loadAreaBubbles = (data) => {
     update_data(data)
   });
 
-  $('#country-boxes').on('change', 'input', function(e) {
+  $('.country-boxes').on('change', 'input', function(e) {
     e.preventDefault;
     if (this.checked) {
       clearAll();

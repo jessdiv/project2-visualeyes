@@ -122,24 +122,24 @@ const loadPopulationBubbles = (data) => {
 
   // Event Listeners
 
-  let countries = ['all']
-  let selectedAll = false;
+  // let countriesGlobal = ['all']
+  // let allSelectedGlobal = false;
 
   const clearAll = function() {
-    let i = countries.indexOf('all');
+    let i = countriesGlobal.indexOf('all');
     if (i !== -1) {
-      countries.splice(i, 1);
+      countriesGlobal.splice(i, 1);
     }
     $('#all').prop('checked', false);
   }
 
   function update_data(data) {
     let updatedData = year2017.filter(function(d) {
-      if (selectedAll) {
+      if (allSelectedGlobal) {
         return true;
       } else {
-        for (var i = 0; i < countries.length; i++) {
-          if (d.country_name === countries[i]) {
+        for (var i = 0; i < countriesGlobal.length; i++) {
+          if (d.country_name === countriesGlobal[i]) {
             return d;
           }
         }
@@ -181,8 +181,8 @@ const loadPopulationBubbles = (data) => {
 
   $('#all').on('change', function() {
     if (this.checked) {
-      countries = ['all']
-      selectedAll = true;
+      countriesGlobal = ['all']
+      allSelectedGlobal = true;
       $('#Australia').prop('checked', false);
       $('#Brazil').prop('checked', false);
       $('#Canada').prop('checked', false);
@@ -199,23 +199,23 @@ const loadPopulationBubbles = (data) => {
       $('#United-Kingdom').prop('checked', false);
       $('#United-States').prop('checked', false);
     } else {
-      let index = countries.indexOf(this.value);
-      countries.splice(index, 1);
+      let index = countriesGlobal.indexOf(this.value);
+      countriesGlobal.splice(index, 1);
       allSelected = false;
     }
     update_data(data)
   });
 
-  $('#country-boxes').on('change', 'input', function(e) {
+  $('.country-boxes').on('change', 'input', function(e) {
     e.preventDefault;
     if (this.checked) {
       clearAll();
-      countries.push(this.value)
-      selectedAll = false;
-      selectedAll = false;
+      countriesGlobal.push(this.value)
+      allSelectedGlobal = false;
+      allSelectedGlobal = false;
     } else {
-      let index = countries.indexOf(this.value);
-      countries.splice(index, 1);
+      let index = countriesGlobal.indexOf(this.value);
+      countriesGlobal.splice(index, 1);
     }
     update_data(data)
   });
