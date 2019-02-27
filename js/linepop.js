@@ -111,17 +111,16 @@ const loadGraphPopulation = (data) => {
     .attr('text-anchor', 'middle')
     .text('Year')
 
-  let pathPop = gPop.selectAll('.line2')
+  let pathPop = gPop.selectAll('.line')
     .data(nestedDataPop)
     .enter()
     .append('path')
     .attr('stroke', 'black')
     .attr('stroke-width', '2px')
-    .attr('class', 'line2')
+    .attr('class', 'line')
     .attr('stroke', function(d) {
       return colorScalePop(d.key);
     })
-    .attr('fill', 'none')
     .on('mouseover', tip.show)
     .on('mouseout', tip.hide)
     .attr('d', function(d) {
@@ -141,9 +140,9 @@ const loadGraphPopulation = (data) => {
       }
     });
 
-    gPop.selectAll('.line2').remove();
+    gPop.selectAll('.line').remove();
 
-    gPop.selectAll('.line2')
+    gPop.selectAll('.line')
       .data(function() {
         if (allSelected) {
           return nestedDataPop;
@@ -153,8 +152,7 @@ const loadGraphPopulation = (data) => {
       })
       .enter()
       .append('path')
-      .attr('class', 'line2')
-      .attr('fill', 'none')
+      .attr('class', 'line')
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide)
       .attr('stroke', function(d) {

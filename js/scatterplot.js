@@ -97,9 +97,7 @@ var timeLabel = g.append('text')
     }
 
     let update = function (data) {
-      // console.log('update', data);
       let updatedData = data.filter(function(d) {
-        // allSelectedGlobal Comes from gpd-per-capita file
         if (allSelectedGlobal) {
           return true;
         } else {
@@ -145,19 +143,27 @@ var timeLabel = g.append('text')
     stopTime.addEventListener('click', killTimer);
 
     let timerId;
+    let playingAnimation = false;
 
     function setTime() {
-      timerId = setInterval(function () {
-        // While time is less than dBY add one, else reset 0. Ternery Operator
-        time = (time < dataByYear.length) ? time + 1 : 0;
-        update(dataByYear[time]);
-        if(time === 0) {
-        }
-      }, 500);
+      if (!playingAnimation) {
+        timerId = setInterval(function () {
+          // While time is less than dBY add one, else reset 0. Ternery Operator
+          time = (time < dataByYear.length) ? time + 1 : 0;
+          update(dataByYear[time]);
+          if(time === 0) {
+          }
+        }, 500);
+
+        playingAnimation = true;
+      }
     } // End Timer function
 
     function killTimer() {
-      clearInterval(timerId);
+      if (playingAnimation) {
+        clearInterval(timerId);
+        playingAnimation = false;
+      }
     }
 
     // Call update to initialise and run the code

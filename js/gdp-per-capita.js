@@ -36,7 +36,7 @@ const loadGraphGDP = (data) => {
   let yAxisCall = d3.axisLeft()
     .ticks(6)
     .tickFormat(function(d) {
-      return "$" + d;
+      return "$" + +d;
     })
 
   let line = d3.line()
@@ -47,14 +47,6 @@ const loadGraphGDP = (data) => {
       return y(+d.gdp_capita);
     })
 
-  //////////// IMPORT CSV ////////////
-  // d3.csv('https://visualeyes-server.herokuapp.com/statistics.csv').then(function(data) {
-  //
-  //   // Format year and GDP as integers
-  //   data.forEach(function(d) {
-  //     d.year = +d.year;
-  //     d.gdp_capita = +d.gdp_capita;
-  //   });
 
   // Nest data by country
   nestedData = d3.nest()
@@ -70,30 +62,6 @@ const loadGraphGDP = (data) => {
     }))
     .range(['#e5446d', '#BC8F8F', '#ffba49', '#20a39e', '#DC143C', '#663399', '#f2e3bc', '#ff8552', '#f76f8e', '#14cc60', '#931621', '#87CEEB', '#C0C0C0', '#d1f5ff', '#7d53de'])
 
-  //////////// TOOLTIP ////////////
-  // let tooltipGDP = d3.select('#ds3')
-  //   .append('div')
-  //   .data(nestedData)
-  //   .attr('class', 'd3-tip')
-  //   .style('z-index', '10')
-  //   .style('visibility', 'hidden')
-  //
-  // let tooltip_mouseoverGDP = function(e) {
-  //   tooltipGDP.style('visibility', 'visible')
-  //     .text(function() {
-  //       return `Country: ${ e.key }`
-  //     })
-  // }
-  //
-  // let tooltip_mouseoutGDP = function() {
-  //   tooltipGDP.style('visibility', 'hidden')
-  // }
-  //
-  // let tooltip_mousemoveGDP = function() {
-  //   console.log(event);
-  //   tooltipGDP.style('top', ( event.y - 10) + 'px')
-  //     .style('left', ( event.x + 10) + 'px')
-  // }
 
   const tip = d3.tip()
     .attr('class', 'd3-tip')
@@ -148,9 +116,7 @@ const loadGraphGDP = (data) => {
     .attr('d', function(d) {
       return line(d.values)
     })
-  // .on('mouseover', tooltip_mouseoverGDP)
-  // .on('mouseout', tooltip_mouseoutGDP)
-  // .on('mousemove', tooltip_mousemoveGDP)
+
 
   //////////// UPDATE DATA FUNCTION ////////////
   function update(data) {
@@ -181,9 +147,6 @@ const loadGraphGDP = (data) => {
       .append('path')
       .attr('class', 'line')
       .attr('fill', 'none')
-      // .on('mouseover', tooltip_mouseoverGDP)
-      // .on('mouseout', tooltip_mouseoutGDP)
-      // .on('mousemove', tooltip_mousemoveGDP)
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide)
       .attr('stroke', function(d) {
