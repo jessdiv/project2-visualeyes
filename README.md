@@ -1,6 +1,6 @@
 # Project 2 Visualeyes
 
-To get a closer look of the project visit: https://declanboller.github.io/Visualeyes-Client/
+To get a closer look of the project visit: https://jessdiv.github.io/project2-visualeyes/.
 
 The Visualeyes site was produced by 4 students (Bridget McMahon, Declan Boller,
 Jessica Diver, and Sean McCusker) that are part of WDI-30 in Sydney, Australia.
